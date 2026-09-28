@@ -1,0 +1,1479 @@
+[
+	{
+		"cat": 205,
+		"District_S": "Ngambe Tikar",
+		"popTotal": 30585.9698865803,
+		"popTravelTime_60": 8613.05256646333,
+		"popCoveredPercent_60": 28.16014204683546
+	},
+	{
+		"cat": 42,
+		"District_S": "Dang",
+		"popTotal": 143375.227971126,
+		"popTravelTime_60": 54252.6173711269,
+		"popCoveredPercent_60": 37.83960321378021
+	},
+	{
+		"cat": 5,
+		"District_S": "Akwaya",
+		"popTotal": 66814.1168625661,
+		"popTravelTime_60": 26333.6849882841,
+		"popCoveredPercent_60": 39.41335487895682
+	},
+	{
+		"cat": 197,
+		"District_S": "Yoko",
+		"popTotal": 25353.8371197582,
+		"popTravelTime_60": 10131.1585896974,
+		"popCoveredPercent_60": 39.95907420972664
+	},
+	{
+		"cat": 132,
+		"District_S": "Waza",
+		"popTotal": 26399.9150580642,
+		"popTravelTime_60": 10748.2479114639,
+		"popCoveredPercent_60": 40.71319126529048
+	},
+	{
+		"cat": 190,
+		"District_S": "Touboro",
+		"popTotal": 260378.697627099,
+		"popTravelTime_60": 106145.973799889,
+		"popCoveredPercent_60": 40.76599766694656
+	},
+	{
+		"cat": 202,
+		"District_S": "Bamusso",
+		"popTotal": 13570.3360094263,
+		"popTravelTime_60": 5538.43065026893,
+		"popCoveredPercent_60": 40.812774616795
+	},
+	{
+		"cat": 185,
+		"District_S": "Tibati",
+		"popTotal": 145075.627300941,
+		"popTravelTime_60": 59566.8794134494,
+		"popCoveredPercent_60": 41.05919134844439
+	},
+	{
+		"cat": 25,
+		"District_S": "Banyo",
+		"popTotal": 203764.461565391,
+		"popTravelTime_60": 84330.3370681441,
+		"popCoveredPercent_60": 41.38618501984521
+	},
+	{
+		"cat": 74,
+		"District_S": "Goulfey",
+		"popTotal": 119057.28315381,
+		"popTravelTime_60": 49287.0056065979,
+		"popCoveredPercent_60": 41.39772410472702
+	},
+	{
+		"cat": 99,
+		"District_S": "Mada",
+		"popTotal": 105254.952712341,
+		"popTravelTime_60": 45826.576311326,
+		"popCoveredPercent_60": 43.53864129944443
+	},
+	{
+		"cat": 129,
+		"District_S": "Moloundou",
+		"popTotal": 60147.0029005404,
+		"popTravelTime_60": 26571.810418341,
+		"popCoveredPercent_60": 44.17811218670425
+	},
+	{
+		"cat": 186,
+		"District_S": "Tignère",
+		"popTotal": 97299.8315627959,
+		"popTravelTime_60": 43392.8147603705,
+		"popCoveredPercent_60": 44.59700912469248
+	},
+	{
+		"cat": 141,
+		"District_S": "Nanga Eboko",
+		"popTotal": 60913.6988651749,
+		"popTravelTime_60": 28028.0697493765,
+		"popCoveredPercent_60": 46.01275291361511
+	},
+	{
+		"cat": 203,
+		"District_S": "Belel",
+		"popTotal": 67630.2397576846,
+		"popTravelTime_60": 31285.7237675369,
+		"popCoveredPercent_60": 46.25996282082085
+	},
+	{
+		"cat": 149,
+		"District_S": "Ngaoundal",
+		"popTotal": 89511.8534274394,
+		"popTravelTime_60": 44173.8035809768,
+		"popCoveredPercent_60": 49.34966922206031
+	},
+	{
+		"cat": 177,
+		"District_S": "Rey Bouba",
+		"popTotal": 241487.444292944,
+		"popTravelTime_60": 121844.286663561,
+		"popCoveredPercent_60": 50.4557439912917
+	},
+	{
+		"cat": 101,
+		"District_S": "Makari",
+		"popTotal": 118808.213670483,
+		"popTravelTime_60": 61658.3155082868,
+		"popCoveredPercent_60": 51.89735086775852
+	},
+	{
+		"cat": 159,
+		"District_S": "Misaje",
+		"popTotal": 30341.7911684095,
+		"popTravelTime_60": 15858.7130842303,
+		"popCoveredPercent_60": 52.2668981412728
+	},
+	{
+		"cat": 175,
+		"District_S": "Poli",
+		"popTotal": 81299.3304672207,
+		"popTravelTime_60": 42668.3230952833,
+		"popCoveredPercent_60": 52.48299444789014
+	},
+	{
+		"cat": 47,
+		"District_S": "Mintom",
+		"popTotal": 7281.37309529404,
+		"popTravelTime_60": 3843.54088260787,
+		"popCoveredPercent_60": 52.7859351842849
+	},
+	{
+		"cat": 150,
+		"District_S": "Ngaoundéré Rural",
+		"popTotal": 144133.593477229,
+		"popTravelTime_60": 77678.2576215968,
+		"popCoveredPercent_60": 53.89323595395464
+	},
+	{
+		"cat": 4,
+		"District_S": "Akonolinga",
+		"popTotal": 77037.8939932201,
+		"popTravelTime_60": 41854.7938678178,
+		"popCoveredPercent_60": 54.3301376741962
+	},
+	{
+		"cat": 71,
+		"District_S": "Gaschiga",
+		"popTotal": 285903.915222421,
+		"popTravelTime_60": 161394.37993281,
+		"popCoveredPercent_60": 56.45056655039232
+	},
+	{
+		"cat": 201,
+		"District_S": "Nye'eté",
+		"popTotal": 60932.3893372623,
+		"popTravelTime_60": 34802.9655126159,
+		"popCoveredPercent_60": 57.11734906698081
+	},
+	{
+		"cat": 211,
+		"District_S": "Mayo Baléo",
+		"popTotal": 27279.1686166522,
+		"popTravelTime_60": 15633.6007101829,
+		"popCoveredPercent_60": 57.30966705722687
+	},
+	{
+		"cat": 32,
+		"District_S": "Bétaré Oya",
+		"popTotal": 97296.0764609218,
+		"popTravelTime_60": 56950.6237051125,
+		"popCoveredPercent_60": 58.53331992065092
+	},
+	{
+		"cat": 24,
+		"District_S": "Bankim",
+		"popTotal": 111756.125782692,
+		"popTravelTime_60": 65453.4136231627,
+		"popCoveredPercent_60": 58.56807684120673
+	},
+	{
+		"cat": 30,
+		"District_S": "Benakuma",
+		"popTotal": 60683.5677262433,
+		"popTravelTime_60": 35580.3549319699,
+		"popCoveredPercent_60": 58.63260230921257
+	},
+	{
+		"cat": 122,
+		"District_S": "Messamena",
+		"popTotal": 35205.6065847956,
+		"popTravelTime_60": 20831.0704650539,
+		"popCoveredPercent_60": 59.1697530189703
+	},
+	{
+		"cat": 96,
+		"District_S": "Lolodorf",
+		"popTotal": 76896.5898519227,
+		"popTravelTime_60": 45562.4618136004,
+		"popCoveredPercent_60": 59.25160257605515
+	},
+	{
+		"cat": 156,
+		"District_S": "Nguti",
+		"popTotal": 39042.3733641291,
+		"popTravelTime_60": 23137.0390135309,
+		"popCoveredPercent_60": 59.26135380588435
+	},
+	{
+		"cat": 8,
+		"District_S": "Ayos",
+		"popTotal": 37028.3078987494,
+		"popTravelTime_60": 22107.7573626961,
+		"popCoveredPercent_60": 59.70501655962186
+	},
+	{
+		"cat": 174,
+		"District_S": "Pette",
+		"popTotal": 77082.0120025497,
+		"popTravelTime_60": 46093.2914856587,
+		"popCoveredPercent_60": 59.79772749592218
+	},
+	{
+		"cat": 28,
+		"District_S": "Batouri",
+		"popTotal": 95200.5517843734,
+		"popTravelTime_60": 58509.9199012769,
+		"popCoveredPercent_60": 61.45964367286467
+	},
+	{
+		"cat": 82,
+		"District_S": "Kette",
+		"popTotal": 58657.051440421,
+		"popTravelTime_60": 36135.5640237094,
+		"popCoveredPercent_60": 61.60480817964901
+	},
+	{
+		"cat": 13,
+		"District_S": "Bakassi",
+		"popTotal": 15778.2376986893,
+		"popTravelTime_60": 9813.18310471199,
+		"popCoveredPercent_60": 62.19441798324012
+	},
+	{
+		"cat": 58,
+		"District_S": "Esse",
+		"popTotal": 18479.9965419361,
+		"popTravelTime_60": 11550.3597969872,
+		"popCoveredPercent_60": 62.50195864905233
+	},
+	{
+		"cat": 45,
+		"District_S": "Djohong",
+		"popTotal": 66036.5518571438,
+		"popTravelTime_60": 41469.2808755633,
+		"popCoveredPercent_60": 62.79746550860708
+	},
+	{
+		"cat": 103,
+		"District_S": "Mamfe",
+		"popTotal": 105930.033202384,
+		"popTravelTime_60": 66580.4642133876,
+		"popCoveredPercent_60": 62.8532458648273
+	},
+	{
+		"cat": 196,
+		"District_S": "Yokadouma",
+		"popTotal": 88128.48773348,
+		"popTravelTime_60": 55712.2392523447,
+		"popCoveredPercent_60": 63.21706032313956
+	},
+	{
+		"cat": 133,
+		"District_S": "Moulvoudaye",
+		"popTotal": 143398.612631707,
+		"popTravelTime_60": 92263.8664258641,
+		"popCoveredPercent_60": 64.34083617170474
+	},
+	{
+		"cat": 63,
+		"District_S": "Fotokol",
+		"popTotal": 54968.9759854547,
+		"popTravelTime_60": 35488.9607338569,
+		"popCoveredPercent_60": 64.56180072055118
+	},
+	{
+		"cat": 86,
+		"District_S": "Kousseri",
+		"popTotal": 239400.623223614,
+		"popTravelTime_60": 154600.205934263,
+		"popCoveredPercent_60": 64.5780298532713
+	},
+	{
+		"cat": 46,
+		"District_S": "Djoum",
+		"popTotal": 38748.7387584144,
+		"popTravelTime_60": 25340.6866192058,
+		"popCoveredPercent_60": 65.39744887490822
+	},
+	{
+		"cat": 166,
+		"District_S": "Nwa",
+		"popTotal": 65186.7765518809,
+		"popTravelTime_60": 42896.5336124097,
+		"popCoveredPercent_60": 65.80557573401282
+	},
+	{
+		"cat": 73,
+		"District_S": "Golombe",
+		"popTotal": 95530.9009079308,
+		"popTravelTime_60": 63143.9165505224,
+		"popCoveredPercent_60": 66.09789706827763
+	},
+	{
+		"cat": 113,
+		"District_S": "Mbang",
+		"popTotal": 20640.5116126684,
+		"popTravelTime_60": 13658.2428835513,
+		"popCoveredPercent_60": 66.17201714694109
+	},
+	{
+		"cat": 97,
+		"District_S": "Lomie",
+		"popTotal": 40202.4379866905,
+		"popTravelTime_60": 26764.5089854347,
+		"popCoveredPercent_60": 66.57434306420772
+	},
+	{
+		"cat": 6,
+		"District_S": "Ambam",
+		"popTotal": 79030.684174174,
+		"popTravelTime_60": 52687.6744591704,
+		"popCoveredPercent_60": 66.66736472007906
+	},
+	{
+		"cat": 49,
+		"District_S": "Doume",
+		"popTotal": 47727.239937177,
+		"popTravelTime_60": 31951.748246763,
+		"popCoveredPercent_60": 66.94656613041282
+	},
+	{
+		"cat": 119,
+		"District_S": "Meiganga",
+		"popTotal": 131135.411516076,
+		"popTravelTime_60": 87858.8968920252,
+		"popCoveredPercent_60": 66.99860539291058
+	},
+	{
+		"cat": 70,
+		"District_S": "Garoua Boulaï",
+		"popTotal": 65557.5351911376,
+		"popTravelTime_60": 43989.9416194909,
+		"popCoveredPercent_60": 67.10127446255434
+	},
+	{
+		"cat": 210,
+		"District_S": "Kaïkaï",
+		"popTotal": 70693.9544951408,
+		"popTravelTime_60": 47440.9115234273,
+		"popCoveredPercent_60": 67.10745192035931
+	},
+	{
+		"cat": 155,
+		"District_S": "Nguelemendouka",
+		"popTotal": 39554.8913137413,
+		"popTravelTime_60": 26555.0059739509,
+		"popCoveredPercent_60": 67.13456943497084
+	},
+	{
+		"cat": 29,
+		"District_S": "Belabo",
+		"popTotal": 81361.6963115444,
+		"popTravelTime_60": 54827.7429442033,
+		"popCoveredPercent_60": 67.38765958647276
+	},
+	{
+		"cat": 152,
+		"District_S": "Ngog Mapubi",
+		"popTotal": 70601.1920070179,
+		"popTravelTime_60": 48598.8550118972,
+		"popCoveredPercent_60": 68.83574289661621
+	},
+	{
+		"cat": 135,
+		"District_S": "Mozogo",
+		"popTotal": 82894.4637370125,
+		"popTravelTime_60": 57378.3980252057,
+		"popCoveredPercent_60": 69.2186129670155
+	},
+	{
+		"cat": 33,
+		"District_S": "Bibemi",
+		"popTotal": 226718.438444258,
+		"popTravelTime_60": 157097.586067333,
+		"popCoveredPercent_60": 69.29193194225255
+	},
+	{
+		"cat": 3,
+		"District_S": "Ako",
+		"popTotal": 26035.0290207481,
+		"popTravelTime_60": 18049.6733492058,
+		"popCoveredPercent_60": 69.32841647620776
+	},
+	{
+		"cat": 100,
+		"District_S": "Maga",
+		"popTotal": 109050.558964794,
+		"popTravelTime_60": 76478.1424012664,
+		"popCoveredPercent_60": 70.130903616878
+	},
+	{
+		"cat": 160,
+		"District_S": "Nkambe",
+		"popTotal": 109586.347733994,
+		"popTravelTime_60": 76956.6633278843,
+		"popCoveredPercent_60": 70.2246811935791
+	},
+	{
+		"cat": 117,
+		"District_S": "Mbonge",
+		"popTotal": 103831.477868113,
+		"popTravelTime_60": 73149.3149275273,
+		"popCoveredPercent_60": 70.45003733881333
+	},
+	{
+		"cat": 139,
+		"District_S": "Mvangan",
+		"popTotal": 27712.2565997128,
+		"popTravelTime_60": 19775.7626590447,
+		"popCoveredPercent_60": 71.36106938057743
+	},
+	{
+		"cat": 193,
+		"District_S": "Wum",
+		"popTotal": 138915.834157698,
+		"popTravelTime_60": 99792.2220112814,
+		"popCoveredPercent_60": 71.83646314789193
+	},
+	{
+		"cat": 110,
+		"District_S": "Mayo Oulo",
+		"popTotal": 166046.567050546,
+		"popTravelTime_60": 119962.872360089,
+		"popCoveredPercent_60": 72.24652366559994
+	},
+	{
+		"cat": 148,
+		"District_S": "Ngambe",
+		"popTotal": 15815.1964704189,
+		"popTravelTime_60": 11515.9531310719,
+		"popCoveredPercent_60": 72.815744986865
+	},
+	{
+		"cat": 7,
+		"District_S": "Awae",
+		"popTotal": 18168.8826976606,
+		"popTravelTime_60": 13235.6213058323,
+		"popCoveredPercent_60": 72.8477448287808
+	},
+	{
+		"cat": 35,
+		"District_S": "Bogo",
+		"popTotal": 160686.070657412,
+		"popTravelTime_60": 117205.120797046,
+		"popCoveredPercent_60": 72.94043616694765
+	},
+	{
+		"cat": 153,
+		"District_S": "Ngong",
+		"popTotal": 306028.682821798,
+		"popTravelTime_60": 226058.137202455,
+		"popCoveredPercent_60": 73.86828421376755
+	},
+	{
+		"cat": 206,
+		"District_S": "Tourou",
+		"popTotal": 110582.506111676,
+		"popTravelTime_60": 82053.1955619366,
+		"popCoveredPercent_60": 74.20088262339797
+	},
+	{
+		"cat": 142,
+		"District_S": "Ndélélé",
+		"popTotal": 59755.9198848001,
+		"popTravelTime_60": 44391.8472716767,
+		"popCoveredPercent_60": 74.28861836159012
+	},
+	{
+		"cat": 192,
+		"District_S": "Wabane",
+		"popTotal": 42042.6416283444,
+		"popTravelTime_60": 31295.1910487262,
+		"popCoveredPercent_60": 74.43678569337932
+	},
+	{
+		"cat": 165,
+		"District_S": "Ntui",
+		"popTotal": 128571.910374763,
+		"popTravelTime_60": 96012.8222195291,
+		"popCoveredPercent_60": 74.67635966492972
+	},
+	{
+		"cat": 112,
+		"District_S": "Mbandjock",
+		"popTotal": 53182.8711306023,
+		"popTravelTime_60": 39787.0875834388,
+		"popCoveredPercent_60": 74.81184587746834
+	},
+	{
+		"cat": 184,
+		"District_S": "Tchollire",
+		"popTotal": 180997.785363965,
+		"popTravelTime_60": 136500.635915307,
+		"popCoveredPercent_60": 75.41563872774492
+	},
+	{
+		"cat": 123,
+		"District_S": "Meyomessala",
+		"popTotal": 81248.5691471491,
+		"popTravelTime_60": 62097.3043964002,
+		"popCoveredPercent_60": 76.42879751388104
+	},
+	{
+		"cat": 105,
+		"District_S": "Manoka",
+		"popTotal": 17563.4779595281,
+		"popTravelTime_60": 13436.8464993138,
+		"popCoveredPercent_60": 76.5044744000967
+	},
+	{
+		"cat": 131,
+		"District_S": "Mora",
+		"popTotal": 185865.402025637,
+		"popTravelTime_60": 142930.389852524,
+		"popCoveredPercent_60": 76.8999438813304
+	},
+	{
+		"cat": 208,
+		"District_S": "Hina",
+		"popTotal": 65073.4600213443,
+		"popTravelTime_60": 50050.1977937867,
+		"popCoveredPercent_60": 76.91338032028737
+	},
+	{
+		"cat": 57,
+		"District_S": "Eseka",
+		"popTotal": 84787.2105485329,
+		"popTravelTime_60": 65246.6224747962,
+		"popCoveredPercent_60": 76.9533778180478
+	},
+	{
+		"cat": 76,
+		"District_S": "Guider",
+		"popTotal": 280631.324509757,
+		"popTravelTime_60": 217219.464765535,
+		"popCoveredPercent_60": 77.40385544806945
+	},
+	{
+		"cat": 2,
+		"District_S": "Abong Mbang",
+		"popTotal": 75989.5030998697,
+		"popTravelTime_60": 58935.8271179331,
+		"popCoveredPercent_60": 77.55785301093007
+	},
+	{
+		"cat": 195,
+		"District_S": "Yagoua",
+		"popTotal": 162159.582139468,
+		"popTravelTime_60": 126455.809499916,
+		"popCoveredPercent_60": 77.98232323462429
+	},
+	{
+		"cat": 111,
+		"District_S": "Mbalmayo",
+		"popTotal": 113764.406601226,
+		"popTravelTime_60": 89564.9966792381,
+		"popCoveredPercent_60": 78.72848754284531
+	},
+	{
+		"cat": 136,
+		"District_S": "Mundemba",
+		"popTotal": 17892.7284032254,
+		"popTravelTime_60": 14097.4362109774,
+		"popCoveredPercent_60": 78.78863353470537
+	},
+	{
+		"cat": 194,
+		"District_S": "Yabassi",
+		"popTotal": 23706.0280643766,
+		"popTravelTime_60": 18716.179640768,
+		"popCoveredPercent_60": 78.95114099224865
+	},
+	{
+		"cat": 144,
+		"District_S": "Ndom",
+		"popTotal": 29375.8852190001,
+		"popTravelTime_60": 23291.211829748,
+		"popCoveredPercent_60": 79.28684244273741
+	},
+	{
+		"cat": 143,
+		"District_S": "Ndikinimeki",
+		"popTotal": 39818.2629447307,
+		"popTravelTime_60": 32056.0263895003,
+		"popCoveredPercent_60": 80.50583832347313
+	},
+	{
+		"cat": 93,
+		"District_S": "Lagdo",
+		"popTotal": 228064.451462614,
+		"popTravelTime_60": 183614.550542096,
+		"popCoveredPercent_60": 80.50993890742129
+	},
+	{
+		"cat": 53,
+		"District_S": "Edea",
+		"popTotal": 115350.650332895,
+		"popTravelTime_60": 92884.7208364969,
+		"popCoveredPercent_60": 80.52379468033965
+	},
+	{
+		"cat": 83,
+		"District_S": "Kolofata",
+		"popTotal": 88758.6510074366,
+		"popTravelTime_60": 71687.3325989809,
+		"popCoveredPercent_60": 80.76658645135853
+	},
+	{
+		"cat": 60,
+		"District_S": "Eyumojock",
+		"popTotal": 51321.1545696988,
+		"popTravelTime_60": 41546.5089001079,
+		"popCoveredPercent_60": 80.95396381561127
+	},
+	{
+		"cat": 198,
+		"District_S": "Zoétele",
+		"popTotal": 49481.486687539,
+		"popTravelTime_60": 40108.9005389496,
+		"popCoveredPercent_60": 81.05839824948163
+	},
+	{
+		"cat": 52,
+		"District_S": "Ebolowa",
+		"popTotal": 222233.566678682,
+		"popTravelTime_60": 180277.538104617,
+		"popCoveredPercent_60": 81.12075092835664
+	},
+	{
+		"cat": 55,
+		"District_S": "Ekondo Titi",
+		"popTotal": 47189.9342069118,
+		"popTravelTime_60": 38297.4621864887,
+		"popCoveredPercent_60": 81.15599826557792
+	},
+	{
+		"cat": 157,
+		"District_S": "Njikwa",
+		"popTotal": 22461.5380899942,
+		"popTravelTime_60": 18511.3300688437,
+		"popCoveredPercent_60": 82.41345714917817
+	},
+	{
+		"cat": 75,
+		"District_S": "Gueré",
+		"popTotal": 113745.729282822,
+		"popTravelTime_60": 93910.3536536889,
+		"popCoveredPercent_60": 82.56165242053738
+	},
+	{
+		"cat": 138,
+		"District_S": "Muyuka",
+		"popTotal": 110093.352488588,
+		"popTravelTime_60": 90995.6387228729,
+		"popCoveredPercent_60": 82.65316357979495
+	},
+	{
+		"cat": 109,
+		"District_S": "Massangam",
+		"popTotal": 55821.0742117194,
+		"popTravelTime_60": 46386.4730640817,
+		"popCoveredPercent_60": 83.09849589806542
+	},
+	{
+		"cat": 72,
+		"District_S": "Gazawa",
+		"popTotal": 72345.1643614953,
+		"popTravelTime_60": 60207.6516835424,
+		"popCoveredPercent_60": 83.22277268276838
+	},
+	{
+		"cat": 200,
+		"District_S": "Kye - Ossi",
+		"popTotal": 26872.5758507948,
+		"popTravelTime_60": 22459.9471067475,
+		"popCoveredPercent_60": 83.57943515148068
+	},
+	{
+		"cat": 134,
+		"District_S": "Moutourwa",
+		"popTotal": 50531.9109762225,
+		"popTravelTime_60": 42363.4635602006,
+		"popCoveredPercent_60": 83.8350712288211
+	},
+	{
+		"cat": 84,
+		"District_S": "Konye",
+		"popTotal": 79851.0369582069,
+		"popTravelTime_60": 67009.5448747565,
+		"popCoveredPercent_60": 83.91818995391195
+	},
+	{
+		"cat": 62,
+		"District_S": "Fontem",
+		"popTotal": 92615.1484811514,
+		"popTravelTime_60": 78193.3521001943,
+		"popCoveredPercent_60": 84.42825324207934
+	},
+	{
+		"cat": 88,
+		"District_S": "Kribi",
+		"popTotal": 150911.247380155,
+		"popTravelTime_60": 127561.34287487,
+		"popCoveredPercent_60": 84.52739281488735
+	},
+	{
+		"cat": 77,
+		"District_S": "Guidiguis",
+		"popTotal": 225259.63160421,
+		"popTravelTime_60": 190965.929425548,
+		"popCoveredPercent_60": 84.77592192864925
+	},
+	{
+		"cat": 180,
+		"District_S": "Sangmelima",
+		"popTotal": 103739.570695101,
+		"popTravelTime_60": 88029.3360438944,
+		"popCoveredPercent_60": 84.8560828371073
+	},
+	{
+		"cat": 176,
+		"District_S": "Pouma",
+		"popTotal": 17791.5858183811,
+		"popTravelTime_60": 15256.6749247558,
+		"popCoveredPercent_60": 85.75219252796231
+	},
+	{
+		"cat": 10,
+		"District_S": "Bafia",
+		"popTotal": 165152.895074842,
+		"popTravelTime_60": 141829.674030178,
+		"popCoveredPercent_60": 85.87780066822644
+	},
+	{
+		"cat": 9,
+		"District_S": "Bafang",
+		"popTotal": 46689.1529049083,
+		"popTravelTime_60": 40525.1636412669,
+		"popCoveredPercent_60": 86.79781302480347
+	},
+	{
+		"cat": 102,
+		"District_S": "Malantouen",
+		"popTotal": 138435.577035964,
+		"popTravelTime_60": 120171.143591595,
+		"popCoveredPercent_60": 86.80654652840857
+	},
+	{
+		"cat": 163,
+		"District_S": "Nkondjock",
+		"popTotal": 12137.552965675,
+		"popTravelTime_60": 10572.0131436106,
+		"popCoveredPercent_60": 87.10168494018731
+	},
+	{
+		"cat": 90,
+		"District_S": "Kumba North",
+		"popTotal": 110016.719359549,
+		"popTravelTime_60": 96065.2478270186,
+		"popCoveredPercent_60": 87.31877153422911
+	},
+	{
+		"cat": 172,
+		"District_S": "Olamze",
+		"popTotal": 11254.2474550469,
+		"popTravelTime_60": 9849.73194009994,
+		"popCoveredPercent_60": 87.52012943951118
+	},
+	{
+		"cat": 66,
+		"District_S": "Fundong",
+		"popTotal": 118378.78508698,
+		"popTravelTime_60": 103737.629213852,
+		"popCoveredPercent_60": 87.63194278234037
+	},
+	{
+		"cat": 91,
+		"District_S": "Kumbo East",
+		"popTotal": 202503.351079297,
+		"popTravelTime_60": 178205.222009857,
+		"popCoveredPercent_60": 88.0011224802274
+	},
+	{
+		"cat": 38,
+		"District_S": "Bourha",
+		"popTotal": 118661.648610079,
+		"popTravelTime_60": 104875.527985544,
+		"popCoveredPercent_60": 88.3819913291142
+	},
+	{
+		"cat": 128,
+		"District_S": "Gawar",
+		"popTotal": 217560.099080508,
+		"popTravelTime_60": 192378.200371586,
+		"popCoveredPercent_60": 88.4253138257657
+	},
+	{
+		"cat": 89,
+		"District_S": "Kumba South",
+		"popTotal": 191899.739475094,
+		"popTravelTime_60": 170559.475106958,
+		"popCoveredPercent_60": 88.87947194378258
+	},
+	{
+		"cat": 65,
+		"District_S": "Foumbot",
+		"popTotal": 104150.353861441,
+		"popTravelTime_60": 92806.081379358,
+		"popCoveredPercent_60": 89.10779266561578
+	},
+	{
+		"cat": 121,
+		"District_S": "Meri",
+		"popTotal": 156583.090788104,
+		"popTravelTime_60": 141234.740280534,
+		"popCoveredPercent_60": 90.19795149634633
+	},
+	{
+		"cat": 126,
+		"District_S": "Mindif",
+		"popTotal": 72894.5877612568,
+		"popTravelTime_60": 65948.5746833174,
+		"popCoveredPercent_60": 90.47115390694181
+	},
+	{
+		"cat": 107,
+		"District_S": "Maroua 2",
+		"popTotal": 109270.889096162,
+		"popTravelTime_60": 99010.4216517914,
+		"popCoveredPercent_60": 90.61006318403702
+	},
+	{
+		"cat": 21,
+		"District_S": "Bangem",
+		"popTotal": 24711.6566343226,
+		"popTravelTime_60": 22429.0215326006,
+		"popCoveredPercent_60": 90.76292158190805
+	},
+	{
+		"cat": 1,
+		"District_S": "Abo",
+		"popTotal": 37278.0830443672,
+		"popTravelTime_60": 33959.0802602896,
+		"popCoveredPercent_60": 91.09663772107749
+	},
+	{
+		"cat": 209,
+		"District_S": "Vele",
+		"popTotal": 60330.5085811021,
+		"popTravelTime_60": 55367.5216266819,
+		"popCoveredPercent_60": 91.77366962231311
+	},
+	{
+		"cat": 22,
+		"District_S": "Bangourain",
+		"popTotal": 44523.191128852,
+		"popTravelTime_60": 40959.7046935689,
+		"popCoveredPercent_60": 91.99633641494785
+	},
+	{
+		"cat": 11,
+		"District_S": "Bafut",
+		"popTotal": 97552.6521470764,
+		"popTravelTime_60": 89778.1625364669,
+		"popCoveredPercent_60": 92.03046822459712
+	},
+	{
+		"cat": 69,
+		"District_S": "Pitoa",
+		"popTotal": 186577.52351419,
+		"popTravelTime_60": 171780.707750354,
+		"popCoveredPercent_60": 92.06934710830234
+	},
+	{
+		"cat": 20,
+		"District_S": "Bangangte",
+		"popTotal": 108388.872615152,
+		"popTravelTime_60": 99998.3154993635,
+		"popCoveredPercent_60": 92.25883901793111
+	},
+	{
+		"cat": 151,
+		"District_S": "Ngaoundéré Urbain",
+		"popTotal": 157698.854506223,
+		"popTravelTime_60": 145597.732867852,
+		"popCoveredPercent_60": 92.32643656400595
+	},
+	{
+		"cat": 116,
+		"District_S": "Mbengwi",
+		"popTotal": 70266.2448583198,
+		"popTravelTime_60": 65357.3150392409,
+		"popCoveredPercent_60": 93.01381505589642
+	},
+	{
+		"cat": 178,
+		"District_S": "Roua",
+		"popTotal": 112416.146527572,
+		"popTravelTime_60": 104908.021732717,
+		"popCoveredPercent_60": 93.32113310518653
+	},
+	{
+		"cat": 120,
+		"District_S": "Melong",
+		"popTotal": 85074.0521750282,
+		"popTravelTime_60": 79666.9715201964,
+		"popCoveredPercent_60": 93.64426577012286
+	},
+	{
+		"cat": 79,
+		"District_S": "Kaele",
+		"popTotal": 150407.495434256,
+		"popTravelTime_60": 141340.568721718,
+		"popCoveredPercent_60": 93.97175873026806
+	},
+	{
+		"cat": 181,
+		"District_S": "Santa",
+		"popTotal": 135116.436266614,
+		"popTravelTime_60": 127240.333543255,
+		"popCoveredPercent_60": 94.1708773995358
+	},
+	{
+		"cat": 137,
+		"District_S": "Toko",
+		"popTotal": 7648.30555845674,
+		"popTravelTime_60": 7204.98949301486,
+		"popCoveredPercent_60": 94.20373490502475
+	},
+	{
+		"cat": 127,
+		"District_S": "Mogode",
+		"popTotal": 163342.482739631,
+		"popTravelTime_60": 153891.619042441,
+		"popCoveredPercent_60": 94.21408102859881
+	},
+	{
+		"cat": 108,
+		"District_S": "Maroua 3",
+		"popTotal": 155184.146553112,
+		"popTravelTime_60": 146414.287698988,
+		"popCoveredPercent_60": 94.34874048095982
+	},
+	{
+		"cat": 146,
+		"District_S": "Ndu",
+		"popTotal": 115039.699218594,
+		"popTravelTime_60": 108576.057306637,
+		"popCoveredPercent_60": 94.38138142236008
+	},
+	{
+		"cat": 189,
+		"District_S": "Tombel",
+		"popTotal": 50813.625529371,
+		"popTravelTime_60": 47975.9115182098,
+		"popCoveredPercent_60": 94.41544668069206
+	},
+	{
+		"cat": 31,
+		"District_S": "Bertoua",
+		"popTotal": 171637.204755358,
+		"popTravelTime_60": 162463.372206664,
+		"popCoveredPercent_60": 94.65510256836805
+	},
+	{
+		"cat": 80,
+		"District_S": "Kar Hay",
+		"popTotal": 142860.822572354,
+		"popTravelTime_60": 135599.268653055,
+		"popCoveredPercent_60": 94.91704318332532
+	},
+	{
+		"cat": 170,
+		"District_S": "Okola",
+		"popTotal": 40821.2274718757,
+		"popTravelTime_60": 38924.2942770861,
+		"popCoveredPercent_60": 95.35307164367724
+	},
+	{
+		"cat": 207,
+		"District_S": "Mokolo",
+		"popTotal": 179774.566955068,
+		"popTravelTime_60": 171461.562147548,
+		"popCoveredPercent_60": 95.3758727119628
+	},
+	{
+		"cat": 114,
+		"District_S": "Mbanga",
+		"popTotal": 56263.3318247898,
+		"popTravelTime_60": 53682.3914882278,
+		"popCoveredPercent_60": 95.41274884928725
+	},
+	{
+		"cat": 168,
+		"District_S": "Obala",
+		"popTotal": 42506.3319749954,
+		"popTravelTime_60": 40592.8015498054,
+		"popCoveredPercent_60": 95.49824617585058
+	},
+	{
+		"cat": 61,
+		"District_S": "Figuil",
+		"popTotal": 102199.208900309,
+		"popTravelTime_60": 97887.9559412968,
+		"popCoveredPercent_60": 95.78152022368623
+	},
+	{
+		"cat": 154,
+		"District_S": "Ngoumou",
+		"popTotal": 54414.7825383731,
+		"popTravelTime_60": 52583.3514719511,
+		"popCoveredPercent_60": 96.6343133593698
+	},
+	{
+		"cat": 171,
+		"District_S": "Oku",
+		"popTotal": 110705.568017881,
+		"popTravelTime_60": 107012.789465269,
+		"popCoveredPercent_60": 96.66432446106455
+	},
+	{
+		"cat": 92,
+		"District_S": "Kumbo West",
+		"popTotal": 124976.167281393,
+		"popTravelTime_60": 121048.390747929,
+		"popCoveredPercent_60": 96.85717955758692
+	},
+	{
+		"cat": 182,
+		"District_S": "Santchou",
+		"popTotal": 25684.5907295683,
+		"popTravelTime_60": 24887.6756654397,
+		"popCoveredPercent_60": 96.897302851662
+	},
+	{
+		"cat": 27,
+		"District_S": "Batibo",
+		"popTotal": 69567.030974901,
+		"popTravelTime_60": 67670.2410776866,
+		"popCoveredPercent_60": 97.27343560500844
+	},
+	{
+		"cat": 179,
+		"District_S": "Saa",
+		"popTotal": 30543.5649951115,
+		"popTravelTime_60": 29726.4360018744,
+		"popCoveredPercent_60": 97.32470982556266
+	},
+	{
+		"cat": 14,
+		"District_S": "Bali",
+		"popTotal": 44878.4829376587,
+		"popTravelTime_60": 43704.0089658585,
+		"popCoveredPercent_60": 97.38299092366451
+	},
+	{
+		"cat": 118,
+		"District_S": "Mbouda",
+		"popTotal": 172130.296552521,
+		"popTravelTime_60": 167916.06883407,
+		"popCoveredPercent_60": 97.55172226920253
+	},
+	{
+		"cat": 67,
+		"District_S": "Galim",
+		"popTotal": 65307.9551543672,
+		"popTravelTime_60": 63731.0935485012,
+		"popCoveredPercent_60": 97.58549842490277
+	},
+	{
+		"cat": 130,
+		"District_S": "Monatele",
+		"popTotal": 21277.3178148374,
+		"popTravelTime_60": 20803.256315524,
+		"popCoveredPercent_60": 97.77198656598145
+	},
+	{
+		"cat": 145,
+		"District_S": "Ndop",
+		"popTotal": 254996.675736759,
+		"popTravelTime_60": 249327.449133645,
+		"popCoveredPercent_60": 97.7767448980525
+	},
+	{
+		"cat": 64,
+		"District_S": "Foumban",
+		"popTotal": 216134.046363701,
+		"popTravelTime_60": 211671.751843019,
+		"popCoveredPercent_60": 97.93540416433373
+	},
+	{
+		"cat": 50,
+		"District_S": "Dschang",
+		"popTotal": 194712.616090248,
+		"popTravelTime_60": 191068.961176995,
+		"popCoveredPercent_60": 98.12870116666494
+	},
+	{
+		"cat": 204,
+		"District_S": "Nkolafamba",
+		"popTotal": 152127.662101241,
+		"popTravelTime_60": 149653.961578296,
+		"popCoveredPercent_60": 98.3739311517857
+	},
+	{
+		"cat": 187,
+		"District_S": "Tiko",
+		"popTotal": 150582.374240146,
+		"popTravelTime_60": 148219.371009602,
+		"popCoveredPercent_60": 98.43075709061705
+	},
+	{
+		"cat": 85,
+		"District_S": "Kouoptamo",
+		"popTotal": 59980.5121535389,
+		"popTravelTime_60": 59073.1838989513,
+		"popCoveredPercent_60": 98.48729491961488
+	},
+	{
+		"cat": 164,
+		"District_S": "Nkongsamba",
+		"popTotal": 64248.0787080499,
+		"popTravelTime_60": 63308.0935558143,
+		"popCoveredPercent_60": 98.5369443396012
+	},
+	{
+		"cat": 158,
+		"District_S": "Njombe Penja",
+		"popTotal": 28322.1120398905,
+		"popTravelTime_60": 27925.2656244575,
+		"popCoveredPercent_60": 98.59881065764425
+	},
+	{
+		"cat": 81,
+		"District_S": "Kekem",
+		"popTotal": 29639.0654589212,
+		"popTravelTime_60": 29238.8365380354,
+		"popCoveredPercent_60": 98.64965742107995
+	},
+	{
+		"cat": 125,
+		"District_S": "Mifi",
+		"popTotal": 412049.263688224,
+		"popTravelTime_60": 406765.569936785,
+		"popCoveredPercent_60": 98.71770338717631
+	},
+	{
+		"cat": 124,
+		"District_S": "Mfou",
+		"popTotal": 464530.9564673,
+		"popTravelTime_60": 458648.961683003,
+		"popCoveredPercent_60": 98.73377765197203
+	},
+	{
+		"cat": 191,
+		"District_S": "Tubah",
+		"popTotal": 112232.586041483,
+		"popTravelTime_60": 110897.777327804,
+		"popCoveredPercent_60": 98.81067632783083
+	},
+	{
+		"cat": 98,
+		"District_S": "Loum",
+		"popTotal": 28118.8067733046,
+		"popTravelTime_60": 27817.8709377917,
+		"popCoveredPercent_60": 98.92977024971556
+	},
+	{
+		"cat": 188,
+		"District_S": "Tokombéré",
+		"popTotal": 136748.801962737,
+		"popTravelTime_60": 135364.765203431,
+		"popCoveredPercent_60": 98.98789843900559
+	},
+	{
+		"cat": 51,
+		"District_S": "Ebebda",
+		"popTotal": 13819.0583713012,
+		"popTravelTime_60": 13683.1262711582,
+		"popCoveredPercent_60": 99.01634325226314
+	},
+	{
+		"cat": 94,
+		"District_S": "Limbe",
+		"popTotal": 254649.807958842,
+		"popTravelTime_60": 252150.437209835,
+		"popCoveredPercent_60": 99.01850672143019
+	},
+	{
+		"cat": 106,
+		"District_S": "Maroua 1",
+		"popTotal": 148059.908587559,
+		"popTravelTime_60": 146680.415574308,
+		"popCoveredPercent_60": 99.06828727208405
+	},
+	{
+		"cat": 183,
+		"District_S": "Soa",
+		"popTotal": 55273.2265146344,
+		"popTravelTime_60": 54818.3932705288,
+		"popCoveredPercent_60": 99.17711833959038
+	},
+	{
+		"cat": 19,
+		"District_S": "Bandjoun",
+		"popTotal": 39635.8508355968,
+		"popTravelTime_60": 39340.6693618307,
+		"popCoveredPercent_60": 99.25526646320661
+	},
+	{
+		"cat": 115,
+		"District_S": "Mbankomo",
+		"popTotal": 171489.591987602,
+		"popTravelTime_60": 170522.442637492,
+		"popCoveredPercent_60": 99.43603029262562
+	},
+	{
+		"cat": 18,
+		"District_S": "Bandja",
+		"popTotal": 49148.3309965503,
+		"popTravelTime_60": 48874.9660594975,
+		"popCoveredPercent_60": 99.44379609335668
+	},
+	{
+		"cat": 26,
+		"District_S": "Batcham",
+		"popTotal": 109597.00329901,
+		"popTravelTime_60": 108987.865865429,
+		"popCoveredPercent_60": 99.44420247338415
+	},
+	{
+		"cat": 15,
+		"District_S": "Bamenda",
+		"popTotal": 232149.175858392,
+		"popTravelTime_60": 231302.075582171,
+		"popCoveredPercent_60": 99.63510519772953
+	},
+	{
+		"cat": 12,
+		"District_S": "Baham",
+		"popTotal": 53061.1537092364,
+		"popTravelTime_60": 52910.9741027053,
+		"popCoveredPercent_60": 99.71696882552902
+	},
+	{
+		"cat": 87,
+		"District_S": "Koza",
+		"popTotal": 120255.13826977,
+		"popTravelTime_60": 119955.26842097,
+		"popCoveredPercent_60": 99.75063863955043
+	},
+	{
+		"cat": 104,
+		"District_S": "Manjo",
+		"popTotal": 33051.7222633479,
+		"popTravelTime_60": 33008.05364495,
+		"popCoveredPercent_60": 99.8678779337126
+	},
+	{
+		"cat": 39,
+		"District_S": "Buea",
+		"popTotal": 227907.678739104,
+		"popTravelTime_60": 227667.172837246,
+		"popCoveredPercent_60": 99.89447222524988
+	},
+	{
+		"cat": 44,
+		"District_S": "Dibombari",
+		"popTotal": 81045.5091065765,
+		"popTravelTime_60": 80971.6725586036,
+		"popCoveredPercent_60": 99.90889495446837
+	},
+	{
+		"cat": 59,
+		"District_S": "Evodoula",
+		"popTotal": 7278.62406126698,
+		"popTravelTime_60": 7275.10473646583,
+		"popCoveredPercent_60": 99.95164848779761
+	},
+	{
+		"cat": 68,
+		"District_S": "Garoua 2",
+		"popTotal": 160466.800211881,
+		"popTravelTime_60": 160419.087951331,
+		"popCoveredPercent_60": 99.97026658443554
+	},
+	{
+		"cat": 23,
+		"District_S": "Bangue",
+		"popTotal": 616821.527598148,
+		"popTravelTime_60": 616676.457740775,
+		"popCoveredPercent_60": 99.97648106447615
+	},
+	{
+		"cat": 173,
+		"District_S": "Penka Michel",
+		"popTotal": 91378.6566437576,
+		"popTravelTime_60": 91361.717215737,
+		"popCoveredPercent_60": 99.98146238011941
+	},
+	{
+		"cat": 16,
+		"District_S": "Bamenda 3",
+		"popTotal": 104584.791091796,
+		"popTravelTime_60": 104576.365794903,
+		"popCoveredPercent_60": 99.99194405151547
+	},
+	{
+		"cat": 17,
+		"District_S": "Bamendjou",
+		"popTotal": 30980.3146907695,
+		"popTravelTime_60": 30980.3146907695,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 34,
+		"District_S": "Biyem-Assi",
+		"popTotal": 660766.670858545,
+		"popTravelTime_60": 660766.670858545,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 36,
+		"District_S": "Boko",
+		"popTotal": 295886.29316593,
+		"popTravelTime_60": 295886.29316593,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 37,
+		"District_S": "Bonassama",
+		"popTotal": 617871.858983827,
+		"popTravelTime_60": 617871.858983827,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 40,
+		"District_S": "Cité des palmiers",
+		"popTotal": 498224.233771657,
+		"popTravelTime_60": 498224.233771657,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 41,
+		"District_S": "Cite Verte",
+		"popTotal": 105969.037161758,
+		"popTravelTime_60": 105969.037161758,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 43,
+		"District_S": "Deido",
+		"popTotal": 576925.319902304,
+		"popTravelTime_60": 576925.319902304,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 48,
+		"District_S": "Djoungolo",
+		"popTotal": 195514.15451647,
+		"popTravelTime_60": 195514.15451647,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 54,
+		"District_S": "Efoulan",
+		"popTotal": 744184.450769238,
+		"popTravelTime_60": 744184.450769238,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 56,
+		"District_S": "Elig-Mfomo",
+		"popTotal": 7040.68084919129,
+		"popTravelTime_60": 7040.68084919129,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 78,
+		"District_S": "Japoma",
+		"popTotal": 271993.129421049,
+		"popTravelTime_60": 271993.129421049,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 95,
+		"District_S": "Logbaba",
+		"popTotal": 250553.884351156,
+		"popTravelTime_60": 250553.884351156,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 140,
+		"District_S": "Mvog Ada",
+		"popTotal": 233712.951981962,
+		"popTravelTime_60": 233712.951981962,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 147,
+		"District_S": "New-Bell",
+		"popTotal": 171372.325088917,
+		"popTravelTime_60": 171372.325088917,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 161,
+		"District_S": "Nkolbisson",
+		"popTotal": 131657.323975216,
+		"popTravelTime_60": 131657.323975216,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 162,
+		"District_S": "Nkolndongo",
+		"popTotal": 436461.900336116,
+		"popTravelTime_60": 436461.900336116,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 167,
+		"District_S": "Nylon",
+		"popTotal": 280638.149043736,
+		"popTravelTime_60": 280638.149043736,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 169,
+		"District_S": "Odza",
+		"popTotal": 952131.82591652,
+		"popTravelTime_60": 952131.82591652,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 199,
+		"District_S": "Garoua 1",
+		"popTotal": 143758.828123499,
+		"popTravelTime_60": 143758.828123499,
+		"popCoveredPercent_60": 100
+	}
+]

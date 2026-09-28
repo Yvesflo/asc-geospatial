@@ -1,0 +1,8 @@
+{
+  "name": "Remix SIG-ASC - Système d\u0027Information Géographique des Agents de Santé Communautaire",
+  "description": "Plateforme WebGIS d\u0027aide à la décision en santé publique pour la planification, surveillance et optimisation spatiale du déploiement des Agents de Santé Communautaire (ASC).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

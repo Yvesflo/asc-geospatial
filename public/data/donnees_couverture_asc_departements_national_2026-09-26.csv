@@ -1,0 +1,59 @@
+﻿Nom de la zone;Région;Département;District de Santé;Population de référence;Total ASC actifs (toutes catégories);ASC polyvalents (ASCp);ACCRA;APS;Pairs Éducateurs;Mères Mentors;Relais Communautaires;ASC inactifs;Part d'ASC inactifs (%);Habitants par ASCp;Habitants par ASC (toutes catégories);Classe de couverture (Code);Classe de couverture (Libellé officiel)
+Djerem;Adamaoua;Djerem;;221205;319;87;67;39;25;27;74;50;13.6;2542.6;693.4;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Faro et Déo;Adamaoua;Faro et Déo;;124579;213;65;39;32;20;12;45;36;14.5;1916.6;584.9;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Mayo Banyo;Adamaoua;Mayo Banyo;;315521;429;113;86;61;28;46;95;72;14.4;2792.2;735.5;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mbéré;Adamaoua;Mbéré;;206390;350;67;68;53;41;32;89;44;11.2;3080.4;589.7;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Vina;Adamaoua;Vina;;507583;729;229;126;90;67;68;149;112;13.3;2216.5;696.3;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Haute Sanaga;Centre;Haute Sanaga;;112915;343;43;66;54;38;37;105;47;12.1;2625.9;329.2;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Lekié;Centre;Lekié;;163287;694;71;169;96;70;89;199;94;11.9;2299.8;235.3;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Mbam et Inoubou;Centre;Mbam et Inoubou;;204971;362;54;71;60;40;37;100;38;9.5;3795.8;566.2;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mbam et Kim;Centre;Mbam et Kim;;184512;247;32;52;37;34;31;61;32;11.5;5766;747;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mefou et Afamba;Centre;Mefou et Afamba;;677947;457;131;86;48;46;30;116;71;13.4;5175.2;1483.5;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mefou et Akono;Centre;Mefou et Akono;;225904;238;74;36;24;26;19;59;31;11.5;3052.8;949.2;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mfoundi;Centre;Mfoundi;;3373346;1820;993;202;146;109;98;272;318;14.9;3397.1;1853.5;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Nyong et Kéllé;Centre;Nyong et Kéllé;;155388;353;48;78;42;35;43;107;51;12.6;3237.3;440.2;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Nyong et Mfoumou;Centre;Nyong et Mfoumou;;115248;301;33;76;43;40;30;79;44;12.8;3492.4;382.9;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Nyong et So'o;Centre;Nyong et So'o;;132652;321;47;62;44;37;31;100;45;12.3;2822.4;413.2;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Boumba et Ngoko;Est;Boumba et Ngoko;;148275;215;57;43;31;21;16;47;35;14;2601.3;689.7;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Haut Nyong;Est;Haut Nyong;;238680;465;59;104;68;49;45;140;70;13.1;4045.4;513.3;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Kadey;Est;Kadey;;229202;593;64;125;87;65;63;189;92;13.4;3581.3;386.5;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Lom et Djerem;Est;Lom et Djerem;;413790;543;106;116;45;45;58;173;106;16.3;3903.7;762;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Diamaré;Extrême-Nord;Diamaré;;879211;967;240;169;147;79;73;259;141;12.7;3663.4;909.2;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Logone et Chari;Extrême-Nord;Logone et Chari;;671949;671;154;112;81;69;63;192;107;13.8;4363.3;1001.4;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mayo Danay;Extrême-Nord;Mayo Danay;;650782;804;176;157;100;79;80;212;116;12.6;3697.6;809.4;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mayo Kani;Extrême-Nord;Mayo Kani;;638146;776;153;153;103;76;82;209;124;13.8;4170.9;822.4;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mayo Sava;Extrême-Nord;Mayo Sava;;411373;453;87;98;62;50;39;117;78;14.7;4728.4;908.1;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mayo Tsanaga;Extrême-Nord;Mayo Tsanaga;;1127760;1168;257;203;168;115;108;317;178;13.2;4388.2;965.5;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Moungo;Littoral;Moungo;;394739;925;309;159;121;82;72;182;149;13.9;1277.5;426.7;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Nkam;Littoral;Nkam;;54507;306;43;72;49;24;31;87;40;11.6;1267.6;178.1;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Sanaga Maritime;Littoral;Sanaga Maritime;;178333;604;174;115;64;51;49;151;104;14.7;1024.9;295.3;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Wouri;Littoral;Wouri;;3408078;3668;2540;296;194;127;126;385;611;14.3;1341.8;929.1;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Bénoué;Nord;Bénoué;;1487620;2312;1506;186;149;83;105;283;406;14.9;987.8;643.4;couverte;<= 1 000 habitants par ASCp : conforme
+Faro;Nord;Faro;;79092;161;43;19;16;16;17;50;23;12.5;1839.3;491.3;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Mayo Louti;Nord;Mayo Louti;;641308;1026;608;107;68;55;63;125;148;12.6;1054.8;625.1;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Mayo Rey;Nord;Mayo Rey;;661427;869;467;100;67;53;36;146;131;13.1;1416.3;761.1;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Boyo;Nord-Ouest;Boyo;;142785;461;201;72;48;35;29;76;96;17.2;710.4;309.7;couverte;<= 1 000 habitants par ASCp : conforme
+Bui;Nord-Ouest;Bui;;438185;946;390;143;89;60;70;194;158;14.3;1123.6;463.2;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Donga Mantung;Nord-Ouest;Donga Mantung;;327416;863;394;121;76;58;60;154;138;13.8;831;379.4;couverte;<= 1 000 habitants par ASCp : conforme
+Menchum;Nord-Ouest;Menchum;;199599;521;223;87;38;30;35;108;85;14;895.1;383.1;couverte;<= 1 000 habitants par ASCp : conforme
+Mezam;Nord-Ouest;Mezam;;721111;1623;858;203;139;103;92;228;269;14.2;840.5;444.3;couverte;<= 1 000 habitants par ASCp : conforme
+Momo;Nord-Ouest;Momo;;162295;702;225;112;79;60;60;166;105;13;721.3;231.2;couverte;<= 1 000 habitants par ASCp : conforme
+Ngo Ketunjia;Nord-Ouest;Ngo Ketunjia;;254997;536;360;54;23;14;29;56;97;15.3;708.3;475.7;couverte;<= 1 000 habitants par ASCp : conforme
+Bamboutos;Ouest;Bamboutos;;345435;755;353;82;80;41;56;143;129;14.6;978.6;457.5;couverte;<= 1 000 habitants par ASCp : conforme
+Haut Nkam;Ouest;Haut Nkam;;125477;437;157;68;45;39;39;89;79;15.3;799.2;287.1;couverte;<= 1 000 habitants par ASCp : conforme
+Hauts Plateaux;Ouest;Hauts Plateaux;;84041;303;98;46;43;23;22;71;51;14.4;857.6;277.4;couverte;<= 1 000 habitants par ASCp : conforme
+Koung Khi;Ouest;Koung Khi;;39636;207;56;39;22;18;15;57;21;9.2;707.8;191.5;couverte;<= 1 000 habitants par ASCp : conforme
+Menoua;Ouest;Menoua;;311776;794;296;126;76;70;53;173;129;14;1053.3;392.7;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Mifi;Ouest;Mifi;;412049;596;401;44;38;25;32;56;105;15;1027.6;691.4;couverte_si_urbain;1 000 à 2 499 habitants par ASCp : conforme en milieu urbain uniquement
+Ndé;Ouest;Ndé;;108389;343;117;68;32;27;21;78;60;14.9;926.4;316;couverte;<= 1 000 habitants par ASCp : conforme
+Noun;Ouest;Noun;;619045;1573;694;219;168;97;96;299;277;15;892;393.5;couverte;<= 1 000 habitants par ASCp : conforme
+Dja et Lobo;Sud;Dja et Lobo;;278499;643;86;139;89;68;82;179;95;12.9;3238.4;433.1;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Mvila;Sud;Mvila;;247415;413;96;73;51;43;39;111;58;12.3;2577.2;599.1;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Océan;Sud;Océan;;288740;347;74;63;46;36;27;101;74;17.6;3901.9;832.1;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Vallée du Ntem;Sud;Vallée du Ntem;;117158;310;34;56;41;38;39;102;51;14.1;3445.8;377.9;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Fako;Sud-Ouest;Fako;;743233;638;280;105;62;41;48;102;87;12;2654.4;1164.9;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Koupé Manengouba;Sud-Ouest;Koupé Manengouba;;118488;309;38;78;42;30;38;83;46;13;3118.1;383.5;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Lebialem;Sud-Ouest;Lebialem;;123902;139;32;22;15;12;18;40;21;13.1;3871.9;891.4;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Manyu;Sud-Ouest;Manyu;;240069;263;51;44;38;22;41;67;36;12;4707.2;912.8;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Meme;Sud-Ouest;Meme;;472800;450;160;84;47;40;44;75;73;14;2955;1050.7;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte
+Ndian;Sud-Ouest;Ndian;;105711;271;37;54;45;24;37;74;37;12;2857.1;390.1;sous_couverte;>= 2 500 habitants par ASCp : sous-couverte

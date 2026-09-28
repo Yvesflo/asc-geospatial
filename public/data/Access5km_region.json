@@ -1,0 +1,72 @@
+[
+	{
+		"cat": 1,
+		"NAME_1": "Adamaoua",
+		"popTotal": 1389032.33266411,
+		"popTravelTime_60": 753473.500676203,
+		"popCoveredPercent_60": 54.2444897039272
+	},
+	{
+		"cat": 2,
+		"NAME_1": "Centre",
+		"popTotal": 5444796.047462,
+		"popTravelTime_60": 5153021.69637095,
+		"popCoveredPercent_60": 94.64122533612522
+	},
+	{
+		"cat": 3,
+		"NAME_1": "Est",
+		"popTotal": 1029242.51175174,
+		"popTravelTime_60": 712901.381997527,
+		"popCoveredPercent_60": 69.26466540759088
+	},
+	{
+		"cat": 4,
+		"NAME_1": "Extrême-Nord",
+		"popTotal": 4429866.28699185,
+		"popTravelTime_60": 3576062.73266,
+		"popCoveredPercent_60": 80.726200318077
+	},
+	{
+		"cat": 5,
+		"NAME_1": "Littoral",
+		"popTotal": 4226971.70057621,
+		"popTravelTime_60": 4169400.55897919,
+		"popCoveredPercent_60": 98.63800503823641
+	},
+	{
+		"cat": 6,
+		"NAME_1": "Nord",
+		"popTotal": 2950966.31338082,
+		"popTravelTime_60": 2109637.94515137,
+		"popCoveredPercent_60": 71.48973323027977
+	},
+	{
+		"cat": 7,
+		"NAME_1": "Nord-Ouest",
+		"popTotal": 2249900.28588029,
+		"popTravelTime_60": 2016908.98771078,
+		"popCoveredPercent_60": 89.64437225810875
+	},
+	{
+		"cat": 8,
+		"NAME_1": "Ouest",
+		"popTotal": 2047324.75070535,
+		"popTravelTime_60": 1965534.50628743,
+		"popCoveredPercent_60": 96.00501853017009
+	},
+	{
+		"cat": 9,
+		"NAME_1": "Sud",
+		"popTotal": 937549.507966079,
+		"popTravelTime_60": 713725.027518806,
+		"popCoveredPercent_60": 76.12664946805442
+	},
+	{
+		"cat": 10,
+		"NAME_1": "Sud-Ouest",
+		"popTotal": 1804709.57844594,
+		"popTravelTime_60": 1540292.29975624,
+		"popCoveredPercent_60": 85.34848588118021
+	}
+]

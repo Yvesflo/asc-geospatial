@@ -1,0 +1,2522 @@
+[
+	{
+		"cat": 17,
+		"NAME_3": "Ngaoundéré 2",
+		"popTotal": 5532.08751382529,
+		"popTravelTime_60": 0,
+		"popCoveredPercent_60": 0
+	},
+	{
+		"cat": 217,
+		"NAME_3": "Kontcha",
+		"popTotal": 0,
+		"popTravelTime_60": 0,
+		"popCoveredPercent_60": 0
+	},
+	{
+		"cat": 357,
+		"NAME_3": "Kombo Abedimo",
+		"popTotal": 1237.01270018446,
+		"popTravelTime_60": 0,
+		"popCoveredPercent_60": 0
+	},
+	{
+		"cat": 133,
+		"NAME_3": "Darrak",
+		"popTotal": 20474.9841902543,
+		"popTravelTime_60": 561.138024440244,
+		"popCoveredPercent_60": 2.740602968120165
+	},
+	{
+		"cat": 358,
+		"NAME_3": "Kombo Etindi",
+		"popTotal": 2152.51278459767,
+		"popTravelTime_60": 213.792139766527,
+		"popCoveredPercent_60": 9.932212310018278
+	},
+	{
+		"cat": 51,
+		"NAME_3": "Assamba",
+		"popTotal": 1687.14993680852,
+		"popTravelTime_60": 270.260244998058,
+		"popCoveredPercent_60": 16.0187449320179
+	},
+	{
+		"cat": 13,
+		"NAME_3": "Martap",
+		"popTotal": 90107.8907624733,
+		"popTravelTime_60": 19007.9925879955,
+		"popCoveredPercent_60": 21.09470372367394
+	},
+	{
+		"cat": 26,
+		"NAME_3": "Nsem",
+		"popTotal": 9757.13286398246,
+		"popTravelTime_60": 2235.54489279651,
+		"popCoveredPercent_60": 22.91190377297017
+	},
+	{
+		"cat": 242,
+		"NAME_3": "Furu Awa",
+		"popTotal": 10805.4765392517,
+		"popTravelTime_60": 2810.08948374028,
+		"popCoveredPercent_60": 26.00615968701075
+	},
+	{
+		"cat": 204,
+		"NAME_3": "Bachéo",
+		"popTotal": 87959.8728220563,
+		"popTravelTime_60": 25058.9873493417,
+		"popCoveredPercent_60": 28.48911275717312
+	},
+	{
+		"cat": 84,
+		"NAME_3": "Akoéman",
+		"popTotal": 10941.0507801491,
+		"popTravelTime_60": 3323.7182119093,
+		"popCoveredPercent_60": 30.37841866102742
+	},
+	{
+		"cat": 46,
+		"NAME_3": "Ngambé Tikar",
+		"popTotal": 29248.2268039587,
+		"popTravelTime_60": 9087.00701048621,
+		"popCoveredPercent_60": 31.06857407593782
+	},
+	{
+		"cat": 343,
+		"NAME_3": "Akwaya",
+		"popTotal": 83378.6339914479,
+		"popTravelTime_60": 28241.8676196283,
+		"popCoveredPercent_60": 33.87182815027295
+	},
+	{
+		"cat": 8,
+		"NAME_3": "Mayo Darlé",
+		"popTotal": 39725.0514200679,
+		"popTravelTime_60": 13898.4821385906,
+		"popCoveredPercent_60": 34.98669389152636
+	},
+	{
+		"cat": 265,
+		"NAME_3": "Bakou",
+		"popTotal": 7477.61789303537,
+		"popTravelTime_60": 2725.36549905757,
+		"popCoveredPercent_60": 36.44697466550099
+	},
+	{
+		"cat": 137,
+		"NAME_3": "Logone Birni",
+		"popTotal": 105285.283046775,
+		"popTravelTime_60": 38428.6024043524,
+		"popCoveredPercent_60": 36.49950049265647
+	},
+	{
+		"cat": 306,
+		"NAME_3": "Oveng",
+		"popTotal": 8518.48275269654,
+		"popTravelTime_60": 3135.33347138604,
+		"popCoveredPercent_60": 36.80624311170372
+	},
+	{
+		"cat": 139,
+		"NAME_3": "Waza",
+		"popTotal": 41025.2185852068,
+		"popTravelTime_60": 15303.7748328725,
+		"popCoveredPercent_60": 37.3033352670322
+	},
+	{
+		"cat": 53,
+		"NAME_3": "Edzendouan",
+		"popTotal": 4210.36143613796,
+		"popTravelTime_60": 1628.57541406373,
+		"popCoveredPercent_60": 38.68018075801051
+	},
+	{
+		"cat": 352,
+		"NAME_3": "Bamuso",
+		"popTotal": 14052.6606419405,
+		"popTravelTime_60": 5507.41511914197,
+		"popCoveredPercent_60": 39.19126249092616
+	},
+	{
+		"cat": 91,
+		"NAME_3": "Moloundou",
+		"popTotal": 38885.6424491812,
+		"popTravelTime_60": 15464.6983956433,
+		"popCoveredPercent_60": 39.76968727173217
+	},
+	{
+		"cat": 134,
+		"NAME_3": "Goulfey",
+		"popTotal": 73703.3348210759,
+		"popTravelTime_60": 29513.3056807305,
+		"popCoveredPercent_60": 40.04337897651138
+	},
+	{
+		"cat": 7,
+		"NAME_3": "Banyo",
+		"popTotal": 156162.934032448,
+		"popTravelTime_60": 63174.4325728312,
+		"popCoveredPercent_60": 40.45417881281907
+	},
+	{
+		"cat": 5,
+		"NAME_3": "Tignère",
+		"popTotal": 43384.5497209941,
+		"popTravelTime_60": 17623.0631262932,
+		"popCoveredPercent_60": 40.62059705500475
+	},
+	{
+		"cat": 19,
+		"NAME_3": "Nyambaka",
+		"popTotal": 90278.8684002563,
+		"popTravelTime_60": 36737.2439643197,
+		"popCoveredPercent_60": 40.69307094262981
+	},
+	{
+		"cat": 49,
+		"NAME_3": "Yoko",
+		"popTotal": 21802.4893281902,
+		"popTravelTime_60": 8945.964044183,
+		"popCoveredPercent_60": 41.03184691215989
+	},
+	{
+		"cat": 138,
+		"NAME_3": "Makari",
+		"popTotal": 121853.894309751,
+		"popTravelTime_60": 50376.90203453,
+		"popCoveredPercent_60": 41.34205338277706
+	},
+	{
+		"cat": 9,
+		"NAME_3": "Dir",
+		"popTotal": 61642.6349314063,
+		"popTravelTime_60": 25610.3540165462,
+		"popCoveredPercent_60": 41.54649463807717
+	},
+	{
+		"cat": 2,
+		"NAME_3": "Tibati",
+		"popTotal": 159291.616690602,
+		"popTravelTime_60": 66961.2842296903,
+		"popCoveredPercent_60": 42.03691670714328
+	},
+	{
+		"cat": 23,
+		"NAME_3": "Minta",
+		"popTotal": 17040.871013051,
+		"popTravelTime_60": 7309.35588137193,
+		"popCoveredPercent_60": 42.89308847989022
+	},
+	{
+		"cat": 140,
+		"NAME_3": "Zina",
+		"popTotal": 22988.2722809762,
+		"popTravelTime_60": 10308.8323216764,
+		"popCoveredPercent_60": 44.84387602372105
+	},
+	{
+		"cat": 346,
+		"NAME_3": "Upper Bayang",
+		"popTotal": 30509.9797761421,
+		"popTravelTime_60": 13893.8972647437,
+		"popCoveredPercent_60": 45.53886094545469
+	},
+	{
+		"cat": 12,
+		"NAME_3": "Belel",
+		"popTotal": 41731.6001223632,
+		"popTravelTime_60": 19170.6446541222,
+		"popCoveredPercent_60": 45.93795732229545
+	},
+	{
+		"cat": 225,
+		"NAME_3": "Touboro",
+		"popTotal": 169777.115913676,
+		"popTravelTime_60": 78426.3446758348,
+		"popCoveredPercent_60": 46.19370770540775
+	},
+	{
+		"cat": 90,
+		"NAME_3": "Gari Gombo",
+		"popTotal": 14473.1854777781,
+		"popTravelTime_60": 6739.85308836491,
+		"popCoveredPercent_60": 46.56786233212566
+	},
+	{
+		"cat": 227,
+		"NAME_3": "Bum",
+		"popTotal": 22873.0694713434,
+		"popTravelTime_60": 10672.0332149778,
+		"popCoveredPercent_60": 46.6576347715303
+	},
+	{
+		"cat": 218,
+		"NAME_3": "Poli",
+		"popTotal": 43755.5292803715,
+		"popTravelTime_60": 20625.8805716524,
+		"popCoveredPercent_60": 47.13891229492009
+	},
+	{
+		"cat": 118,
+		"NAME_3": "Bétaré Oya",
+		"popTotal": 88648.014950278,
+		"popTravelTime_60": 42742.6657043516,
+		"popCoveredPercent_60": 48.21615659225493
+	},
+	{
+		"cat": 305,
+		"NAME_3": "Mintom 2",
+		"popTotal": 6662.22521200176,
+		"popTravelTime_60": 3263.72964716273,
+		"popCoveredPercent_60": 48.98858179221018
+	},
+	{
+		"cat": 82,
+		"NAME_3": "Mengang",
+		"popTotal": 11231.9687236526,
+		"popTravelTime_60": 5517.83671052606,
+		"popCoveredPercent_60": 49.126175884967
+	},
+	{
+		"cat": 328,
+		"NAME_3": "Ma'an",
+		"popTotal": 23522.3226398373,
+		"popTravelTime_60": 11646.0920810582,
+		"popCoveredPercent_60": 49.5108083473629
+	},
+	{
+		"cat": 79,
+		"NAME_3": "Akonolinga",
+		"popTotal": 51211.5658971023,
+		"popTravelTime_60": 25504.7571895691,
+		"popCoveredPercent_60": 49.80272862738656
+	},
+	{
+		"cat": 3,
+		"NAME_3": "Galim Tignère",
+		"popTotal": 48683.5566494208,
+		"popTravelTime_60": 24571.1923244505,
+		"popCoveredPercent_60": 50.47123508537421
+	},
+	{
+		"cat": 92,
+		"NAME_3": "Salapoumbé",
+		"popTotal": 21859.8188614994,
+		"popTravelTime_60": 11107.1120226976,
+		"popCoveredPercent_60": 50.8106315659367
+	},
+	{
+		"cat": 38,
+		"NAME_3": "Deuk",
+		"popTotal": 10175.4041220295,
+		"popTravelTime_60": 5175.27085034922,
+		"popCoveredPercent_60": 50.86059274191269
+	},
+	{
+		"cat": 21,
+		"NAME_3": "Lembé Yézoum",
+		"popTotal": 10518.6563375266,
+		"popTravelTime_60": 5450.03808108194,
+		"popCoveredPercent_60": 51.81306343889437
+	},
+	{
+		"cat": 353,
+		"NAME_3": "Dikome value",
+		"popTotal": 10880.4936853835,
+		"popTravelTime_60": 5637.98151790237,
+		"popCoveredPercent_60": 51.81733183188415
+	},
+	{
+		"cat": 24,
+		"NAME_3": "Nanga Eboko",
+		"popTotal": 28566.1685788704,
+		"popTravelTime_60": 14863.5486441041,
+		"popCoveredPercent_60": 52.03199933188888
+	},
+	{
+		"cat": 317,
+		"NAME_3": "Akom 2",
+		"popTotal": 15606.0144729968,
+		"popTravelTime_60": 8212.22598077432,
+		"popCoveredPercent_60": 52.62218611282204
+	},
+	{
+		"cat": 4,
+		"NAME_3": "Mayo Baléo",
+		"popTotal": 29632.3763169919,
+		"popTravelTime_60": 15643.8168953526,
+		"popCoveredPercent_60": 52.79298807494581
+	},
+	{
+		"cat": 104,
+		"NAME_3": "Messok",
+		"popTotal": 6865.90592572518,
+		"popTravelTime_60": 3626.56926468765,
+		"popCoveredPercent_60": 52.81996729811893
+	},
+	{
+		"cat": 1,
+		"NAME_3": "Ngaoundal",
+		"popTotal": 60935.8824902459,
+		"popTravelTime_60": 32252.2946268639,
+		"popCoveredPercent_60": 52.92824737875351
+	},
+	{
+		"cat": 313,
+		"NAME_3": "Efoulan",
+		"popTotal": 14190.1918673839,
+		"popTravelTime_60": 7543.06411699917,
+		"popCoveredPercent_60": 53.15688602024383
+	},
+	{
+		"cat": 322,
+		"NAME_3": "Lokoundje",
+		"popTotal": 31582.3444468676,
+		"popTravelTime_60": 16811.5827248951,
+		"popCoveredPercent_60": 53.2309523543383
+	},
+	{
+		"cat": 224,
+		"NAME_3": "Tcholliré",
+		"popTotal": 206610.141118404,
+		"popTravelTime_60": 110969.464371051,
+		"popCoveredPercent_60": 53.70959226413611
+	},
+	{
+		"cat": 223,
+		"NAME_3": "Rey Bouba",
+		"popTotal": 261451.422655584,
+		"popTravelTime_60": 141948.412379149,
+		"popCoveredPercent_60": 54.2924612677059
+	},
+	{
+		"cat": 318,
+		"NAME_3": "Bipindi",
+		"popTotal": 22186.8053318052,
+		"popTravelTime_60": 12151.9035757956,
+		"popCoveredPercent_60": 54.77085769700976
+	},
+	{
+		"cat": 314,
+		"NAME_3": "Mengong",
+		"popTotal": 19409.084393053,
+		"popTravelTime_60": 10664.1732897717,
+		"popCoveredPercent_60": 54.94423680072552
+	},
+	{
+		"cat": 114,
+		"NAME_3": "Ndem Nam",
+		"popTotal": 8318.91735180679,
+		"popTravelTime_60": 4575.10571378371,
+		"popCoveredPercent_60": 54.99640782931977
+	},
+	{
+		"cat": 95,
+		"NAME_3": "Atok",
+		"popTotal": 19390.8800494485,
+		"popTravelTime_60": 10799.2284366389,
+		"popCoveredPercent_60": 55.69230694584201
+	},
+	{
+		"cat": 15,
+		"NAME_3": "Nganha",
+		"popTotal": 43792.6570114875,
+		"popTravelTime_60": 24753.3015342087,
+		"popCoveredPercent_60": 56.52386318490682
+	},
+	{
+		"cat": 324,
+		"NAME_3": "Mvengué",
+		"popTotal": 34233.4504144621,
+		"popTravelTime_60": 19428.2494538104,
+		"popCoveredPercent_60": 56.75223858125278
+	},
+	{
+		"cat": 99,
+		"NAME_3": "Doumétang",
+		"popTotal": 16468.8003827333,
+		"popTravelTime_60": 9348.62043798357,
+		"popCoveredPercent_60": 56.76564303848824
+	},
+	{
+		"cat": 78,
+		"NAME_3": "Nguibassal",
+		"popTotal": 4528.85830290354,
+		"popTravelTime_60": 2578.21914010366,
+		"popCoveredPercent_60": 56.92867755325251
+	},
+	{
+		"cat": 241,
+		"NAME_3": "Fungom",
+		"popTotal": 54396.1283835824,
+		"popTravelTime_60": 31137.7804557221,
+		"popCoveredPercent_60": 57.24264093971799
+	},
+	{
+		"cat": 215,
+		"NAME_3": "Touroua",
+		"popTotal": 121966.166278556,
+		"popTravelTime_60": 71696.8834479102,
+		"popCoveredPercent_60": 58.78423962606414
+	},
+	{
+		"cat": 47,
+		"NAME_3": "Ngoro",
+		"popTotal": 17704.9396426854,
+		"popTravelTime_60": 10433.8835766654,
+		"popCoveredPercent_60": 58.93204827148926
+	},
+	{
+		"cat": 301,
+		"NAME_3": "Bengbis",
+		"popTotal": 21928.270836275,
+		"popTravelTime_60": 12973.5542317977,
+		"popCoveredPercent_60": 59.16359903005258
+	},
+	{
+		"cat": 237,
+		"NAME_3": "Misaje",
+		"popTotal": 45600.4461644768,
+		"popTravelTime_60": 27007.7262420223,
+		"popCoveredPercent_60": 59.2268903348178
+	},
+	{
+		"cat": 103,
+		"NAME_3": "Messamena",
+		"popTotal": 30480.0307877301,
+		"popTravelTime_60": 18093.0096521962,
+		"popCoveredPercent_60": 59.3602079282664
+	},
+	{
+		"cat": 6,
+		"NAME_3": "Bankim",
+		"popTotal": 120140.60037119,
+		"popTravelTime_60": 71459.0118549775,
+		"popCoveredPercent_60": 59.47948623046297
+	},
+	{
+		"cat": 85,
+		"NAME_3": "Dzeng",
+		"popTotal": 15345.3236750547,
+		"popTravelTime_60": 9178.97515445203,
+		"popCoveredPercent_60": 59.81610651441218
+	},
+	{
+		"cat": 144,
+		"NAME_3": "Kalfou",
+		"popTotal": 35149.719036804,
+		"popTravelTime_60": 21048.5856015011,
+		"popCoveredPercent_60": 59.88265675598115
+	},
+	{
+		"cat": 216,
+		"NAME_3": "Béka",
+		"popTotal": 37396.9885089756,
+		"popTravelTime_60": 22428.4161445292,
+		"popCoveredPercent_60": 59.97385628831099
+	},
+	{
+		"cat": 76,
+		"NAME_3": "Messondo",
+		"popTotal": 18460.0929732983,
+		"popTravelTime_60": 11082.4620487104,
+		"popCoveredPercent_60": 60.0347033178039
+	},
+	{
+		"cat": 80,
+		"NAME_3": "Ayos",
+		"popTotal": 27906.7069023962,
+		"popTravelTime_60": 16813.0465868907,
+		"popCoveredPercent_60": 60.24733282108271
+	},
+	{
+		"cat": 106,
+		"NAME_3": "Nguélémendouga",
+		"popTotal": 28783.4705981161,
+		"popTravelTime_60": 17606.9755016248,
+		"popCoveredPercent_60": 61.17043961605238
+	},
+	{
+		"cat": 81,
+		"NAME_3": "Endom",
+		"popTotal": 20361.2550340943,
+		"popTravelTime_60": 12526.7979693378,
+		"popCoveredPercent_60": 61.52272022702952
+	},
+	{
+		"cat": 87,
+		"NAME_3": "Mengueme",
+		"popTotal": 15308.1321332865,
+		"popTravelTime_60": 9421.44375467704,
+		"popCoveredPercent_60": 61.54535166436633
+	},
+	{
+		"cat": 135,
+		"NAME_3": "Hilé Alifa",
+		"popTotal": 136086.163646959,
+		"popTravelTime_60": 83994.5222059895,
+		"popCoveredPercent_60": 61.72157400504872
+	},
+	{
+		"cat": 108,
+		"NAME_3": "Batouri",
+		"popTotal": 90800.8132297004,
+		"popTravelTime_60": 56707.2203812013,
+		"popCoveredPercent_60": 62.45232654221725
+	},
+	{
+		"cat": 351,
+		"NAME_3": "Mbongé",
+		"popTotal": 80135.434497802,
+		"popTravelTime_60": 50260.3520853002,
+		"popCoveredPercent_60": 62.71926071191237
+	},
+	{
+		"cat": 40,
+		"NAME_3": "Kon-Yambetta",
+		"popTotal": 8368.57509101362,
+		"popTravelTime_60": 5248.83504292154,
+		"popCoveredPercent_60": 62.72077367816018
+	},
+	{
+		"cat": 188,
+		"NAME_3": "Dizangué",
+		"popTotal": 13995.6915701613,
+		"popTravelTime_60": 8796.85728303298,
+		"popCoveredPercent_60": 62.85403789397451
+	},
+	{
+		"cat": 132,
+		"NAME_3": "Blangoua",
+		"popTotal": 44362.7007114305,
+		"popTravelTime_60": 27946.2269401557,
+		"popCoveredPercent_60": 62.99487292701066
+	},
+	{
+		"cat": 355,
+		"NAME_3": "Idabato",
+		"popTotal": 8267.01824135615,
+		"popTravelTime_60": 5213.57067303179,
+		"popCoveredPercent_60": 63.06470508254905
+	},
+	{
+		"cat": 112,
+		"NAME_3": "Mbotoro",
+		"popTotal": 4895.42203607988,
+		"popTravelTime_60": 3093.82924925506,
+		"popCoveredPercent_60": 63.19841734692426
+	},
+	{
+		"cat": 110,
+		"NAME_3": "Kétté",
+		"popTotal": 52670.7198622865,
+		"popTravelTime_60": 33419.5605838719,
+		"popCoveredPercent_60": 63.44997879514668
+	},
+	{
+		"cat": 107,
+		"NAME_3": "Somalomo",
+		"popTotal": 4250.4522938471,
+		"popTravelTime_60": 2701.71461349018,
+		"popCoveredPercent_60": 63.56299110570297
+	},
+	{
+		"cat": 195,
+		"NAME_3": "Ngambé",
+		"popTotal": 7600.98375496953,
+		"popTravelTime_60": 4838.93182672002,
+		"popCoveredPercent_60": 63.66191512455637
+	},
+	{
+		"cat": 71,
+		"NAME_3": "Bot Makak",
+		"popTotal": 21693.3286238317,
+		"popTravelTime_60": 13921.343335748,
+		"popCoveredPercent_60": 64.17338517821737
+	},
+	{
+		"cat": 243,
+		"NAME_3": "Menchum Valley",
+		"popTotal": 80586.857051028,
+		"popTravelTime_60": 51815.0126943385,
+		"popCoveredPercent_60": 64.29710078099828
+	},
+	{
+		"cat": 236,
+		"NAME_3": "Ako",
+		"popTotal": 23494.6514888498,
+		"popTravelTime_60": 15168.4363640009,
+		"popCoveredPercent_60": 64.56123161137167
+	},
+	{
+		"cat": 319,
+		"NAME_3": "Campo",
+		"popTotal": 15032.9268891437,
+		"popTravelTime_60": 9755.1435554058,
+		"popCoveredPercent_60": 64.89184459781184
+	},
+	{
+		"cat": 186,
+		"NAME_3": "Yingui",
+		"popTotal": 2322.12587474441,
+		"popTravelTime_60": 1517.19955373062,
+		"popCoveredPercent_60": 65.33666284983858
+	},
+	{
+		"cat": 325,
+		"NAME_3": "Nyé'été",
+		"popTotal": 37214.8687536594,
+		"popTravelTime_60": 24338.6164869924,
+		"popCoveredPercent_60": 65.40024807852947
+	},
+	{
+		"cat": 193,
+		"NAME_3": "Mouanko",
+		"popTotal": 11857.506849202,
+		"popTravelTime_60": 7767.64249479977,
+		"popCoveredPercent_60": 65.50822692818032
+	},
+	{
+		"cat": 96,
+		"NAME_3": "Dimako",
+		"popTotal": 10354.5778242311,
+		"popTravelTime_60": 6783.57395132684,
+		"popCoveredPercent_60": 65.51280087395129
+	},
+	{
+		"cat": 48,
+		"NAME_3": "Ntui",
+		"popTotal": 69081.2871319488,
+		"popTravelTime_60": 45425.2479303287,
+		"popCoveredPercent_60": 65.75622692664099
+	},
+	{
+		"cat": 131,
+		"NAME_3": "Pété",
+		"popTotal": 52552.1688168067,
+		"popTravelTime_60": 34573.6131978397,
+		"popCoveredPercent_60": 65.78912721634948
+	},
+	{
+		"cat": 70,
+		"NAME_3": "Bondjock",
+		"popTotal": 8873.09460301661,
+		"popTravelTime_60": 5863.59388109731,
+		"popCoveredPercent_60": 66.08285094924885
+	},
+	{
+		"cat": 338,
+		"NAME_3": "Nguti",
+		"popTotal": 29446.4443905843,
+		"popTravelTime_60": 19462.3269362704,
+		"popCoveredPercent_60": 66.09397955867844
+	},
+	{
+		"cat": 207,
+		"NAME_3": "Dembo",
+		"popTotal": 33338.6967436246,
+		"popTravelTime_60": 22128.8861104045,
+		"popCoveredPercent_60": 66.375978283063
+	},
+	{
+		"cat": 240,
+		"NAME_3": "Nwa",
+		"popTotal": 63418.6322182265,
+		"popTravelTime_60": 42112.9159381414,
+		"popCoveredPercent_60": 66.40464239788217
+	},
+	{
+		"cat": 122,
+		"NAME_3": "Ngoura",
+		"popTotal": 23503.2755003508,
+		"popTravelTime_60": 15665.7813535948,
+		"popCoveredPercent_60": 66.65360899743943
+	},
+	{
+		"cat": 146,
+		"NAME_3": "Kay Kay",
+		"popTotal": 74380.3860240419,
+		"popTravelTime_60": 49811.7648519647,
+		"popCoveredPercent_60": 66.96895178234769
+	},
+	{
+		"cat": 93,
+		"NAME_3": "Yokadouma",
+		"popTotal": 73059.1880822374,
+		"popTravelTime_60": 48974.7304006552,
+		"popCoveredPercent_60": 67.03432064633394
+	},
+	{
+		"cat": 121,
+		"NAME_3": "Mandjou",
+		"popTotal": 20033.9118938259,
+		"popTravelTime_60": 13453.1840033511,
+		"popCoveredPercent_60": 67.15205734481209
+	},
+	{
+		"cat": 194,
+		"NAME_3": "Ndom",
+		"popTotal": 15130.8043261834,
+		"popTravelTime_60": 10183.2736500562,
+		"popCoveredPercent_60": 67.301601623612
+	},
+	{
+		"cat": 20,
+		"NAME_3": "Bibé",
+		"popTotal": 5427.58361042364,
+		"popTravelTime_60": 3685.82885799736,
+		"popCoveredPercent_60": 67.90920458449962
+	},
+	{
+		"cat": 316,
+		"NAME_3": "Ngoulémakong",
+		"popTotal": 20117.398711152,
+		"popTravelTime_60": 13673.1055176637,
+		"popCoveredPercent_60": 67.96656821283791
+	},
+	{
+		"cat": 323,
+		"NAME_3": "Lolodorf",
+		"popTotal": 19871.4577409352,
+		"popTravelTime_60": 13511.8432162016,
+		"popCoveredPercent_60": 67.99623556739476
+	},
+	{
+		"cat": 105,
+		"NAME_3": "Ngoïla",
+		"popTotal": 8251.71479293021,
+		"popTravelTime_60": 5655.88624863646,
+		"popCoveredPercent_60": 68.54195025599081
+	},
+	{
+		"cat": 163,
+		"NAME_3": "Hina",
+		"popTotal": 52518.0043069993,
+		"popTravelTime_60": 36033.0763753758,
+		"popCoveredPercent_60": 68.61090182471673
+	},
+	{
+		"cat": 222,
+		"NAME_3": "Madingring",
+		"popTotal": 57505.9208078204,
+		"popTravelTime_60": 39904.6842404831,
+		"popCoveredPercent_60": 69.3923054877096
+	},
+	{
+		"cat": 22,
+		"NAME_3": "Mbandjock",
+		"popTotal": 26640.9679700099,
+		"popTravelTime_60": 18487.9108569724,
+		"popCoveredPercent_60": 69.39654324041264
+	},
+	{
+		"cat": 100,
+		"NAME_3": "Lomié",
+		"popTotal": 24989.7866970357,
+		"popTravelTime_60": 17347.6862532642,
+		"popCoveredPercent_60": 69.41910494707021
+	},
+	{
+		"cat": 111,
+		"NAME_3": "Mbang",
+		"popTotal": 28884.3547354003,
+		"popTravelTime_60": 20106.1852076757,
+		"popCoveredPercent_60": 69.60925868644667
+	},
+	{
+		"cat": 18,
+		"NAME_3": "Ngaoundéré 3",
+		"popTotal": 32171.1736784507,
+		"popTravelTime_60": 22424.1208512402,
+		"popCoveredPercent_60": 69.70252647717545
+	},
+	{
+		"cat": 157,
+		"NAME_3": "Moulvouday",
+		"popTotal": 110958.928648317,
+		"popTravelTime_60": 77601.356045313,
+		"popCoveredPercent_60": 69.93700911737312
+	},
+	{
+		"cat": 221,
+		"NAME_3": "Mayo Oulo",
+		"popTotal": 280474.436019571,
+		"popTravelTime_60": 196202.340224884,
+		"popCoveredPercent_60": 69.95373375532643
+	},
+	{
+		"cat": 69,
+		"NAME_3": "Biyouha",
+		"popTotal": 2623.34772930965,
+		"popTravelTime_60": 1836.67174057358,
+		"popCoveredPercent_60": 70.0125156895198
+	},
+	{
+		"cat": 72,
+		"NAME_3": "Dibang",
+		"popTotal": 12081.3842345582,
+		"popTravelTime_60": 8465.28892718515,
+		"popCoveredPercent_60": 70.06886597456781
+	},
+	{
+		"cat": 10,
+		"NAME_3": "Djohong",
+		"popTotal": 40322.5493190789,
+		"popTravelTime_60": 28420.179363925,
+		"popCoveredPercent_60": 70.48209957914985
+	},
+	{
+		"cat": 123,
+		"NAME_3": "Bogo",
+		"popTotal": 86901.6854886308,
+		"popTravelTime_60": 61261.2644603728,
+		"popCoveredPercent_60": 70.49490940930887
+	},
+	{
+		"cat": 143,
+		"NAME_3": "Guéré",
+		"popTotal": 38049.2552998778,
+		"popTravelTime_60": 26901.1410420744,
+		"popCoveredPercent_60": 70.70083456314268
+	},
+	{
+		"cat": 360,
+		"NAME_3": "Toko",
+		"popTotal": 10754.0391440058,
+		"popTravelTime_60": 7604.64455859382,
+		"popCoveredPercent_60": 70.71430982127843
+	},
+	{
+		"cat": 101,
+		"NAME_3": "Mboma",
+		"popTotal": 12034.121316928,
+		"popTravelTime_60": 8512.25193192519,
+		"popCoveredPercent_60": 70.73430379957435
+	},
+	{
+		"cat": 115,
+		"NAME_3": "Bélabo",
+		"popTotal": 45132.9589571118,
+		"popTravelTime_60": 32037.9386102011,
+		"popCoveredPercent_60": 70.9856817512133
+	},
+	{
+		"cat": 344,
+		"NAME_3": "Eyumodjock",
+		"popTotal": 40270.5435792847,
+		"popTravelTime_60": 28741.1388520787,
+		"popCoveredPercent_60": 71.37012887718565
+	},
+	{
+		"cat": 109,
+		"NAME_3": "Bombé",
+		"popTotal": 24443.7968435379,
+		"popTravelTime_60": 17459.5746418976,
+		"popCoveredPercent_60": 71.4274249358823
+	},
+	{
+		"cat": 11,
+		"NAME_3": "Meiganga",
+		"popTotal": 118475.042613544,
+		"popTravelTime_60": 85305.0714979292,
+		"popCoveredPercent_60": 72.00256663016145
+	},
+	{
+		"cat": 50,
+		"NAME_3": "Afanloum",
+		"popTotal": 1766.45689487783,
+		"popTravelTime_60": 1273.51073480631,
+		"popCoveredPercent_60": 72.09407365099544
+	},
+	{
+		"cat": 113,
+		"NAME_3": "Ndélélé",
+		"popTotal": 23886.9764744435,
+		"popTravelTime_60": 17261.909872286,
+		"popCoveredPercent_60": 72.26494274298126
+	},
+	{
+		"cat": 14,
+		"NAME_3": "Mbé",
+		"popTotal": 30044.5025983118,
+		"popTravelTime_60": 21804.2767373431,
+		"popCoveredPercent_60": 72.57326582789986
+	},
+	{
+		"cat": 206,
+		"NAME_3": "Bibémi",
+		"popTotal": 148673.994058905,
+		"popTravelTime_60": 108524.814447854,
+		"popCoveredPercent_60": 72.99515637203923
+	},
+	{
+		"cat": 302,
+		"NAME_3": "Djoum",
+		"popTotal": 30633.2872682849,
+		"popTravelTime_60": 22378.0242337445,
+		"popCoveredPercent_60": 73.05133150666727
+	},
+	{
+		"cat": 315,
+		"NAME_3": "Mvangan",
+		"popTotal": 20771.3361788073,
+		"popTravelTime_60": 15191.2324719681,
+		"popCoveredPercent_60": 73.13555729490093
+	},
+	{
+		"cat": 89,
+		"NAME_3": "Nkolmetet",
+		"popTotal": 15420.1771961059,
+		"popTravelTime_60": 11302.5942730342,
+		"popCoveredPercent_60": 73.29743445418042
+	},
+	{
+		"cat": 42,
+		"NAME_3": "Ndikiniméki",
+		"popTotal": 16778.4036947972,
+		"popTravelTime_60": 12420.3407118731,
+		"popCoveredPercent_60": 74.02575917114517
+	},
+	{
+		"cat": 120,
+		"NAME_3": "Garoua Boulaî",
+		"popTotal": 54232.4742067324,
+		"popTravelTime_60": 40471.4617544535,
+		"popCoveredPercent_60": 74.6258811651809
+	},
+	{
+		"cat": 75,
+		"NAME_3": "Matomb",
+		"popTotal": 15384.1966070779,
+		"popTravelTime_60": 11508.0364962333,
+		"popCoveredPercent_60": 74.80427343822899
+	},
+	{
+		"cat": 128,
+		"NAME_3": "Maroua 3",
+		"popTotal": 136785.659313817,
+		"popTravelTime_60": 102405.685026671,
+		"popCoveredPercent_60": 74.86580504154267
+	},
+	{
+		"cat": 297,
+		"NAME_3": "Magba",
+		"popTotal": 46987.0968619908,
+		"popTravelTime_60": 35181.1831611132,
+		"popCoveredPercent_60": 74.87413675385478
+	},
+	{
+		"cat": 97,
+		"NAME_3": "Dja",
+		"popTotal": 9951.66308722421,
+		"popTravelTime_60": 7475.65399192942,
+		"popCoveredPercent_60": 75.11964509255291
+	},
+	{
+		"cat": 232,
+		"NAME_3": "Mbven",
+		"popTotal": 46442.1659663734,
+		"popTravelTime_60": 34938.9096020121,
+		"popCoveredPercent_60": 75.23100801825163
+	},
+	{
+		"cat": 341,
+		"NAME_3": "Fontem",
+		"popTotal": 38043.9217975213,
+		"popTravelTime_60": 28865.6396525517,
+		"popCoveredPercent_60": 75.87451106166557
+	},
+	{
+		"cat": 212,
+		"NAME_3": "Lagdo",
+		"popTotal": 144569.83406161,
+		"popTravelTime_60": 109691.910046624,
+		"popCoveredPercent_60": 75.87468766124309
+	},
+	{
+		"cat": 326,
+		"NAME_3": "Ambam",
+		"popTotal": 51443.9896349266,
+		"popTravelTime_60": 39176.5565724929,
+		"popCoveredPercent_60": 76.15380698602536
+	},
+	{
+		"cat": 147,
+		"NAME_3": "Maga",
+		"popTotal": 94024.3869240626,
+		"popTravelTime_60": 71877.2781010189,
+		"popCoveredPercent_60": 76.44535684031582
+	},
+	{
+		"cat": 309,
+		"NAME_3": "Biwong Bane",
+		"popTotal": 13261.7235146715,
+		"popTravelTime_60": 10189.1387623657,
+		"popCoveredPercent_60": 76.83118073675276
+	},
+	{
+		"cat": 77,
+		"NAME_3": "Ngog Mapubi",
+		"popTotal": 13581.4480981949,
+		"popTravelTime_60": 10444.4488519645,
+		"popCoveredPercent_60": 76.9023212874676
+	},
+	{
+		"cat": 160,
+		"NAME_3": "Mora",
+		"popTotal": 217246.261233626,
+		"popTravelTime_60": 167413.526458451,
+		"popCoveredPercent_60": 77.06163756641823
+	},
+	{
+		"cat": 310,
+		"NAME_3": "Biwong Bulu",
+		"popTotal": 16127.9111414086,
+		"popTravelTime_60": 12461.0690242526,
+		"popCoveredPercent_60": 77.26399851161543
+	},
+	{
+		"cat": 54,
+		"NAME_3": "Esse",
+		"popTotal": 10440.398050853,
+		"popTravelTime_60": 8107.24213801271,
+		"popCoveredPercent_60": 77.65261533635044
+	},
+	{
+		"cat": 155,
+		"NAME_3": "Mindif",
+		"popTotal": 92239.2794291013,
+		"popTravelTime_60": 71705.8932009942,
+		"popCoveredPercent_60": 77.7389997458839
+	},
+	{
+		"cat": 187,
+		"NAME_3": "Dibamba",
+		"popTotal": 13905.7341281084,
+		"popTravelTime_60": 10828.1656869838,
+		"popCoveredPercent_60": 77.86834975577631
+	},
+	{
+		"cat": 196,
+		"NAME_3": "Ngwei",
+		"popTotal": 12144.4234880953,
+		"popTravelTime_60": 9469.08039481778,
+		"popCoveredPercent_60": 77.97060440209407
+	},
+	{
+		"cat": 151,
+		"NAME_3": "Wina",
+		"popTotal": 44728.8750769998,
+		"popTravelTime_60": 34953.1156985831,
+		"popCoveredPercent_60": 78.1444103801226
+	},
+	{
+		"cat": 304,
+		"NAME_3": "Meyomessi",
+		"popTotal": 14131.3795842534,
+		"popTravelTime_60": 11099.649973468,
+		"popCoveredPercent_60": 78.54611722295213
+	},
+	{
+		"cat": 189,
+		"NAME_3": "Douala 6",
+		"popTotal": 5487.69697142088,
+		"popTravelTime_60": 4317.28598052128,
+		"popCoveredPercent_60": 78.67209146213925
+	},
+	{
+		"cat": 27,
+		"NAME_3": "Batchenga",
+		"popTotal": 6446.4557874696,
+		"popTravelTime_60": 5097.74301400271,
+		"popCoveredPercent_60": 79.07822813136372
+	},
+	{
+		"cat": 124,
+		"NAME_3": "Dargala",
+		"popTotal": 63785.1671502725,
+		"popTravelTime_60": 50514.7920538093,
+		"popCoveredPercent_60": 79.195202130302
+	},
+	{
+		"cat": 88,
+		"NAME_3": "Ngomedzap",
+		"popTotal": 24498.691303555,
+		"popTravelTime_60": 19415.3108384201,
+		"popCoveredPercent_60": 79.25039994117054
+	},
+	{
+		"cat": 185,
+		"NAME_3": "Yabassi",
+		"popTotal": 22519.3178565859,
+		"popTravelTime_60": 17882.3781395699,
+		"popCoveredPercent_60": 79.40905782960961
+	},
+	{
+		"cat": 102,
+		"NAME_3": "Mbouanz",
+		"popTotal": 16054.1891623813,
+		"popTravelTime_60": 12774.3607973905,
+		"popCoveredPercent_60": 79.57026460933821
+	},
+	{
+		"cat": 308,
+		"NAME_3": "Zoétélé",
+		"popTotal": 48660.2260676421,
+		"popTravelTime_60": 39318.1979116009,
+		"popCoveredPercent_60": 80.8015109854711
+	},
+	{
+		"cat": 359,
+		"NAME_3": "Mundemba",
+		"popTotal": 16949.0752146136,
+		"popTravelTime_60": 13697.7811453985,
+		"popCoveredPercent_60": 80.81727747357085
+	},
+	{
+		"cat": 220,
+		"NAME_3": "Guider",
+		"popTotal": 277158.909317325,
+		"popTravelTime_60": 224039.357247448,
+		"popCoveredPercent_60": 80.83426139873451
+	},
+	{
+		"cat": 350,
+		"NAME_3": "Kumba 3",
+		"popTotal": 99677.4122540968,
+		"popTravelTime_60": 80728.0657617574,
+		"popCoveredPercent_60": 80.9893274074633
+	},
+	{
+		"cat": 37,
+		"NAME_3": "Bokito",
+		"popTotal": 70144.3484523238,
+		"popTravelTime_60": 56836.4258193795,
+		"popCoveredPercent_60": 81.02780491005697
+	},
+	{
+		"cat": 145,
+		"NAME_3": "Kar Hay",
+		"popTotal": 37446.9902032928,
+		"popTravelTime_60": 30356.0747331277,
+		"popCoveredPercent_60": 81.06412442850593
+	},
+	{
+		"cat": 342,
+		"NAME_3": "Wabane",
+		"popTotal": 54215.8705794605,
+		"popTravelTime_60": 43974.0019513352,
+		"popCoveredPercent_60": 81.10909495935422
+	},
+	{
+		"cat": 74,
+		"NAME_3": "Makak",
+		"popTotal": 34279.3953947037,
+		"popTravelTime_60": 27815.7220584064,
+		"popCoveredPercent_60": 81.14414428296492
+	},
+	{
+		"cat": 213,
+		"NAME_3": "Pitoa",
+		"popTotal": 203221.671637329,
+		"popTravelTime_60": 165086.210667937,
+		"popCoveredPercent_60": 81.23455010376608
+	},
+	{
+		"cat": 214,
+		"NAME_3": "Tchéboa",
+		"popTotal": 238588.304054367,
+		"popTravelTime_60": 194990.998471812,
+		"popCoveredPercent_60": 81.72697284749528
+	},
+	{
+		"cat": 228,
+		"NAME_3": "Fundong",
+		"popTotal": 57446.8883855755,
+		"popTravelTime_60": 47054.1836911271,
+		"popCoveredPercent_60": 81.90902068586551
+	},
+	{
+		"cat": 153,
+		"NAME_3": "Guidiguis",
+		"popTotal": 94712.5847525455,
+		"popTravelTime_60": 77727.01343971,
+		"popCoveredPercent_60": 82.06619388836921
+	},
+	{
+		"cat": 130,
+		"NAME_3": "Ndoukoula",
+		"popTotal": 60839.2659673576,
+		"popTravelTime_60": 49933.3960627888,
+		"popCoveredPercent_60": 82.0742907871042
+	},
+	{
+		"cat": 192,
+		"NAME_3": "Massok Song Loulou",
+		"popTotal": 8394.12196227264,
+		"popTravelTime_60": 6894.885984289,
+		"popCoveredPercent_60": 82.13945443344815
+	},
+	{
+		"cat": 334,
+		"NAME_3": "Muyuka",
+		"popTotal": 108038.376621074,
+		"popTravelTime_60": 89210.4757527864,
+		"popCoveredPercent_60": 82.57295096692981
+	},
+	{
+		"cat": 43,
+		"NAME_3": "Ntoukou",
+		"popTotal": 7179.01210033457,
+		"popTravelTime_60": 5931.1489744898,
+		"popCoveredPercent_60": 82.61789911474567
+	},
+	{
+		"cat": 347,
+		"NAME_3": "Konye",
+		"popTotal": 83768.5546184119,
+		"popTravelTime_60": 69382.8029116315,
+		"popCoveredPercent_60": 82.8267877220619
+	},
+	{
+		"cat": 312,
+		"NAME_3": "Ebolowa 2",
+		"popTotal": 79488.6497177107,
+		"popTravelTime_60": 65878.0417659269,
+		"popCoveredPercent_60": 82.87729380217256
+	},
+	{
+		"cat": 209,
+		"NAME_3": "Garoua 1",
+		"popTotal": 34192.400462375,
+		"popTravelTime_60": 28356.505493616,
+		"popCoveredPercent_60": 82.93218700693224
+	},
+	{
+		"cat": 98,
+		"NAME_3": "Doumé",
+		"popTotal": 14923.7460526265,
+		"popTravelTime_60": 12388.1551326877,
+		"popCoveredPercent_60": 83.00968864655432
+	},
+	{
+		"cat": 239,
+		"NAME_3": "Nkambe",
+		"popTotal": 92791.7997275267,
+		"popTravelTime_60": 77136.2078041744,
+		"popCoveredPercent_60": 83.12825921113365
+	},
+	{
+		"cat": 345,
+		"NAME_3": "Mamfé",
+		"popTotal": 91965.9611723369,
+		"popTravelTime_60": 76696.5596088403,
+		"popCoveredPercent_60": 83.39668137118366
+	},
+	{
+		"cat": 169,
+		"NAME_3": "Baré Bakem",
+		"popTotal": 6988.33300777292,
+		"popTravelTime_60": 5842.81229579751,
+		"popCoveredPercent_60": 83.60809780098802
+	},
+	{
+		"cat": 321,
+		"NAME_3": "Kribi 2",
+		"popTotal": 41512.563605357,
+		"popTravelTime_60": 34744.044711914,
+		"popCoveredPercent_60": 83.69525197771802
+	},
+	{
+		"cat": 119,
+		"NAME_3": "Diang",
+		"popTotal": 35147.8337550826,
+		"popTravelTime_60": 29449.4127288269,
+		"popCoveredPercent_60": 83.78727671820835
+	},
+	{
+		"cat": 354,
+		"NAME_3": "Ekondo Titi",
+		"popTotal": 38841.0785295578,
+		"popTravelTime_60": 32659.4806685863,
+		"popCoveredPercent_60": 84.0848964678791
+	},
+	{
+		"cat": 303,
+		"NAME_3": "Meyomessala",
+		"popTotal": 61372.7089943049,
+		"popTravelTime_60": 51775.8357679866,
+		"popCoveredPercent_60": 84.36296297885622
+	},
+	{
+		"cat": 191,
+		"NAME_3": "Edéa 2",
+		"popTotal": 15158.2980304803,
+		"popTravelTime_60": 12796.9633567594,
+		"popCoveredPercent_60": 84.4221648830711
+	},
+	{
+		"cat": 156,
+		"NAME_3": "Montouroua",
+		"popTotal": 58909.4048307848,
+		"popTravelTime_60": 49811.2575619157,
+		"popCoveredPercent_60": 84.55569650550161
+	},
+	{
+		"cat": 327,
+		"NAME_3": "Kyé Ossi",
+		"popTotal": 26855.466136576,
+		"popTravelTime_60": 22710.2132986306,
+		"popCoveredPercent_60": 84.56458429407135
+	},
+	{
+		"cat": 299,
+		"NAME_3": "Massangam",
+		"popTotal": 67292.1438267652,
+		"popTravelTime_60": 56918.0138006437,
+		"popCoveredPercent_60": 84.58344550170918
+	},
+	{
+		"cat": 31,
+		"NAME_3": "Lobo",
+		"popTotal": 5193.80831812318,
+		"popTravelTime_60": 4403.29097704925,
+		"popCoveredPercent_60": 84.77962041233764
+	},
+	{
+		"cat": 356,
+		"NAME_3": "Isangele",
+		"popTotal": 5200.39285538856,
+		"popTravelTime_60": 4415.24942223263,
+		"popCoveredPercent_60": 84.90222844717631
+	},
+	{
+		"cat": 52,
+		"NAME_3": "Awaé",
+		"popTotal": 12691.635232873,
+		"popTravelTime_60": 10790.5763595555,
+		"popCoveredPercent_60": 85.02116678870892
+	},
+	{
+		"cat": 184,
+		"NAME_3": "Nord Makombé",
+		"popTotal": 2825.36419617951,
+		"popTravelTime_60": 2402.80386662266,
+		"popCoveredPercent_60": 85.04404033546396
+	},
+	{
+		"cat": 142,
+		"NAME_3": "Gobo",
+		"popTotal": 43948.3868991698,
+		"popTravelTime_60": 37457.2963318314,
+		"popCoveredPercent_60": 85.23019608835514
+	},
+	{
+		"cat": 73,
+		"NAME_3": "Eséka",
+		"popTotal": 23562.9552722137,
+		"popTravelTime_60": 20123.6689806765,
+		"popCoveredPercent_60": 85.40384153089262
+	},
+	{
+		"cat": 198,
+		"NAME_3": "Pouma",
+		"popTotal": 19482.072772764,
+		"popTravelTime_60": 16649.3094781155,
+		"popCoveredPercent_60": 85.45964113937245
+	},
+	{
+		"cat": 117,
+		"NAME_3": "Bertoua 2",
+		"popTotal": 15604.9571758533,
+		"popTravelTime_60": 13344.2629524457,
+		"popCoveredPercent_60": 85.51297387149683
+	},
+	{
+		"cat": 307,
+		"NAME_3": "Sangmélima",
+		"popTotal": 87658.8217042444,
+		"popTravelTime_60": 75136.7717173301,
+		"popCoveredPercent_60": 85.71501448061561
+	},
+	{
+		"cat": 170,
+		"NAME_3": "Bonaléa",
+		"popTotal": 20122.8513368776,
+		"popTravelTime_60": 17290.9858721178,
+		"popCoveredPercent_60": 85.92711630498377
+	},
+	{
+		"cat": 25,
+		"NAME_3": "Nkoteng",
+		"popTotal": 18874.1018968286,
+		"popTravelTime_60": 16242.0195143986,
+		"popCoveredPercent_60": 86.05452912770241
+	},
+	{
+		"cat": 159,
+		"NAME_3": "Kolofata",
+		"popTotal": 106809.276560721,
+		"popTravelTime_60": 92162.4912017529,
+		"popCoveredPercent_60": 86.28697260144683
+	},
+	{
+		"cat": 245,
+		"NAME_3": "Bafut",
+		"popTotal": 60876.9860043028,
+		"popTravelTime_60": 52918.6188006955,
+		"popCoveredPercent_60": 86.9271333455227
+	},
+	{
+		"cat": 329,
+		"NAME_3": "Olamzé",
+		"popTotal": 11003.9812631638,
+		"popTravelTime_60": 9599.46574821685,
+		"popCoveredPercent_60": 87.23629674244708
+	},
+	{
+		"cat": 254,
+		"NAME_3": "Ngie",
+		"popTotal": 19047.9503882531,
+		"popTravelTime_60": 16642.9962397167,
+		"popCoveredPercent_60": 87.37421035063416
+	},
+	{
+		"cat": 41,
+		"NAME_3": "Makénéné",
+		"popTotal": 15795.0183264642,
+		"popTravelTime_60": 13846.3907773379,
+		"popCoveredPercent_60": 87.66302444954167
+	},
+	{
+		"cat": 167,
+		"NAME_3": "Mokolo",
+		"popTotal": 616419.124160527,
+		"popTravelTime_60": 540613.525784699,
+		"popCoveredPercent_60": 87.7022637026286
+	},
+	{
+		"cat": 255,
+		"NAME_3": "Njikwa",
+		"popTotal": 22013.9066055682,
+		"popTravelTime_60": 19308.8295591305,
+		"popCoveredPercent_60": 87.71196273834705
+	},
+	{
+		"cat": 337,
+		"NAME_3": "Bangem",
+		"popTotal": 25902.335974052,
+		"popTravelTime_60": 22745.1512135332,
+		"popCoveredPercent_60": 87.81119678286333
+	},
+	{
+		"cat": 208,
+		"NAME_3": "Demsa",
+		"popTotal": 91391.6710123826,
+		"popTravelTime_60": 80527.4731409982,
+		"popCoveredPercent_60": 88.11248579762547
+	},
+	{
+		"cat": 291,
+		"NAME_3": "Tonga",
+		"popTotal": 11352.8563176133,
+		"popTravelTime_60": 10046.921435122,
+		"popCoveredPercent_60": 88.49686064937494
+	},
+	{
+		"cat": 256,
+		"NAME_3": "Widikum Menka",
+		"popTotal": 35682.0976962127,
+		"popTravelTime_60": 31586.29176138,
+		"popCoveredPercent_60": 88.5213981260204
+	},
+	{
+		"cat": 162,
+		"NAME_3": "Bourrah",
+		"popTotal": 149033.201924181,
+		"popTravelTime_60": 132146.829048021,
+		"popCoveredPercent_60": 88.66938866095707
+	},
+	{
+		"cat": 339,
+		"NAME_3": "Tombel",
+		"popTotal": 58772.3920889177,
+		"popTravelTime_60": 52185.5574020449,
+		"popCoveredPercent_60": 88.79263808608049
+	},
+	{
+		"cat": 152,
+		"NAME_3": "Yagoua",
+		"popTotal": 72929.6536994898,
+		"popTravelTime_60": 64809.2416116759,
+		"popCoveredPercent_60": 88.86541800777711
+	},
+	{
+		"cat": 45,
+		"NAME_3": "Mbangassina",
+		"popTotal": 45958.9789415918,
+		"popTravelTime_60": 40863.6852666155,
+		"popCoveredPercent_60": 88.91338799878086
+	},
+	{
+		"cat": 294,
+		"NAME_3": "Foumbot",
+		"popTotal": 102068.886332189,
+		"popTravelTime_60": 90764.6696143391,
+		"popCoveredPercent_60": 88.92491421816862
+	},
+	{
+		"cat": 190,
+		"NAME_3": "Edéa 1",
+		"popTotal": 47932.6736486473,
+		"popTravelTime_60": 42804.5612074501,
+		"popCoveredPercent_60": 89.30142624885285
+	},
+	{
+		"cat": 234,
+		"NAME_3": "Noni",
+		"popTotal": 60005.1539581516,
+		"popTravelTime_60": 53619.4836458532,
+		"popCoveredPercent_60": 89.35813027535626
+	},
+	{
+		"cat": 211,
+		"NAME_3": "Garoua 3",
+		"popTotal": 40252.612177604,
+		"popTravelTime_60": 36006.4293741387,
+		"popCoveredPercent_60": 89.45116211407563
+	},
+	{
+		"cat": 238,
+		"NAME_3": "Ndu",
+		"popTotal": 93282.7310474599,
+		"popTravelTime_60": 83453.0524147357,
+		"popCoveredPercent_60": 89.46248837019672
+	},
+	{
+		"cat": 268,
+		"NAME_3": "Banka",
+		"popTotal": 7973.08135209536,
+		"popTravelTime_60": 7135.31645086815,
+		"popCoveredPercent_60": 89.49258305251028
+	},
+	{
+		"cat": 158,
+		"NAME_3": "Taîbong",
+		"popTotal": 97198.1442041815,
+		"popTravelTime_60": 87014.3407943589,
+		"popCoveredPercent_60": 89.52263595853253
+	},
+	{
+		"cat": 94,
+		"NAME_3": "Abong Mbang",
+		"popTotal": 34787.4689680518,
+		"popTravelTime_60": 31242.1724242278,
+		"popCoveredPercent_60": 89.80869649620115
+	},
+	{
+		"cat": 289,
+		"NAME_3": "Bassamba",
+		"popTotal": 4226.64104219654,
+		"popTravelTime_60": 3804.46090247054,
+		"popCoveredPercent_60": 90.0114503334639
+	},
+	{
+		"cat": 141,
+		"NAME_3": "Datchéka",
+		"popTotal": 51274.9259562822,
+		"popTravelTime_60": 46336.6181944038,
+		"popCoveredPercent_60": 90.3689616907709
+	},
+	{
+		"cat": 183,
+		"NAME_3": "Nkondjock",
+		"popTotal": 8799.116993531,
+		"popTravelTime_60": 7953.44908260641,
+		"popCoveredPercent_60": 90.38917300967455
+	},
+	{
+		"cat": 205,
+		"NAME_3": "Bardanké",
+		"popTotal": 366464.942472104,
+		"popTravelTime_60": 331962.324629664,
+		"popCoveredPercent_60": 90.58501541520131
+	},
+	{
+		"cat": 58,
+		"NAME_3": "Akono",
+		"popTotal": 8805.55355652472,
+		"popTravelTime_60": 8012.42354897338,
+		"popCoveredPercent_60": 90.9928432953128
+	},
+	{
+		"cat": 129,
+		"NAME_3": "Méri",
+		"popTotal": 148236.520555755,
+		"popTravelTime_60": 134897.979500304,
+		"popCoveredPercent_60": 91.00185230640645
+	},
+	{
+		"cat": 154,
+		"NAME_3": "Kaele",
+		"popTotal": 179971.9578874,
+		"popTravelTime_60": 164027.502490342,
+		"popCoveredPercent_60": 91.14058902052192
+	},
+	{
+		"cat": 288,
+		"NAME_3": "Bangangté",
+		"popTotal": 68802.2648697183,
+		"popTravelTime_60": 63010.7819810344,
+		"popCoveredPercent_60": 91.58242406750641
+	},
+	{
+		"cat": 166,
+		"NAME_3": "Mogodé",
+		"popTotal": 237697.184414763,
+		"popTravelTime_60": 218839.760647794,
+		"popCoveredPercent_60": 92.06661878919682
+	},
+	{
+		"cat": 197,
+		"NAME_3": "Nyanon",
+		"popTotal": 13345.3582787076,
+		"popTravelTime_60": 12294.7023569152,
+		"popCoveredPercent_60": 92.12718085307075
+	},
+	{
+		"cat": 298,
+		"NAME_3": "Malantouen",
+		"popTotal": 59881.5185269435,
+		"popTravelTime_60": 55242.0432420255,
+		"popCoveredPercent_60": 92.25224176165392
+	},
+	{
+		"cat": 284,
+		"NAME_3": "Santchou",
+		"popTotal": 39389.6594445355,
+		"popTravelTime_60": 36382.6510415972,
+		"popCoveredPercent_60": 92.3659954278801
+	},
+	{
+		"cat": 150,
+		"NAME_3": "Vélé",
+		"popTotal": 59416.0400317841,
+		"popTravelTime_60": 54896.2310092929,
+		"popCoveredPercent_60": 92.39294806575234
+	},
+	{
+		"cat": 340,
+		"NAME_3": "Alou",
+		"popTotal": 30438.6717493177,
+		"popTravelTime_60": 28250.8016614127,
+		"popCoveredPercent_60": 92.81220249712756
+	},
+	{
+		"cat": 244,
+		"NAME_3": "Wum",
+		"popTotal": 51503.0970576915,
+		"popTravelTime_60": 47878.9691924479,
+		"popCoveredPercent_60": 92.96328168151905
+	},
+	{
+		"cat": 16,
+		"NAME_3": "Ngaoundéré 1",
+		"popTotal": 176976.758020965,
+		"popTravelTime_60": 164656.737699518,
+		"popCoveredPercent_60": 93.03862243877948
+	},
+	{
+		"cat": 230,
+		"NAME_3": "Jakiri",
+		"popTotal": 123372.497758103,
+		"popTravelTime_60": 115351.051185727,
+		"popCoveredPercent_60": 93.49818904687844
+	},
+	{
+		"cat": 165,
+		"NAME_3": "Mayo Moskota",
+		"popTotal": 45186.407625905,
+		"popTravelTime_60": 42291.8663014281,
+		"popCoveredPercent_60": 93.59422119049472
+	},
+	{
+		"cat": 311,
+		"NAME_3": "Ebolowa 1",
+		"popTotal": 72190.4368099308,
+		"popTravelTime_60": 67609.7922823373,
+		"popCoveredPercent_60": 93.65477654657523
+	},
+	{
+		"cat": 219,
+		"NAME_3": "Figuil",
+		"popTotal": 80948.6028629619,
+		"popTravelTime_60": 75837.1819076473,
+		"popCoveredPercent_60": 93.68559706463651
+	},
+	{
+		"cat": 250,
+		"NAME_3": "Santa",
+		"popTotal": 120559.250509658,
+		"popTravelTime_60": 113085.264681989,
+		"popCoveredPercent_60": 93.80057042817278
+	},
+	{
+		"cat": 148,
+		"NAME_3": "Porhi",
+		"popTotal": 15861.5340813782,
+		"popTravelTime_60": 14909.5112417139,
+		"popCoveredPercent_60": 93.9979144843121
+	},
+	{
+		"cat": 300,
+		"NAME_3": "Njimom",
+		"popTotal": 51371.5743764807,
+		"popTravelTime_60": 48414.046381519,
+		"popCoveredPercent_60": 94.24287063252682
+	},
+	{
+		"cat": 281,
+		"NAME_3": "Fongo Tongo",
+		"popTotal": 25644.4731737359,
+		"popTravelTime_60": 24195.1144882765,
+		"popCoveredPercent_60": 94.34826102435288
+	},
+	{
+		"cat": 229,
+		"NAME_3": "Njinikom",
+		"popTotal": 26157.7418715416,
+		"popTravelTime_60": 24723.952708445,
+		"popCoveredPercent_60": 94.51868142847417
+	},
+	{
+		"cat": 86,
+		"NAME_3": "Mbalmayo",
+		"popTotal": 50618.5561280411,
+		"popTravelTime_60": 47922.1480551282,
+		"popCoveredPercent_60": 94.67308378751015
+	},
+	{
+		"cat": 181,
+		"NAME_3": "Nlonako",
+		"popTotal": 12389.4028722961,
+		"popTravelTime_60": 11747.9881137276,
+		"popCoveredPercent_60": 94.8228759272752
+	},
+	{
+		"cat": 125,
+		"NAME_3": "Gasawa",
+		"popTotal": 91383.4255483328,
+		"popTravelTime_60": 86747.3020630093,
+		"popCoveredPercent_60": 94.92673484550932
+	},
+	{
+		"cat": 83,
+		"NAME_3": "Nyakokombo",
+		"popTotal": 4992.56906107949,
+		"popTravelTime_60": 4746.70092353956,
+		"popCoveredPercent_60": 95.07531824734001
+	},
+	{
+		"cat": 178,
+		"NAME_3": "Nkongsamba 1",
+		"popTotal": 6093.64072984599,
+		"popTravelTime_60": 5815.50145752056,
+		"popCoveredPercent_60": 95.43558137644817
+	},
+	{
+		"cat": 259,
+		"NAME_3": "Ndop",
+		"popTotal": 116209.270167274,
+		"popTravelTime_60": 111014.649126524,
+		"popCoveredPercent_60": 95.52994263429007
+	},
+	{
+		"cat": 174,
+		"NAME_3": "Mbanga",
+		"popTotal": 43268.2059974759,
+		"popTravelTime_60": 41351.2042255639,
+		"popCoveredPercent_60": 95.5694909744494
+	},
+	{
+		"cat": 333,
+		"NAME_3": "Limbé 3",
+		"popTotal": 19671.0803112344,
+		"popTravelTime_60": 18837.7454939678,
+		"popCoveredPercent_60": 95.76365505055321
+	},
+	{
+		"cat": 292,
+		"NAME_3": "Bangourain",
+		"popTotal": 44462.7772700348,
+		"popTravelTime_60": 42610.3638115995,
+		"popCoveredPercent_60": 95.83378823327864
+	},
+	{
+		"cat": 320,
+		"NAME_3": "Kribi 1",
+		"popTotal": 72361.1818825372,
+		"popTravelTime_60": 69348.3759268631,
+		"popCoveredPercent_60": 95.83643346156956
+	},
+	{
+		"cat": 270,
+		"NAME_3": "Kekem",
+		"popTotal": 24318.602326595,
+		"popTravelTime_60": 23321.4746801139,
+		"popCoveredPercent_60": 95.89973291602112
+	},
+	{
+		"cat": 57,
+		"NAME_3": "Soa",
+		"popTotal": 23799.3066061186,
+		"popTravelTime_60": 22879.7229950739,
+		"popCoveredPercent_60": 96.13609074304591
+	},
+	{
+		"cat": 175,
+		"NAME_3": "Melong",
+		"popTotal": 74394.8285460292,
+		"popTravelTime_60": 71555.8989074214,
+		"popCoveredPercent_60": 96.1839691090204
+	},
+	{
+		"cat": 168,
+		"NAME_3": "Soulédé Roua",
+		"popTotal": 39357.0943254661,
+		"popTravelTime_60": 37891.7257134568,
+		"popCoveredPercent_60": 96.27673577756696
+	},
+	{
+		"cat": 126,
+		"NAME_3": "Maroua 1",
+		"popTotal": 33368.1640306971,
+		"popTravelTime_60": 32134.2177290607,
+		"popCoveredPercent_60": 96.3020251863386
+	},
+	{
+		"cat": 30,
+		"NAME_3": "Evodoula",
+		"popTotal": 8053.76082812465,
+		"popTravelTime_60": 7756.14437107298,
+		"popCoveredPercent_60": 96.30462757209824
+	},
+	{
+		"cat": 290,
+		"NAME_3": "Bazou",
+		"popTotal": 22462.325674638,
+		"popTravelTime_60": 21640.8930472105,
+		"popCoveredPercent_60": 96.34306509786308
+	},
+	{
+		"cat": 136,
+		"NAME_3": "Kousséri",
+		"popTotal": 109263.013576633,
+		"popTravelTime_60": 105560.389065862,
+		"popCoveredPercent_60": 96.61127366931525
+	},
+	{
+		"cat": 231,
+		"NAME_3": "Kumbo",
+		"popTotal": 65085.1792470254,
+		"popTravelTime_60": 62936.9870477067,
+		"popCoveredPercent_60": 96.69941417666622
+	},
+	{
+		"cat": 282,
+		"NAME_3": "Nkong-Nkhi",
+		"popTotal": 66381.7252680145,
+		"popTravelTime_60": 64255.036830793,
+		"popCoveredPercent_60": 96.79627423265205
+	},
+	{
+		"cat": 226,
+		"NAME_3": "Belo",
+		"popTotal": 32227.6545696202,
+		"popTravelTime_60": 31263.301714918,
+		"popCoveredPercent_60": 97.00768527036634
+	},
+	{
+		"cat": 257,
+		"NAME_3": "Babessi",
+		"popTotal": 53777.9005449052,
+		"popTravelTime_60": 52189.5700525092,
+		"popCoveredPercent_60": 97.0464996284678
+	},
+	{
+		"cat": 28,
+		"NAME_3": "Ebebda",
+		"popTotal": 4971.0128164147,
+		"popTravelTime_60": 4829.10980115609,
+		"popCoveredPercent_60": 97.14539027559867
+	},
+	{
+		"cat": 263,
+		"NAME_3": "Mbouda",
+		"popTotal": 99704.5561214996,
+		"popTravelTime_60": 96868.3489517314,
+		"popCoveredPercent_60": 97.15538859998333
+	},
+	{
+		"cat": 247,
+		"NAME_3": "Bamenda 1",
+		"popTotal": 12288.8379461731,
+		"popTravelTime_60": 11942.1379397356,
+		"popCoveredPercent_60": 97.17874051268235
+	},
+	{
+		"cat": 39,
+		"NAME_3": "Kiiki",
+		"popTotal": 18509.0665129135,
+		"popTravelTime_60": 17994.5215035493,
+		"popCoveredPercent_60": 97.22003803376464
+	},
+	{
+		"cat": 34,
+		"NAME_3": "Okola",
+		"popTotal": 31166.6429157748,
+		"popTravelTime_60": 30325.144485024,
+		"popCoveredPercent_60": 97.30000297746255
+	},
+	{
+		"cat": 235,
+		"NAME_3": "Oku",
+		"popTotal": 100995.786910399,
+		"popTravelTime_60": 98347.3075833723,
+		"popCoveredPercent_60": 97.37763385181962
+	},
+	{
+		"cat": 262,
+		"NAME_3": "Galim",
+		"popTotal": 66815.3638596729,
+		"popTravelTime_60": 65087.9606874084,
+		"popCoveredPercent_60": 97.41466172975959
+	},
+	{
+		"cat": 258,
+		"NAME_3": "Balikumbat",
+		"popTotal": 81546.1049412189,
+		"popTravelTime_60": 79451.3971432636,
+		"popCoveredPercent_60": 97.4312595316904
+	},
+	{
+		"cat": 149,
+		"NAME_3": "Tchatibali",
+		"popTotal": 79026.970511605,
+		"popTravelTime_60": 77022.0304310372,
+		"popCoveredPercent_60": 97.46296730396192
+	},
+	{
+		"cat": 253,
+		"NAME_3": "Mbeggwi",
+		"popTotal": 53018.5900544579,
+		"popTravelTime_60": 51683.2642125717,
+		"popCoveredPercent_60": 97.48140069263513
+	},
+	{
+		"cat": 59,
+		"NAME_3": "Bikok",
+		"popTotal": 35095.5769947942,
+		"popTravelTime_60": 34266.6991537725,
+		"popCoveredPercent_60": 97.63822705879817
+	},
+	{
+		"cat": 275,
+		"NAME_3": "Bandjoun",
+		"popTotal": 9455.78204503052,
+		"popTravelTime_60": 9237.68317259152,
+		"popCoveredPercent_60": 97.69348667936332
+	},
+	{
+		"cat": 233,
+		"NAME_3": "Nkum",
+		"popTotal": 43695.1513151092,
+		"popTravelTime_60": 42688.5927802315,
+		"popCoveredPercent_60": 97.69640679896297
+	},
+	{
+		"cat": 348,
+		"NAME_3": "Kumba 1",
+		"popTotal": 193272.423601442,
+		"popTravelTime_60": 188985.20372071,
+		"popCoveredPercent_60": 97.78177362251486
+	},
+	{
+		"cat": 33,
+		"NAME_3": "Obala",
+		"popTotal": 36824.5227383297,
+		"popTravelTime_60": 36031.293771738,
+		"popCoveredPercent_60": 97.84592193569408
+	},
+	{
+		"cat": 260,
+		"NAME_3": "Babadjou",
+		"popTotal": 64342.0847314988,
+		"popTravelTime_60": 62972.2556108566,
+		"popCoveredPercent_60": 97.87102154622666
+	},
+	{
+		"cat": 285,
+		"NAME_3": "Bafoussam 1",
+		"popTotal": 223722.636912878,
+		"popTravelTime_60": 219238.518123744,
+		"popCoveredPercent_60": 97.99567944888823
+	},
+	{
+		"cat": 35,
+		"NAME_3": "Sa'a",
+		"popTotal": 41973.9708497971,
+		"popTravelTime_60": 41165.3614408002,
+		"popCoveredPercent_60": 98.07354559831738
+	},
+	{
+		"cat": 32,
+		"NAME_3": "Monatelé",
+		"popTotal": 18498.5101005852,
+		"popTravelTime_60": 18157.1219018933,
+		"popCoveredPercent_60": 98.1545097587016
+	},
+	{
+		"cat": 246,
+		"NAME_3": "Bali",
+		"popTotal": 64082.8550702809,
+		"popTravelTime_60": 62948.8269963241,
+		"popCoveredPercent_60": 98.23037211323825
+	},
+	{
+		"cat": 293,
+		"NAME_3": "Foumban",
+		"popTotal": 105212.723157358,
+		"popTravelTime_60": 103411.321463083,
+		"popCoveredPercent_60": 98.28784804706481
+	},
+	{
+		"cat": 176,
+		"NAME_3": "Mombo",
+		"popTotal": 8791.31401882677,
+		"popTravelTime_60": 8643.88821246788,
+		"popCoveredPercent_60": 98.32305152513977
+	},
+	{
+		"cat": 251,
+		"NAME_3": "Tubah",
+		"popTotal": 102798.431050161,
+		"popTravelTime_60": 101219.155016137,
+		"popCoveredPercent_60": 98.46371581950177
+	},
+	{
+		"cat": 164,
+		"NAME_3": "Koza",
+		"popTotal": 36851.9920172825,
+		"popTravelTime_60": 36316.3402590787,
+		"popCoveredPercent_60": 98.54647814437658
+	},
+	{
+		"cat": 280,
+		"NAME_3": "Fokoue",
+		"popTotal": 12373.3010833958,
+		"popTravelTime_60": 12197.8717936745,
+		"popCoveredPercent_60": 98.58219493295354
+	},
+	{
+		"cat": 296,
+		"NAME_3": "Koutaba",
+		"popTotal": 68763.260763696,
+		"popTravelTime_60": 67805.6877837048,
+		"popCoveredPercent_60": 98.60743517780244
+	},
+	{
+		"cat": 295,
+		"NAME_3": "Kouoptamo",
+		"popTotal": 70668.6303533484,
+		"popTravelTime_60": 69695.2755003152,
+		"popCoveredPercent_60": 98.62264933087516
+	},
+	{
+		"cat": 29,
+		"NAME_3": "Elig Mfomo",
+		"popTotal": 7552.9507628918,
+		"popTravelTime_60": 7462.81090953371,
+		"popCoveredPercent_60": 98.8065610886681
+	},
+	{
+		"cat": 335,
+		"NAME_3": "Tiko",
+		"popTotal": 145689.17708028,
+		"popTravelTime_60": 144227.579199362,
+		"popCoveredPercent_60": 98.99676975997153
+	},
+	{
+		"cat": 274,
+		"NAME_3": "Batie",
+		"popTotal": 11245.181852861,
+		"popTravelTime_60": 11143.843931079,
+		"popCoveredPercent_60": 99.09883252127028
+	},
+	{
+		"cat": 61,
+		"NAME_3": "Ngoumou",
+		"popTotal": 13025.9593431032,
+		"popTravelTime_60": 12909.9863155989,
+		"popCoveredPercent_60": 99.10967764868924
+	},
+	{
+		"cat": 330,
+		"NAME_3": "Buéa",
+		"popTotal": 246338.011680329,
+		"popTravelTime_60": 244166.311992957,
+		"popCoveredPercent_60": 99.11840658591083
+	},
+	{
+		"cat": 266,
+		"NAME_3": "Bana",
+		"popTotal": 15468.4590981046,
+		"popTravelTime_60": 15342.2535902534,
+		"popCoveredPercent_60": 99.18411066641625
+	},
+	{
+		"cat": 171,
+		"NAME_3": "Dibombari",
+		"popTotal": 102126.946980951,
+		"popTravelTime_60": 101334.085656113,
+		"popCoveredPercent_60": 99.22365120247267
+	},
+	{
+		"cat": 261,
+		"NAME_3": "Batcham",
+		"popTotal": 123821.644908064,
+		"popTravelTime_60": 122882.520959879,
+		"popCoveredPercent_60": 99.24155106412752
+	},
+	{
+		"cat": 286,
+		"NAME_3": "Bafoussam 2",
+		"popTotal": 109462.971743977,
+		"popTravelTime_60": 108638.438365296,
+		"popCoveredPercent_60": 99.24674676235767
+	},
+	{
+		"cat": 36,
+		"NAME_3": "Bafia",
+		"popTotal": 42470.4387726714,
+		"popTravelTime_60": 42164.6699572466,
+		"popCoveredPercent_60": 99.2800431917799
+	},
+	{
+		"cat": 267,
+		"NAME_3": "Bandja",
+		"popTotal": 48153.2625786639,
+		"popTravelTime_60": 47826.3797132621,
+		"popCoveredPercent_60": 99.32116154150967
+	},
+	{
+		"cat": 336,
+		"NAME_3": "West Coast",
+		"popTotal": 11631.9510341184,
+		"popTravelTime_60": 11555.0929775972,
+		"popCoveredPercent_60": 99.33925051527673
+	},
+	{
+		"cat": 273,
+		"NAME_3": "Bangou",
+		"popTotal": 27876.2189687202,
+		"popTravelTime_60": 27710.9213404585,
+		"popCoveredPercent_60": 99.40702995464635
+	},
+	{
+		"cat": 172,
+		"NAME_3": "Loum",
+		"popTotal": 23419.7368592745,
+		"popTravelTime_60": 23282.3557878279,
+		"popCoveredPercent_60": 99.41339617830847
+	},
+	{
+		"cat": 349,
+		"NAME_3": "Kumba 2",
+		"popTotal": 15573.2877439136,
+		"popTravelTime_60": 15482.4145279482,
+		"popCoveredPercent_60": 99.41648020983293
+	},
+	{
+		"cat": 116,
+		"NAME_3": "Bertoua 1",
+		"popTotal": 127173.441969548,
+		"popTravelTime_60": 126471.036694963,
+		"popCoveredPercent_60": 99.44767927665809
+	},
+	{
+		"cat": 56,
+		"NAME_3": "Nlolofamba",
+		"popTotal": 427986.777325446,
+		"popTravelTime_60": 425642.357915986,
+		"popCoveredPercent_60": 99.45222153261119
+	},
+	{
+		"cat": 278,
+		"NAME_3": "Poumegne",
+		"popTotal": 13565.5848221349,
+		"popTravelTime_60": 13502.0090459925,
+		"popCoveredPercent_60": 99.53134511356514
+	},
+	{
+		"cat": 55,
+		"NAME_3": "Mfou",
+		"popTotal": 161945.619984884,
+		"popTravelTime_60": 161193.057017239,
+		"popCoveredPercent_60": 99.53529896781697
+	},
+	{
+		"cat": 202,
+		"NAME_3": "Douala 4",
+		"popTotal": 582963.441559734,
+		"popTravelTime_60": 580290.0251269,
+		"popCoveredPercent_60": 99.54140924760542
+	},
+	{
+		"cat": 60,
+		"NAME_3": "Mbankomo",
+		"popTotal": 193409.820619845,
+		"popTravelTime_60": 192561.526959318,
+		"popCoveredPercent_60": 99.56140093723867
+	},
+	{
+		"cat": 173,
+		"NAME_3": "Manjo",
+		"popTotal": 40090.5940791093,
+		"popTravelTime_60": 39936.6575286854,
+		"popCoveredPercent_60": 99.61602826308798
+	},
+	{
+		"cat": 276,
+		"NAME_3": "Bayangam",
+		"popTotal": 9931.9701281336,
+		"popTravelTime_60": 9894.74002116891,
+		"popCoveredPercent_60": 99.62514882259632
+	},
+	{
+		"cat": 277,
+		"NAME_3": "Djemrem",
+		"popTotal": 6404.06940853505,
+		"popTravelTime_60": 6381.63951720798,
+		"popCoveredPercent_60": 99.64975564916307
+	},
+	{
+		"cat": 177,
+		"NAME_3": "Njombé Penja",
+		"popTotal": 31943.7948811423,
+		"popTravelTime_60": 31838.3391470387,
+		"popCoveredPercent_60": 99.6698709890419
+	},
+	{
+		"cat": 248,
+		"NAME_3": "Bamenda 2",
+		"popTotal": 320898.394918837,
+		"popTravelTime_60": 319883.391565461,
+		"popCoveredPercent_60": 99.68369946081135
+	},
+	{
+		"cat": 279,
+		"NAME_3": "Dschang",
+		"popTotal": 81495.2937796922,
+		"popTravelTime_60": 81325.1624646578,
+		"popCoveredPercent_60": 99.7912378652265
+	},
+	{
+		"cat": 210,
+		"NAME_3": "Garoua 2",
+		"popTotal": 25267.081115238,
+		"popTravelTime_60": 25224.4402083885,
+		"popCoveredPercent_60": 99.83123928460503
+	},
+	{
+		"cat": 331,
+		"NAME_3": "Limbé 1",
+		"popTotal": 111447.482979267,
+		"popTravelTime_60": 111262.050797238,
+		"popCoveredPercent_60": 99.83361474205434
+	},
+	{
+		"cat": 182,
+		"NAME_3": "Baré",
+		"popTotal": 507.607342390658,
+		"popTravelTime_60": 506.979758404276,
+		"popCoveredPercent_60": 99.87636428121266
+	},
+	{
+		"cat": 44,
+		"NAME_3": "Ombessa",
+		"popTotal": 14225.4105471599,
+		"popTravelTime_60": 14218.697629162,
+		"popCoveredPercent_60": 99.95281037425497
+	},
+	{
+		"cat": 264,
+		"NAME_3": "Bafang",
+		"popTotal": 14673.0008939679,
+		"popTravelTime_60": 14667.0058652119,
+		"popCoveredPercent_60": 99.95914244945993
+	},
+	{
+		"cat": 200,
+		"NAME_3": "Douala 2",
+		"popTotal": 671922.689600455,
+		"popTravelTime_60": 671681.672566489,
+		"popCoveredPercent_60": 99.96413024330086
+	},
+	{
+		"cat": 203,
+		"NAME_3": "Douala 5",
+		"popTotal": 555988.645058842,
+		"popTravelTime_60": 555843.575201469,
+		"popCoveredPercent_60": 99.97390776616352
+	},
+	{
+		"cat": 283,
+		"NAME_3": "Penka Michel",
+		"popTotal": 87861.8304842283,
+		"popTravelTime_60": 87842.6535647527,
+		"popCoveredPercent_60": 99.97817377651945
+	},
+	{
+		"cat": 199,
+		"NAME_3": "Douala 1",
+		"popTotal": 672407.394206397,
+		"popTravelTime_60": 672390.115981957,
+		"popCoveredPercent_60": 99.99743039345061
+	},
+	{
+		"cat": 62,
+		"NAME_3": "Yaoundé 1",
+		"popTotal": 144489.396236711,
+		"popTravelTime_60": 144489.396236711,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 63,
+		"NAME_3": "Yaoundé 2",
+		"popTotal": 11903.9395350657,
+		"popTravelTime_60": 11903.9395350657,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 64,
+		"NAME_3": "Yaoundé 3",
+		"popTotal": 737632.457336261,
+		"popTravelTime_60": 737632.457336261,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 65,
+		"NAME_3": "Yaoundé 4",
+		"popTotal": 1144215.07278205,
+		"popTravelTime_60": 1144215.07278205,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 66,
+		"NAME_3": "Yaoundé 5",
+		"popTotal": 347912.441684354,
+		"popTravelTime_60": 347912.441684354,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 67,
+		"NAME_3": "Yaoundé 6",
+		"popTotal": 1082927.24780309,
+		"popTravelTime_60": 1082927.24780309,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 68,
+		"NAME_3": "Yaoundé 7",
+		"popTotal": 12998.0605723449,
+		"popTravelTime_60": 12998.0605723449,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 127,
+		"NAME_3": "Maroua 2",
+		"popTotal": 227865.571323265,
+		"popTravelTime_60": 227865.571323265,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 161,
+		"NAME_3": "Tokombéré",
+		"popTotal": 71759.8235612722,
+		"popTravelTime_60": 71759.8235612722,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 179,
+		"NAME_3": "Nkongsamba 2",
+		"popTotal": 10584.6800643125,
+		"popTravelTime_60": 10584.6800643125,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 180,
+		"NAME_3": "Nkongsamba 3",
+		"popTotal": 29737.3540060711,
+		"popTravelTime_60": 29737.3540060711,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 201,
+		"NAME_3": "Douala 3",
+		"popTotal": 1112328.94872634,
+		"popTravelTime_60": 1112328.94872634,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 249,
+		"NAME_3": "Bamenda 3",
+		"popTotal": 52099.7070079464,
+		"popTravelTime_60": 52099.7070079464,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 252,
+		"NAME_3": "Batibo",
+		"popTotal": 40818.8938436985,
+		"popTravelTime_60": 40818.8938436985,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 269,
+		"NAME_3": "Banwa",
+		"popTotal": 3647.81762062493,
+		"popTravelTime_60": 3647.81762062493,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 271,
+		"NAME_3": "Baham",
+		"popTotal": 17517.004394794,
+		"popTravelTime_60": 17517.004394794,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 272,
+		"NAME_3": "Bamendjou",
+		"popTotal": 31254.951970252,
+		"popTravelTime_60": 31254.951970252,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 287,
+		"NAME_3": "Bafoussam 3",
+		"popTotal": 73793.9044677012,
+		"popTravelTime_60": 73793.9044677012,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 332,
+		"NAME_3": "Limbé 2",
+		"popTotal": 98187.3471278837,
+		"popTravelTime_60": 98187.3471278837,
+		"popCoveredPercent_60": 100
+	}
+]

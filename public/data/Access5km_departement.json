@@ -1,0 +1,408 @@
+[
+	{
+		"cat": 1,
+		"NAME_2": "Djerem",
+		"popTotal": 220227.499180849,
+		"popTravelTime_60": 99213.5788565542,
+		"popCoveredPercent_60": 45.05049515868172
+	},
+	{
+		"cat": 2,
+		"NAME_2": "Faro et Déo",
+		"popTotal": 121700.482687407,
+		"popTravelTime_60": 57838.0723460963,
+		"popCoveredPercent_60": 47.52493257948361
+	},
+	{
+		"cat": 3,
+		"NAME_2": "Mayo Banyo",
+		"popTotal": 316028.585823705,
+		"popTravelTime_60": 148531.9265664,
+		"popCoveredPercent_60": 46.99952258409238
+	},
+	{
+		"cat": 4,
+		"NAME_2": "Mbéré",
+		"popTotal": 220440.226864029,
+		"popTravelTime_60": 139335.604878401,
+		"popCoveredPercent_60": 63.20788490403133
+	},
+	{
+		"cat": 5,
+		"NAME_2": "Vina",
+		"popTotal": 510635.538108136,
+		"popTravelTime_60": 308554.318028748,
+		"popCoveredPercent_60": 60.42554718614321
+	},
+	{
+		"cat": 6,
+		"NAME_2": "Haute Sanaga",
+		"popTotal": 116825.482270694,
+		"popTravelTime_60": 68274.2467287228,
+		"popCoveredPercent_60": 58.44122823351664
+	},
+	{
+		"cat": 7,
+		"NAME_2": "Lekié",
+		"popTotal": 160681.635117511,
+		"popTravelTime_60": 155228.02067227,
+		"popCoveredPercent_60": 96.60595036809738
+	},
+	{
+		"cat": 8,
+		"NAME_2": "Mbam et Inoubou",
+		"popTotal": 203645.677619708,
+		"popTravelTime_60": 173836.301266309,
+		"popCoveredPercent_60": 85.36213648046798
+	},
+	{
+		"cat": 9,
+		"NAME_2": "Mbam et Kim",
+		"popTotal": 183795.921848377,
+		"popTravelTime_60": 114755.787828279,
+		"popCoveredPercent_60": 62.43652561722622
+	},
+	{
+		"cat": 10,
+		"NAME_2": "Mefou et Afamba",
+		"popTotal": 644527.705467998,
+		"popTravelTime_60": 631785.302819733,
+		"popCoveredPercent_60": 98.02298605007016
+	},
+	{
+		"cat": 11,
+		"NAME_2": "Mefou et Akono",
+		"popTotal": 250336.910514268,
+		"popTravelTime_60": 247750.635977663,
+		"popCoveredPercent_60": 98.96688245800749
+	},
+	{
+		"cat": 12,
+		"NAME_2": "Mfoundi",
+		"popTotal": 3482078.61594988,
+		"popTravelTime_60": 3482078.61594988,
+		"popCoveredPercent_60": 100
+	},
+	{
+		"cat": 13,
+		"NAME_2": "Nyong et Kéllé",
+		"popTotal": 155068.101839107,
+		"popTravelTime_60": 113639.455460699,
+		"popCoveredPercent_60": 73.283579351869
+	},
+	{
+		"cat": 14,
+		"NAME_2": "Nyong et Mfoumou",
+		"popTotal": 115704.065618326,
+		"popTravelTime_60": 65109.1393798633,
+		"popCoveredPercent_60": 56.2721275453184
+	},
+	{
+		"cat": 15,
+		"NAME_2": "Nyong et So'o",
+		"popTotal": 132131.931216192,
+		"popTravelTime_60": 100564.190287621,
+		"popCoveredPercent_60": 76.10892337831618
+	},
+	{
+		"cat": 16,
+		"NAME_2": "Boumba et Ngoko",
+		"popTotal": 148277.834870696,
+		"popTravelTime_60": 82286.3939073608,
+		"popCoveredPercent_60": 55.49473660653172
+	},
+	{
+		"cat": 17,
+		"NAME_2": "Haut Nyong",
+		"popTotal": 237586.807939008,
+		"popTravelTime_60": 164355.858638009,
+		"popCoveredPercent_60": 69.17718204295313
+	},
+	{
+		"cat": 18,
+		"NAME_2": "Kadey",
+		"popTotal": 233901.000533252,
+		"popTravelTime_60": 152623.385649972,
+		"popCoveredPercent_60": 65.25127524124235
+	},
+	{
+		"cat": 19,
+		"NAME_2": "Lom et Djerem",
+		"popTotal": 409476.868408781,
+		"popTravelTime_60": 313635.743802188,
+		"popCoveredPercent_60": 76.59425183673262
+	},
+	{
+		"cat": 20,
+		"NAME_2": "Diamaré",
+		"popTotal": 901717.628194936,
+		"popTravelTime_60": 780333.821417122,
+		"popCoveredPercent_60": 86.53860111165834
+	},
+	{
+		"cat": 21,
+		"NAME_2": "Logone et Chari",
+		"popTotal": 675042.865169065,
+		"popTravelTime_60": 361993.693510612,
+		"popCoveredPercent_60": 53.62528991695223
+	},
+	{
+		"cat": 22,
+		"NAME_2": "Mayo Danay",
+		"popTotal": 646237.123744777,
+		"popTravelTime_60": 530378.888848224,
+		"popCoveredPercent_60": 82.07186949812098
+	},
+	{
+		"cat": 23,
+		"NAME_2": "Mayo Kani",
+		"popTotal": 633990.29975233,
+		"popTravelTime_60": 527887.363532632,
+		"popCoveredPercent_60": 83.26426504299083
+	},
+	{
+		"cat": 24,
+		"NAME_2": "Mayo Sava",
+		"popTotal": 395815.361355618,
+		"popTravelTime_60": 331335.841221478,
+		"popCoveredPercent_60": 83.70969739190876
+	},
+	{
+		"cat": 25,
+		"NAME_2": "Mayo Tsanaga",
+		"popTotal": 1177063.00877512,
+		"popTravelTime_60": 1044133.12412985,
+		"popCoveredPercent_60": 88.70664665746314
+	},
+	{
+		"cat": 26,
+		"NAME_2": "Moungo",
+		"popTotal": 409951.683379987,
+		"popTravelTime_60": 398961.751274667,
+		"popCoveredPercent_60": 97.31921283632505
+	},
+	{
+		"cat": 27,
+		"NAME_2": "Nkam",
+		"popTotal": 36973.5322634316,
+		"popTravelTime_60": 30262.8104009339,
+		"popCoveredPercent_60": 81.84993033750554
+	},
+	{
+		"cat": 28,
+		"NAME_2": "Sanaga Maritime",
+		"popTotal": 184435.365781013,
+		"popTravelTime_60": 147641.659700462,
+		"popCoveredPercent_60": 80.0506231954247
+	},
+	{
+		"cat": 29,
+		"NAME_2": "Wouri",
+		"popTotal": 3595611.11915175,
+		"popTravelTime_60": 3592534.33760314,
+		"popCoveredPercent_60": 99.91442952403217
+	},
+	{
+		"cat": 30,
+		"NAME_2": "Bénoué",
+		"popTotal": 1535887.24689616,
+		"popTravelTime_60": 1199255.86338869,
+		"popCoveredPercent_60": 78.08228538990991
+	},
+	{
+		"cat": 31,
+		"NAME_2": "Faro",
+		"popTotal": 81152.5177893469,
+		"popTravelTime_60": 43054.2967161816,
+		"popCoveredPercent_60": 53.05355630239417
+	},
+	{
+		"cat": 32,
+		"NAME_2": "Mayo Louti",
+		"popTotal": 638581.948199859,
+		"popTravelTime_60": 496078.879379978,
+		"popCoveredPercent_60": 77.68445080203217
+	},
+	{
+		"cat": 33,
+		"NAME_2": "Mayo Rey",
+		"popTotal": 695344.600495487,
+		"popTravelTime_60": 371248.905666517,
+		"popCoveredPercent_60": 53.39063615392617
+	},
+	{
+		"cat": 34,
+		"NAME_2": "Boyo",
+		"popTotal": 138705.354298081,
+		"popTravelTime_60": 113713.471329468,
+		"popCoveredPercent_60": 81.98203443905643
+	},
+	{
+		"cat": 35,
+		"NAME_2": "Bui",
+		"popTotal": 439595.935155156,
+		"popTravelTime_60": 407882.331844898,
+		"popCoveredPercent_60": 92.78573781646442
+	},
+	{
+		"cat": 36,
+		"NAME_2": "Donga Mantung",
+		"popTotal": 318588.260646542,
+		"popTravelTime_60": 244878.338763075,
+		"popCoveredPercent_60": 76.86357879795058
+	},
+	{
+		"cat": 37,
+		"NAME_2": "Menchum",
+		"popTotal": 197291.559031553,
+		"popTravelTime_60": 133641.851826249,
+		"popCoveredPercent_60": 67.73825118634474
+	},
+	{
+		"cat": 38,
+		"NAME_2": "Mezam",
+		"popTotal": 733604.462507358,
+		"popTravelTime_60": 714097.102008288,
+		"popCoveredPercent_60": 97.34088851744487
+	},
+	{
+		"cat": 39,
+		"NAME_2": "Momo",
+		"popTotal": 170581.438588191,
+		"popTravelTime_60": 160040.275616498,
+		"popCoveredPercent_60": 93.82045135805136
+	},
+	{
+		"cat": 40,
+		"NAME_2": "Ngo Ketunjia",
+		"popTotal": 251533.275653398,
+		"popTravelTime_60": 242655.616322297,
+		"popCoveredPercent_60": 96.47058254696526
+	},
+	{
+		"cat": 41,
+		"NAME_2": "Bamboutos",
+		"popTotal": 354683.649620734,
+		"popTravelTime_60": 347811.086209873,
+		"popCoveredPercent_60": 98.06233994202725
+	},
+	{
+		"cat": 42,
+		"NAME_2": "Haut Nkam",
+		"popTotal": 121711.841763087,
+		"popTravelTime_60": 114665.613419392,
+		"popCoveredPercent_60": 94.21072901237454
+	},
+	{
+		"cat": 43,
+		"NAME_2": "Hauts Plateaux",
+		"popTotal": 87893.3571866271,
+		"popTravelTime_60": 87626.7216365834,
+		"popCoveredPercent_60": 99.69663742678809
+	},
+	{
+		"cat": 44,
+		"NAME_2": "Koung Khi",
+		"popTotal": 39357.406403834,
+		"popTravelTime_60": 39016.0717569608,
+		"popCoveredPercent_60": 99.13273084265037
+	},
+	{
+		"cat": 45,
+		"NAME_2": "Menoua",
+		"popTotal": 313146.283233599,
+		"popTravelTime_60": 306198.49018375,
+		"popCoveredPercent_60": 97.78129474247467
+	},
+	{
+		"cat": 46,
+		"NAME_2": "Mifi",
+		"popTotal": 406979.513124556,
+		"popTravelTime_60": 401670.860956741,
+		"popCoveredPercent_60": 98.6955971992157
+	},
+	{
+		"cat": 47,
+		"NAME_2": "Ndé",
+		"popTotal": 106844.087904165,
+		"popTravelTime_60": 98503.0573658365,
+		"popCoveredPercent_60": 92.19326899415334
+	},
+	{
+		"cat": 48,
+		"NAME_2": "Noun",
+		"popTotal": 616708.611468807,
+		"popTravelTime_60": 570042.604758341,
+		"popCoveredPercent_60": 92.43305414540553
+	},
+	{
+		"cat": 49,
+		"NAME_2": "Dja et Lobo",
+		"popTotal": 279565.402419705,
+		"popTravelTime_60": 219081.096954478,
+		"popCoveredPercent_60": 78.36488172652233
+	},
+	{
+		"cat": 50,
+		"NAME_2": "Mvila",
+		"popTotal": 255556.732334118,
+		"popTravelTime_60": 203209.617231285,
+		"popCoveredPercent_60": 79.51644058650987
+	},
+	{
+		"cat": 51,
+		"NAME_2": "Océan",
+		"popTotal": 289601.613537764,
+		"popTravelTime_60": 208301.985632653,
+		"popCoveredPercent_60": 71.92708047722616
+	},
+	{
+		"cat": 52,
+		"NAME_2": "Vallée du Ntem",
+		"popTotal": 112825.759674504,
+		"popTravelTime_60": 83132.3277003985,
+		"popCoveredPercent_60": 73.6820456075196
+	},
+	{
+		"cat": 53,
+		"NAME_2": "Fako",
+		"popTotal": 741003.426834191,
+		"popTravelTime_60": 717446.603341796,
+		"popCoveredPercent_60": 96.82095620083196
+	},
+	{
+		"cat": 54,
+		"NAME_2": "Koupé Manengouba",
+		"popTotal": 114121.172453554,
+		"popTravelTime_60": 94393.0355518485,
+		"popCoveredPercent_60": 82.71299139540945
+	},
+	{
+		"cat": 55,
+		"NAME_2": "Lebialem",
+		"popTotal": 122698.4641263,
+		"popTravelTime_60": 101090.4432653,
+		"popCoveredPercent_60": 82.38933061235572
+	},
+	{
+		"cat": 56,
+		"NAME_2": "Manyu",
+		"popTotal": 246125.118519212,
+		"popTravelTime_60": 147573.463345291,
+		"popCoveredPercent_60": 59.95871702699525
+	},
+	{
+		"cat": 57,
+		"NAME_2": "Meme",
+		"popTotal": 472427.112715665,
+		"popTravelTime_60": 404838.839007345,
+		"popCoveredPercent_60": 85.69339652845058
+	},
+	{
+		"cat": 58,
+		"NAME_2": "Ndian",
+		"popTotal": 108334.283797028,
+		"popTravelTime_60": 74949.9152446539,
+		"popCoveredPercent_60": 69.18393016293707
+	}
+]
