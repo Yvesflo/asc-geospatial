@@ -129,8 +129,8 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
   const [allFeatures, setAllFeatures] = useState<any[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [showNationalCard, setShowNationalCard] = useState<boolean>(true);
-  const [isNationalCardMinimized, setIsNationalCardMinimized] = useState<boolean>(false);
-  const [isLegendOpen, setIsLegendOpen] = useState<boolean>(true);
+  const [isNationalCardMinimized, setIsNationalCardMinimized] = useState<boolean>(true);
+  const [isLegendOpen, setIsLegendOpen] = useState<boolean>(false);
 
   // Filtres territoriaux (Région, Département ou District de Santé)
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -174,6 +174,9 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
 
   // Ref tracking isThematicVisible so mouseover closure always reads the live value
   const isThematicVisibleRef = useRef<boolean>(isThematicVisible);
+  const thematicOpacityRef = useRef<number>(thematicOpacity);
+  isThematicVisibleRef.current = isThematicVisible;
+  thematicOpacityRef.current = thematicOpacity;
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -192,14 +195,15 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
   // Style for polygon feature (rendered on dedicated geojsonPane above basemap and raster)
   const styleFeature = (feature: any) => {
     const pct = feature.properties.popCoveredPercent || 0;
+    const visible = isThematicVisibleRef.current;
     return {
       pane: 'geojsonPane',
       fillColor: getColor(pct),
       weight: level === 'aires_sante' ? 1.2 : 2,
-      opacity: isThematicVisible ? 1 : 0.2,
+      opacity: visible ? 1 : 0,
       color: '#ffffff',
       dashArray: '',
-      fillOpacity: isThematicVisible ? thematicOpacity : 0, // Dynamic opacity controlled by slider
+      fillOpacity: visible ? thematicOpacityRef.current : 0, // Dynamic opacity controlled by slider
     };
   };
 
@@ -556,6 +560,8 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
         // Hover & Click listeners
         l.on({
           mouseover: (e) => {
+            if (!isThematicVisibleRef.current) return;
+
             const target = e.target;
             target.setStyle({
               weight: 3,
@@ -623,7 +629,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
           });
         } else {
           const fitZoom = map.getBoundsZoom(bounds, false, L.point(20, 20));
-          map.setView(bounds.getCenter(), fitZoom + 1);
+          map.setView(bounds.getCenter(), fitZoom);
         }
       }
     } catch (e) {
