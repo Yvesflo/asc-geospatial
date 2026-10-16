@@ -6,26 +6,30 @@ interface FloatingBasemapSwitcherProps {
   basemap: BasemapType;
   onBasemapChange?: (bm: BasemapType) => void;
   className?: string;
+  language?: 'fr' | 'en';
 }
 
 export const FloatingBasemapSwitcher: React.FC<FloatingBasemapSwitcherProps> = ({
   basemap,
   onBasemapChange,
   className = '',
+  language = 'fr',
 }) => {
+  const isFr = language === 'fr';
   const options: { id: BasemapType; label: string; icon: string; title: string }[] = [
-    { id: 'hot', label: 'HOT', icon: '🗺️', title: 'OpenStreetMap Humanitaire' },
+    { id: 'hot', label: 'HOT', icon: '🗺️', title: isFr ? 'OpenStreetMap Humanitaire' : 'Humanitarian OpenStreetMap' },
     { id: 'osm', label: 'OSM', icon: '🌍', title: 'OpenStreetMap Standard' },
-    { id: 'satellite', label: 'Satellite', icon: '🛰️', title: 'Imagerie Satellite Esri World Imagery' },
+    { id: 'satellite', label: 'Satellite', icon: '🛰️', title: isFr ? 'Imagerie Satellite Esri World Imagery' : 'Esri World Imagery Satellite' },
   ];
 
   return (
-    <div 
+    <div
+      data-tour="basemap-switcher"
       className={`absolute z-20 pointer-events-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-[#cbd5e1] p-1 flex items-center gap-1 font-mono text-[11px] select-none transition-all duration-300 ${className}`}
     >
       <span className="text-[10px] text-[#64748b] font-bold uppercase px-1.5 hidden sm:flex items-center gap-1">
         <Layers className="w-3 h-3 text-[#006948]" />
-        <span>Fond :</span>
+        <span>{isFr ? 'Fond :' : 'Map:'}</span>
       </span>
       {options.map((bm) => {
         const isActive = basemap === bm.id;

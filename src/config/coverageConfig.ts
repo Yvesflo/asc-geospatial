@@ -8,21 +8,25 @@ import { SubdivisionLevel } from '../types';
 export interface NormativeClassDef {
   id: string;
   label: string;
+  labelEn: string;
   shortLabel: string;
+  shortLabelEn: string;
   color: string;
 }
 
 export interface AscCategoryDef {
   field: string;
   label: string;
+  labelEn: string;
   shortLabel: string;
+  shortLabelEn: string;
   description: string;
   color: string;
 }
 
 export const COVERAGE_CONFIG = {
   // Bandeau d'alerte sur données factices (activable / désactivable ici)
-  SHOW_MOCK_BANNER: true,
+  SHOW_MOCK_BANNER: false,
   MOCK_BANNER_TEXT: "DONNÉES FACTICES : ne pas diffuser",
 
   // Paramètre d'activation du niveau arrondissement (Instruction 7 : désactivé par défaut)
@@ -79,51 +83,65 @@ export const COVERAGE_CONFIG = {
     {
       field: 'EFF_TOT_A',
       label: 'Tous les ASC actifs',
+      labelEn: 'All active CHWs',
       shortLabel: 'Total actifs',
+      shortLabelEn: 'Total active',
       description: 'Ensemble des acteurs de santé communautaire actifs',
-      color: '#0284c7', // Bleu
+      color: '#0284c7',
     },
     {
       field: 'EFF_ASCP_A',
       label: 'ASC polyvalents (ASCp)',
+      labelEn: 'Versatile CHWs (ASCp)',
       shortLabel: 'ASCp',
+      shortLabelEn: 'ASCp',
       description: 'Agents de Santé Communautaire Polyvalents',
-      color: '#006948', // Vert MINSANTE
+      color: '#006948',
     },
     {
       field: 'EFF_ACC_A',
       label: 'Agents de Communication et Relais (ACCRA)',
+      labelEn: 'Community Communication & Relay Agents (ACCRA)',
       shortLabel: 'ACCRA',
+      shortLabelEn: 'ACCRA',
       description: 'Agents de communication communautaire et relais associés',
-      color: '#8b5cf6', // Violet
+      color: '#8b5cf6',
     },
     {
       field: 'EFF_APS_A',
       label: 'Agents Polyvalents de Santé (APS)',
+      labelEn: 'Versatile Health Agents (APS)',
       shortLabel: 'APS',
+      shortLabelEn: 'APS',
       description: 'Agents de promotion et prévention de santé',
-      color: '#0d9488', // Teal
+      color: '#0d9488',
     },
     {
       field: 'EFF_PE_A',
       label: 'Pairs Éducateurs (PE)',
+      labelEn: 'Peer Educators (PE)',
       shortLabel: 'Pairs éducateurs',
+      shortLabelEn: 'Peer educators',
       description: 'Sensibilisation ciblée par les pairs',
-      color: '#f59e0b', // Ambre
+      color: '#f59e0b',
     },
     {
       field: 'EFF_MM_A',
       label: 'Mères Mentors (MM)',
+      labelEn: 'Mentor Mothers (MM)',
       shortLabel: 'Mères mentors',
+      shortLabelEn: 'Mentor mothers',
       description: 'Santé maternelle et infantile',
-      color: '#ec4899', // Rose
+      color: '#ec4899',
     },
     {
       field: 'EFF_RC_A',
       label: 'Relais Communautaires (RC)',
+      labelEn: 'Community Relays (RC)',
       shortLabel: 'Relais communautaires',
+      shortLabelEn: 'Community relays',
       description: 'Mobilisation et orientation communautaire',
-      color: '#64748b', // Ardoise
+      color: '#64748b',
     },
   ] as AscCategoryDef[],
 
@@ -132,32 +150,42 @@ export const COVERAGE_CONFIG = {
     couverte: {
       id: 'couverte',
       label: '1 ASCp pour ≤ 1 000 habitants : conforme',
+      labelEn: '1 CHWp per ≤ 1,000 inhabitants: compliant',
       shortLabel: 'Conforme (1 ASCp / ≤ 1 000 hab.)',
-      color: '#16a34a', // Vert accessible
+      shortLabelEn: 'Compliant (1 CHWp / ≤ 1,000 pop.)',
+      color: '#16a34a',
     },
     couverte_si_urbain: {
       id: 'couverte_si_urbain',
       label: '1 ASCp pour 1 000 à 2 499 habitants : conforme en milieu urbain uniquement',
+      labelEn: '1 CHWp per 1,000–2,499 inhabitants: compliant in urban areas only',
       shortLabel: 'Conforme si urbain (1 ASCp / 1 000 - 2 499 hab.)',
-      color: '#ea580c', // Orange vif
+      shortLabelEn: 'Compliant if urban (1 CHWp / 1,000–2,499 pop.)',
+      color: '#ea580c',
     },
     sous_couverte: {
       id: 'sous_couverte',
       label: '1 ASCp pour ≥ 2 500 habitants : sous-couverte',
+      labelEn: '1 CHWp per ≥ 2,500 inhabitants: under-covered',
       shortLabel: 'Sous-couverte (1 ASCp / ≥ 2 500 hab.)',
-      color: '#dc2626', // Rouge vif
+      shortLabelEn: 'Under-covered (1 CHWp / ≥ 2,500 pop.)',
+      color: '#dc2626',
     },
     aucun_ascp_actif: {
       id: 'aucun_ascp_actif',
       label: 'Aucun ASCp actif',
+      labelEn: 'No active CHWp',
       shortLabel: 'Aucun ASCp actif',
-      color: '#7f1d1d', // Rouge très sombre / bordeaux
+      shortLabelEn: 'No active CHWp',
+      color: '#7f1d1d',
     },
     pop_manquante: {
       id: 'pop_manquante',
       label: 'Population non disponible',
+      labelEn: 'Population not available',
       shortLabel: 'Population non disponible',
-      color: '#94a3b8', // Gris clair
+      shortLabelEn: 'Population not available',
+      color: '#94a3b8',
     },
   } as Record<string, NormativeClassDef>,
 
@@ -169,6 +197,7 @@ export const COVERAGE_CONFIG = {
     weight: 1.5,
     dashArray: '3, 4',
     label: 'Découpage en aires de santé non disponible',
+    labelEn: 'Health area boundary not available',
   },
 
   // Paramètre d'effectif minimum pour le calcul fiable du pourcentage d'inactifs (Carte 3b)
@@ -188,25 +217,31 @@ export const COVERAGE_CONFIG = {
 
   // Seuils fixes pour la Carte 3b (% d'inactifs)
   PCT_INACT_CLASSES: [
-    { id: 'p1', min: 0, max: 10, label: 'Moins de 10 %', color: '#fef3c7' },
-    { id: 'p2', min: 10, max: 20, label: '10 à 19 %', color: '#fcd34d' },
-    { id: 'p3', min: 20, max: 30, label: '20 à 29 %', color: '#fb923c' },
-    { id: 'p4', min: 30, max: 50, label: '30 à 49 %', color: '#ea580c' },
-    { id: 'p5', min: 50, max: 100, label: '50 % et plus', color: '#b91c1c' },
+    { id: 'p1', min: 0, max: 10, label: 'Moins de 10 %', labelEn: 'Less than 10%', color: '#fef3c7' },
+    { id: 'p2', min: 10, max: 20, label: '10 à 19 %', labelEn: '10–19%', color: '#fcd34d' },
+    { id: 'p3', min: 20, max: 30, label: '20 à 29 %', labelEn: '20–29%', color: '#fb923c' },
+    { id: 'p4', min: 30, max: 50, label: '30 à 49 %', labelEn: '30–49%', color: '#ea580c' },
+    { id: 'p5', min: 50, max: 100, label: '50 % et plus', labelEn: '50% and over', color: '#b91c1c' },
   ],
 
   // Style des entités avec effectif trop faible (< 5 ASC au total)
   LOW_ASC_STYLE: {
     label: 'Effectif trop faible pour un pourcentage fiable',
+    labelEn: 'Too few CHWs for a reliable percentage',
     note: 'Moins de 5 ASC au total (actifs + inactifs)',
+    noteEn: 'Fewer than 5 CHWs total (active + inactive)',
   },
 
   // Mentions et sources cartographiques
   SOURCES: {
     MAP_SOURCE: 'Population : WorldPop. Effectifs ASC : cartographie et profilage des ASC, MINSANTE.',
+    MAP_SOURCE_EN: 'Population: WorldPop. CHW workforce: CHW mapping & profiling, MINSANTE.',
     NORMATIVE_NOTE: 'Norme nationale : 1 ASCp pour 1 000 habitants en milieu rural, 1 pour 2 500 en milieu urbain.',
+    NORMATIVE_NOTE_EN: 'National standard: 1 CHWp per 1,000 inhabitants (rural), 1 per 2,500 (urban).',
     RATIO_TOT_NOTE: "Pas de norme officielle pour l'ensemble des catégories ; classes relatives.",
+    RATIO_TOT_NOTE_EN: 'No official standard for all categories combined; relative classes.',
     INACTIVE_TITLE: 'ASC inactifs à remplacer',
+    INACTIVE_TITLE_EN: 'Inactive CHWs to replace',
   },
 
   // Liste ordonnée canonique des 10 régions du Cameroun

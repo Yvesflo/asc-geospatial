@@ -70,7 +70,7 @@ export interface QuantileClass {
 }
 
 // Fonction de calcul des 5 classes par quantiles (quintiles) avec fusion des bornes identiques
-function computeQuintileBreaks(values: number[]): QuantileClass[] {
+function computeQuintileBreaks(values: number[], lang: 'fr' | 'en' = 'fr'): QuantileClass[] {
   if (!values || values.length === 0) return [];
   const sorted = [...values].sort((a, b) => a - b);
   const n = sorted.length;
@@ -110,11 +110,18 @@ function computeQuintileBreaks(values: number[]): QuantileClass[] {
     const colorIdx = numClasses === 1 ? 2 : Math.round((i / (numClasses - 1)) * (palette.length - 1));
     const color = palette[colorIdx];
 
-    const label = i === 0 
-      ? `1 ASC pour ≤ ${Math.round(maxVal).toLocaleString('fr-FR')} hab.`
-      : i === numClasses - 1
-      ? `1 ASC pour > ${Math.round(minVal).toLocaleString('fr-FR')} hab.`
-      : `1 ASC pour ${Math.round(minVal).toLocaleString('fr-FR')} à ${Math.round(maxVal).toLocaleString('fr-FR')} hab.`;
+    const locale = lang === 'fr' ? 'fr-FR' : 'en-US';
+    const label = lang === 'fr'
+      ? (i === 0
+          ? `1 ASC pour ≤ ${Math.round(maxVal).toLocaleString(locale)} hab.`
+          : i === numClasses - 1
+          ? `1 ASC pour > ${Math.round(minVal).toLocaleString(locale)} hab.`
+          : `1 ASC pour ${Math.round(minVal).toLocaleString(locale)} à ${Math.round(maxVal).toLocaleString(locale)} hab.`)
+      : (i === 0
+          ? `1 CHW per ≤ ${Math.round(maxVal).toLocaleString(locale)} pop.`
+          : i === numClasses - 1
+          ? `1 CHW per > ${Math.round(minVal).toLocaleString(locale)} pop.`
+          : `1 CHW per ${Math.round(minVal).toLocaleString(locale)}–${Math.round(maxVal).toLocaleString(locale)} pop.`);
 
     classes.push({
       min: minVal,
@@ -436,6 +443,20 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
   const circlesLayerRef = useRef<L.LayerGroup | null>(null);
   const subdivDropdownRef = useRef<HTMLDivElement>(null);
 
+  // Tour: simulate click on first polygon to show demo popup
+  useEffect(() => {
+    const handler = () => {
+      setTimeout(() => {
+        const layers = polygonsLayerRef.current?.getLayers();
+        if (layers && layers.length > 0) {
+          (layers[0] as L.Path).fire('click');
+        }
+      }, 400);
+    };
+    window.addEventListener('tour:show-demo-popup', handler);
+    return () => window.removeEventListener('tour:show-demo-popup', handler);
+  }, []);
+
   // Fermeture du menu de recherche lors d'un clic extérieur
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -522,7 +543,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
         vals.push(v);
       }
     });
-    return computeQuintileBreaks(vals);
+    return computeQuintileBreaks(vals, language);
   }, [geoData]);
 
   // 1. Initialisation de la carte Leaflet
@@ -631,13 +652,13 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
         setGeoData(data);
         setLoading(false);
 
-        // Recentrage avec cadrage optimal (+1 zoom par rapport au fit bounds standard)
+        // Recentrage avec cadrage optimal (+1 pour compenser le panneau latéral)
         if (mapInstanceRef.current) {
           const tempLayer = L.geoJSON(data);
           const bounds = tempLayer.getBounds();
           if (bounds.isValid()) {
             const fitZoom = mapInstanceRef.current.getBoundsZoom(bounds, false, L.point(20, 20));
-            mapInstanceRef.current.setView(bounds.getCenter(), fitZoom + 1);
+            mapInstanceRef.current.setView(bounds.getCenter(), fitZoom);
           }
         }
       })
@@ -684,7 +705,9 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
 
     // Extraction population
     const popVal = getPopulationForLevel(level, props);
-    const popFormatted = popVal !== null ? `${Math.round(popVal).toLocaleString('fr-FR')} hab.` : 'N/D';
+    const locale = language === 'fr' ? 'fr-FR' : 'en-US';
+    const popUnit = language === 'fr' ? 'hab.' : 'pop.';
+    const popFormatted = popVal !== null ? `${Math.round(popVal).toLocaleString(locale)} ${popUnit}` : 'N/A';
 
     // Card des indicateurs contextuels selon la carte active
     const card = document.createElement('div');
@@ -693,7 +716,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
     // Ligne Population
     const popRow = document.createElement('div');
     popRow.className = 'flex justify-between items-center text-[10.5px] text-[#64748b]';
-    popRow.innerHTML = `<span>👥 Population :</span><strong class="text-[#0f172a]">${popFormatted}</strong>`;
+    popRow.innerHTML = `<span>👥 ${language === 'fr' ? 'Population :' : 'Population:'}</span><strong class="text-[#0f172a]">${popFormatted}</strong>`;
     card.appendChild(popRow);
 
     // Indicateurs spécifiques à la carte active (très lisibles, compacts)
@@ -705,16 +728,16 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       catRow.innerHTML = `
         <span class="flex items-center gap-1.5 truncate">
           <span style="background-color: ${activeCategory.color}" class="w-2 h-2 rounded-full shrink-0"></span>
-          <span class="truncate">${activeCategory.shortLabel} :</span>
+          <span class="truncate">${language === 'fr' ? activeCategory.shortLabel : activeCategory.shortLabelEn} :</span>
         </span>
-        <strong style="color: ${activeCategory.color}" class="text-xs shrink-0">${typeof catVal === 'number' ? catVal.toLocaleString('fr-FR') : '0'} ASC</strong>
+        <strong style="color: ${activeCategory.color}" class="text-xs shrink-0">${typeof catVal === 'number' ? catVal.toLocaleString(locale) : '0'} ${language === 'fr' ? 'ASC' : 'CHW'}</strong>
       `;
       card.appendChild(catRow);
 
       if (selectedCategoryField !== COVERAGE_CONFIG.FIELDS.EFF_TOT_A && typeof totalCount === 'number') {
         const totRow = document.createElement('div');
         totRow.className = 'flex justify-between items-center text-[10px] text-[#64748b]';
-        totRow.innerHTML = `<span>Total toutes catégories :</span><strong>${totalCount.toLocaleString('fr-FR')} ASC</strong>`;
+        totRow.innerHTML = `<span>${language === 'fr' ? 'Total toutes catégories :' : 'All-category total:'}</span><strong>${totalCount.toLocaleString(locale)} ${language === 'fr' ? 'ASC' : 'CHW'}</strong>`;
         card.appendChild(totRow);
       }
     } else if (activeMap === 'map-2a') {
@@ -727,11 +750,11 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       cvgRow.className = 'pt-1 border-t border-[#e2e8f0] space-y-1';
       cvgRow.innerHTML = `
         <div class="flex justify-between items-center text-[11px]">
-          <span>ASC polyvalents (ASCp) :</span>
-          <strong class="text-[#006948]">${typeof ascpCount === 'number' ? ascpCount.toLocaleString('fr-FR') : '0'} ASCp</strong>
+          <span>${language === 'fr' ? 'ASC polyvalents (ASCp) :' : 'Multipurpose CHWs (CHWp):'}</span>
+          <strong class="text-[#006948]">${typeof ascpCount === 'number' ? ascpCount.toLocaleString(locale) : '0'} ${language === 'fr' ? 'ASCp' : 'CHWp'}</strong>
         </div>
-        ${ratioAscp ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>Ratio :</span><strong>1 ASCp pour ${Math.round(ratioAscp).toLocaleString('fr-FR')} hab.</strong></div>` : ''}
-        ${classeDef ? `<div class="text-[10px] font-bold px-2 py-0.5 rounded-lg text-center" style="background-color: ${classeDef.color}15; color: ${classeDef.color}; border: 1px solid ${classeDef.color}40">${classeDef.shortLabel}</div>` : ''}
+        ${ratioAscp ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? 'Ratio :' : 'Ratio:'}</span><strong>${language === 'fr' ? `1 ASCp pour ${Math.round(ratioAscp).toLocaleString(locale)} hab.` : `1 CHWp per ${Math.round(ratioAscp).toLocaleString(locale)} pop.`}</strong></div>` : ''}
+        ${classeDef ? `<div class="text-[10px] font-bold px-2 py-0.5 rounded-lg text-center" style="background-color: ${classeDef.color}15; color: ${classeDef.color}; border: 1px solid ${classeDef.color}40">${language === 'fr' ? classeDef.shortLabel : (classeDef as any).shortLabelEn || classeDef.shortLabel}</div>` : ''}
       `;
       card.appendChild(cvgRow);
     } else if (activeMap === 'map-2b') {
@@ -742,10 +765,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       totRow.className = 'pt-1 border-t border-[#e2e8f0] space-y-1';
       totRow.innerHTML = `
         <div class="flex justify-between items-center text-[11px]">
-          <span>Total ASC actifs :</span>
-          <strong class="text-[#8b5cf6]">${typeof totalCount === 'number' ? totalCount.toLocaleString('fr-FR') : '0'} ASC</strong>
+          <span>${language === 'fr' ? 'Total ASC actifs :' : 'Total active CHWs:'}</span>
+          <strong class="text-[#8b5cf6]">${typeof totalCount === 'number' ? totalCount.toLocaleString(locale) : '0'} ${language === 'fr' ? 'ASC' : 'CHW'}</strong>
         </div>
-        ${ratioTot ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>Ratio démographique :</span><strong class="text-[#0f172a]">1 ASC pour ${Math.round(ratioTot).toLocaleString('fr-FR')} hab.</strong></div>` : ''}
+        ${ratioTot ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? 'Ratio démographique :' : 'Demographic ratio:'}</span><strong class="text-[#0f172a]">${language === 'fr' ? `1 ASC pour ${Math.round(ratioTot).toLocaleString(locale)} hab.` : `1 CHW per ${Math.round(ratioTot).toLocaleString(locale)} pop.`}</strong></div>` : ''}
       `;
       card.appendChild(totRow);
     } else if (activeMap === 'map-3a') {
@@ -756,10 +779,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       inactRow.className = 'pt-1 border-t border-[#e2e8f0] space-y-1';
       inactRow.innerHTML = `
         <div class="flex justify-between items-center text-[11px]">
-          <span class="text-[#ea580c]">Inactifs à remplacer :</span>
-          <strong class="text-[#ea580c]">${typeof inactCount === 'number' ? inactCount.toLocaleString('fr-FR') : '0'} ASC</strong>
+          <span class="text-[#ea580c]">${language === 'fr' ? 'Inactifs à remplacer :' : 'Inactive to replace:'}</span>
+          <strong class="text-[#ea580c]">${typeof inactCount === 'number' ? inactCount.toLocaleString(locale) : '0'} ${language === 'fr' ? 'ASC' : 'CHW'}</strong>
         </div>
-        ${inactPct !== undefined && inactPct !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>Part d'inactifs :</span><strong>${inactPct} %</strong></div>` : ''}
+        ${inactPct !== undefined && inactPct !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? "Part d'inactifs :" : 'Inactive share:'}</span><strong>${inactPct} %</strong></div>` : ''}
       `;
       card.appendChild(inactRow);
     } else if (activeMap === 'map-3b') {
@@ -770,10 +793,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       pctRow.className = 'pt-1 border-t border-[#e2e8f0] space-y-1';
       pctRow.innerHTML = `
         <div class="flex justify-between items-center text-[11px]">
-          <span class="text-[#dc2626]">Part d'inactifs :</span>
-          <strong class="text-[#dc2626]">${inactPct !== undefined && inactPct !== null ? `${inactPct} %` : 'N/D'}</strong>
+          <span class="text-[#dc2626]">${language === 'fr' ? "Part d'inactifs :" : 'Inactive share:'}</span>
+          <strong class="text-[#dc2626]">${inactPct !== undefined && inactPct !== null ? `${inactPct} %` : 'N/A'}</strong>
         </div>
-        ${inactCount !== undefined && inactCount !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>Volume à remplacer :</span><strong>${inactCount.toLocaleString('fr-FR')} ASC</strong></div>` : ''}
+        ${inactCount !== undefined && inactCount !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? 'Volume à remplacer :' : 'Volume to replace:'}</span><strong>${inactCount.toLocaleString(locale)} ${language === 'fr' ? 'ASC' : 'CHW'}</strong></div>` : ''}
       `;
       card.appendChild(pctRow);
     }
@@ -784,7 +807,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'w-full py-1.5 px-2.5 rounded-xl bg-[#006948]/10 hover:bg-[#006948] text-[#006948] hover:text-white font-mono text-[10.5px] font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-[#006948]/20';
-    btn.innerHTML = '<span>Fiche & analyse complète</span><span>➔</span>';
+    btn.innerHTML = `<span>${language === 'fr' ? 'Fiche & analyse complète' : 'Full profile & analysis'}</span><span>➔</span>`;
     btn.onclick = (e) => {
       e.stopPropagation();
       if (feature) setSelectedFeature(feature);
@@ -1083,7 +1106,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       const bounds = tempLayer.getBounds();
       if (bounds.isValid()) {
         const fitZoom = map.getBoundsZoom(bounds, false, L.point(20, 20));
-        map.setView(bounds.getCenter(), fitZoom + 1);
+        map.setView(bounds.getCenter(), fitZoom);
       }
     }
   }, [selectedRegion, selectedSubdivision]);
@@ -1158,16 +1181,16 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
         <div className="flex items-center gap-2 flex-wrap">
           <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#006948]/10 text-[#006948] font-mono text-[11px] font-bold">
             <Users className="w-3.5 h-3.5" />
-            <span>Couverture Sanitaire en ASC</span>
+            <span>{language === 'fr' ? 'Couverture en ASC' : 'CHW Coverage'}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#f8fafc] border border-[#cbd5e1] font-mono text-xs shadow-2xs">
             {activeMap === 'map-1' && (
               <>
                 <span className="w-2.5 h-2.5 rounded-full bg-[#0284c7] shrink-0 animate-pulse"></span>
                 <Users className="w-4 h-4 text-[#006948] shrink-0" />
-                <span className="font-bold text-[#0f172a]">1. Effectifs Actifs :</span>
+                <span className="font-bold text-[#0f172a]">{language === 'fr' ? '1. Effectifs Actifs :' : '1. Active CHWs:'}</span>
                 <span className="px-2 py-0.5 rounded-lg bg-[#e0f2fe] text-[#0369a1] font-bold text-[11px]">
-                  {activeCategory.shortLabel}
+                  {language === 'fr' ? activeCategory.shortLabel : activeCategory.shortLabelEn}
                 </span>
               </>
             )}
@@ -1175,44 +1198,45 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               <>
                 <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] shrink-0 animate-pulse"></span>
                 <ShieldCheck className="w-4 h-4 text-[#16a34a] shrink-0" />
-                <span className="font-bold text-[#0f172a]">2a. Couverture Normative ASCp</span>
-                <span className="text-[#64748b] text-[10px] hidden sm:inline">(1 ASCp pour ≤ 1 000 hab.)</span>
+                <span className="font-bold text-[#0f172a]">{language === 'fr' ? '2a. Couverture Normative ASCp' : '2a. Normative CHWp Coverage'}</span>
+                <span className="text-[#64748b] text-[10px] hidden sm:inline">{language === 'fr' ? '(1 ASCp pour ≤ 1 000 hab.)' : '(1 CHWp per ≤ 1,000 pop.)'}</span>
               </>
             )}
             {activeMap === 'map-2b' && (
               <>
                 <span className="w-2.5 h-2.5 rounded-full bg-[#8b5cf6] shrink-0 animate-pulse"></span>
                 <BarChart3 className="w-4 h-4 text-[#8b5cf6] shrink-0" />
-                <span className="font-bold text-[#0f172a]">2b. Ratios Toutes Catégories</span>
-                <span className="text-[#64748b] text-[10px] hidden sm:inline">(1 ASC pour X hab.)</span>
+                <span className="font-bold text-[#0f172a]">{language === 'fr' ? '2b. Ratios Toutes Catégories' : '2b. All-Category Ratios'}</span>
+                <span className="text-[#64748b] text-[10px] hidden sm:inline">{language === 'fr' ? '(1 ASC pour X hab.)' : '(1 CHW per X pop.)'}</span>
               </>
             )}
             {activeMap === 'map-3a' && (
               <>
                 <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c] shrink-0 animate-pulse"></span>
                 <UserMinus className="w-4 h-4 text-[#ea580c] shrink-0" />
-                <span className="font-bold text-[#0f172a]">3a. ASC Inactifs à Remplacer</span>
-                <span className="text-[#ea580c] font-bold text-[11px] hidden sm:inline">(Volume d'inactifs)</span>
+                <span className="font-bold text-[#0f172a]">{language === 'fr' ? '3a. ASC Inactifs à Remplacer' : '3a. Inactive CHWs to Replace'}</span>
+                <span className="text-[#ea580c] font-bold text-[11px] hidden sm:inline">{language === 'fr' ? "(Volume d'inactifs)" : '(Inactive volume)'}</span>
               </>
             )}
             {activeMap === 'map-3b' && (
               <>
                 <span className="w-2.5 h-2.5 rounded-full bg-[#dc2626] shrink-0 animate-pulse"></span>
                 <Percent className="w-4 h-4 text-[#dc2626] shrink-0" />
-                <span className="font-bold text-[#0f172a]">3b. Part d'ASC Inactifs</span>
+                <span className="font-bold text-[#0f172a]">{language === 'fr' ? "3b. Part d'ASC Inactifs" : '3b. Inactive CHW Share'}</span>
                 <span className="text-[#dc2626] font-bold text-[11px] hidden sm:inline">(%)</span>
               </>
             )}
           </div>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap">
+        {/* Barre d'outils et de filtres territoriaux */}
+        <div data-tour="horizontal-filter-bar" className="flex items-center gap-2 flex-wrap">
 
           {/* Filtre Régional */}
           <div className="flex items-center gap-1.5 bg-[#f8fafc] px-2.5 py-1 rounded-xl border border-[#cbd5e1]/70">
             <span className="text-[11px] font-mono font-bold text-[#475569] flex items-center gap-1">
               <MapPin className="w-3 h-3 text-[#006948]" />
-              <span className="hidden md:inline">Région :</span>
+              <span className="hidden md:inline">{language === 'fr' ? 'Région :' : 'Region:'}</span>
             </span>
             <select
               value={selectedRegion || ''}
@@ -1228,7 +1252,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               }}
               className="bg-white border border-[#cbd5e1] text-[#0f172a] text-xs font-mono font-semibold rounded-lg px-2 py-1 focus:ring-1 focus:ring-[#006948] focus:outline-none"
             >
-              <option value="">Toutes (National)</option>
+              <option value="">{language === 'fr' ? 'Toutes (National)' : 'All (National)'}</option>
               {COVERAGE_CONFIG.REGIONS_LIST.map((reg) => (
                 <option key={reg} value={reg}>
                   {reg}
@@ -1238,12 +1262,12 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
           </div>
 
           {/* Filtre Libre : Département ou District (Recherche libre demandée par l'utilisateur) */}
-          <div ref={subdivDropdownRef} className="relative flex items-center">
+          <div data-tour="map-search" ref={subdivDropdownRef} className="relative flex items-center">
             <div className="flex items-center gap-1.5 bg-[#f8fafc] px-2.5 py-1 rounded-xl border border-[#cbd5e1]/70 focus-within:border-[#006948] focus-within:ring-1 focus-within:ring-[#006948] transition-all">
               <Search className="w-3 h-3 text-[#006948] shrink-0" />
               <input
                 type="text"
-                placeholder="Dép. ou District (texte libre)..."
+                placeholder={language === 'fr' ? 'Dép. ou District (texte libre)...' : 'Dept. or District (free text)...'}
                 value={searchSubdivText}
                 onChange={(e) => {
                   const val = e.target.value;
@@ -1264,7 +1288,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                 <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md font-bold uppercase ${
                   selectedSubdivision.type === 'district' ? 'bg-[#e0f2fe] text-[#0284c7]' : 'bg-[#fef3c7] text-[#d97706]'
                 }`}>
-                  {selectedSubdivision.type === 'district' ? 'Dist' : 'Dép'}
+                  {selectedSubdivision.type === 'district' ? 'Dist' : (language === 'fr' ? 'Dép' : 'Dept')}
                 </span>
               )}
               {(searchSubdivText || selectedSubdivision) && (
@@ -1276,7 +1300,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                     setIsSubdivDropdownOpen(false);
                   }}
                   className="text-[#94a3b8] hover:text-[#0f172a] p-0.5 rounded transition-colors cursor-pointer"
-                  title="Effacer le filtre"
+                  title={language === 'fr' ? 'Effacer le filtre' : 'Clear filter'}
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -1289,7 +1313,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                 className="absolute left-0 top-full mt-1.5 w-72 bg-white rounded-2xl shadow-xl border border-[#cbd5e1] py-1.5 z-50 max-h-64 overflow-y-auto font-mono text-xs animate-in fade-in zoom-in-95 duration-100"
               >
                 <div className="px-3 py-1 text-[10px] font-bold text-[#64748b] uppercase tracking-wider border-b border-[#f1f5f9] flex items-center justify-between">
-                  <span>Suggestions correspondantes</span>
+                  <span>{language === 'fr' ? 'Suggestions correspondantes' : 'Matching suggestions'}</span>
                   <span>{filteredSubdivSuggestions.length}</span>
                 </div>
                 {filteredSubdivSuggestions.map((item, idx) => (
@@ -1319,14 +1343,16 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       <div className="truncate">
                         <div className="font-bold text-[#0f172a] truncate">{item.name}</div>
                         <div className="text-[10px] text-[#64748b] truncate">
-                          {item.type === 'district' ? `District • Dép. ${item.dept || '-'} • ${item.region}` : `Département • Région ${item.region}`}
+                          {item.type === 'district'
+                            ? `District • ${language === 'fr' ? 'Dép.' : 'Dept.'} ${item.dept || '-'} • ${item.region}`
+                            : `${language === 'fr' ? 'Département' : 'Department'} • ${language === 'fr' ? 'Région' : 'Region'} ${item.region}`}
                         </div>
                       </div>
                     </div>
                     <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded shrink-0 ml-1.5 ${
                       item.type === 'district' ? 'bg-[#e0f2fe] text-[#0284c7]' : 'bg-[#fef3c7] text-[#d97706]'
                     }`}>
-                      {item.type === 'district' ? 'District' : 'Dép.'}
+                      {item.type === 'district' ? 'District' : (language === 'fr' ? 'Dép.' : 'Dept.')}
                     </span>
                   </button>
                 ))}
@@ -1337,7 +1363,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       </div>
 
       {/* 3. Conteneur de la Carte Leaflet */}
-      <div className="relative flex-1 w-full h-full">
+      <div data-tour="couverture-map" className="relative flex-1 w-full h-full">
         {/* Élément Map */}
         <div ref={mapContainerRef} className="w-full h-full z-0" />
 
@@ -1346,7 +1372,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
           <div className="absolute inset-0 bg-white/70 backdrop-blur-xs flex items-center justify-center z-30">
             <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl shadow-xl border border-[#cbd5e1] font-mono text-xs text-[#0f172a]">
               <div className="w-4 h-4 border-2 border-[#006948] border-t-transparent rounded-full animate-spin"></div>
-              <span>Chargement des données ({level})...</span>
+              <span>{language === 'fr' ? `Chargement des données (${level})...` : `Loading data (${level})...`}</span>
             </div>
           </div>
         )}
@@ -1354,16 +1380,17 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
         {/* 4. Légende Flottante Interactive Adaptative (Déployée ou Réduite/Dockée) */}
         {!isLegendOpen ? (
           <button
+            data-tour="legend-btn"
             type="button"
             onClick={() => setIsLegendOpen(true)}
             className="absolute bottom-6 left-4 z-20 bg-white/95 hover:bg-white text-[#0f172a] border border-[#cbd5e1] rounded-2xl px-3.5 py-2.5 shadow-xl font-sans text-xs font-bold flex items-center gap-2.5 transition-all hover:scale-105 backdrop-blur-md group cursor-pointer"
-            title="Afficher la légende"
+            title={language === 'fr' ? 'Afficher la légende' : 'Show legend'}
           >
             <div className="w-6 h-6 rounded-lg bg-[#006948]/10 text-[#006948] flex items-center justify-center font-bold">
               <Layers className="w-3.5 h-3.5" />
             </div>
             <div className="flex items-center gap-1.5 font-sans font-semibold text-xs text-[#0f172a]">
-              <span>Légende</span>
+              <span>{language === 'fr' ? 'Légende' : 'Legend'}</span>
               {activeMap === 'map-1' && (
                 <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: activeCategory.color }}></span>
               )}
@@ -1389,7 +1416,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       type="button"
                       onClick={() => setIsLegendOpen(false)}
                       className="p-1 rounded-md hover:bg-[#e2e8f0] text-[#64748b] hover:text-[#0f172a] transition-colors cursor-pointer"
-                      title="Réduire la légende"
+                      title={language === 'fr' ? 'Réduire la légende' : 'Collapse legend'}
                     >
                       <ChevronDown className="w-3.5 h-3.5" />
                     </button>
@@ -1401,7 +1428,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   {circleRefValues1.map((val, idx) => {
                     const r = calculateCircleRadius(val);
                     const maxR = calculateCircleRadius(circleRefValues1[0]);
-                    const refLabel = idx === 0 ? 'Max observé' : idx === 1 ? '50 %' : '10 %';
+                    const refLabel = language === 'fr'
+                      ? (idx === 0 ? 'Max observé' : idx === 1 ? '50 %' : '10 %')
+                      : (idx === 0 ? 'Max observed' : idx === 1 ? '50%' : '10%');
+                    const locale = language === 'fr' ? 'fr-FR' : 'en-US';
                     return (
                       <div key={idx} className="flex items-center gap-2.5">
                         <div
@@ -1420,10 +1450,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                         </div>
                         <div className="flex items-baseline gap-1.5 font-mono">
                           <span className="text-xs font-semibold text-[#0f172a]">
-                            {val.toLocaleString('fr-FR')}
+                            {val.toLocaleString(locale)}
                           </span>
                           <span className="text-[10px] text-[#64748b]">
-                            ASC ({refLabel})
+                            {language === 'fr' ? `ASC (${refLabel})` : `CHW (${refLabel})`}
                           </span>
                         </div>
                       </div>
@@ -1431,7 +1461,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   })}
                 </div>
                 <div className="text-[10px] font-mono text-[#64748b] text-center">
-                  Surfaces proportionnelles (échelle racine carrée commune)
+                  {language === 'fr' ? 'Surfaces proportionnelles (échelle racine carrée commune)' : 'Proportional symbols (common square-root scale)'}
                 </div>
               </div>
             )}
@@ -1440,7 +1470,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
             {activeMap === 'map-2a' && (
               <div className="space-y-2">
                 <div className="border-b border-[#e2e8f0] pb-1 font-bold text-xs text-[#0f172a] flex items-center justify-between gap-2">
-                  <span>Couverture normative en ASCp</span>
+                  <span>{language === 'fr' ? 'Couverture normative en ASCp' : 'Normative CHWp coverage'}</span>
                   <button
                     type="button"
                     onClick={() => setIsLegendOpen(false)}
@@ -1459,7 +1489,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                         style={{ backgroundColor: cls.color }}
                       ></span>
                       <span className="text-[#334155] leading-tight text-[10px]">
-                        {cls.label}
+                        {language === 'fr' ? cls.label : cls.labelEn}
                       </span>
                     </div>
                   ))}
@@ -1473,13 +1503,13 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       }}
                     ></span>
                     <span className="text-[#64748b] text-[10px]">
-                      {COVERAGE_CONFIG.NO_DATA_STYLE.label}
+                      {language === 'fr' ? COVERAGE_CONFIG.NO_DATA_STYLE.label : COVERAGE_CONFIG.NO_DATA_STYLE.labelEn}
                     </span>
                   </div>
                 </div>
 
                 <div className="text-[10px] text-[#475569] bg-[#f8fafc] p-2 rounded-lg border border-[#e2e8f0] leading-snug">
-                  <strong>Note :</strong> {COVERAGE_CONFIG.SOURCES.NORMATIVE_NOTE}
+                  <strong>{language === 'fr' ? 'Note :' : 'Note:'}</strong> {language === 'fr' ? COVERAGE_CONFIG.SOURCES.NORMATIVE_NOTE : COVERAGE_CONFIG.SOURCES.NORMATIVE_NOTE_EN}
                 </div>
               </div>
             )}
@@ -1488,7 +1518,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
             {activeMap === 'map-2b' && (
               <div className="space-y-2">
                 <div className="border-b border-[#e2e8f0] pb-1 font-bold text-xs text-[#0f172a] flex items-center justify-between gap-2">
-                  <span>Ratios toutes catégories (1 ASC pour X hab.)</span>
+                  <span>{language === 'fr' ? 'Ratios toutes catégories (1 ASC pour X hab.)' : 'All-category ratios (1 CHW per X pop.)'}</span>
                   <button
                     type="button"
                     onClick={() => setIsLegendOpen(false)}
@@ -1521,13 +1551,13 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       }}
                     ></span>
                     <span className="text-[#64748b] text-[10px]">
-                      {COVERAGE_CONFIG.NO_DATA_STYLE.label}
+                      {language === 'fr' ? COVERAGE_CONFIG.NO_DATA_STYLE.label : COVERAGE_CONFIG.NO_DATA_STYLE.labelEn}
                     </span>
                   </div>
                 </div>
 
                 <div className="text-[10px] text-[#475569] bg-[#f8fafc] p-2 rounded-lg border border-[#e2e8f0] leading-snug">
-                  {COVERAGE_CONFIG.SOURCES.RATIO_TOT_NOTE}
+                  {language === 'fr' ? COVERAGE_CONFIG.SOURCES.RATIO_TOT_NOTE : COVERAGE_CONFIG.SOURCES.RATIO_TOT_NOTE_EN}
                 </div>
               </div>
             )}
@@ -1538,7 +1568,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                 <div className="flex items-center justify-between border-b border-[#e2e8f0] pb-1.5 gap-2">
                   <span className="font-bold text-xs text-[#0f172a] flex items-center gap-1.5 truncate">
                     <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: COVERAGE_CONFIG.INACTIVE_CIRCLES_COLOR }}></span>
-                    <span className="truncate">{COVERAGE_CONFIG.SOURCES.INACTIVE_TITLE}</span>
+                    <span className="truncate">{language === 'fr' ? COVERAGE_CONFIG.SOURCES.INACTIVE_TITLE : COVERAGE_CONFIG.SOURCES.INACTIVE_TITLE_EN}</span>
                   </span>
                   <div className="flex items-center gap-1.5 shrink-0">
                     <span className="text-[10px] font-mono bg-[#f1f5f9] text-[#475569] px-1.5 py-0.5 rounded">
@@ -1548,7 +1578,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       type="button"
                       onClick={() => setIsLegendOpen(false)}
                       className="p-1 rounded-md hover:bg-[#e2e8f0] text-[#64748b] hover:text-[#0f172a] transition-colors cursor-pointer"
-                      title="Réduire la légende"
+                      title={language === 'fr' ? 'Réduire la légende' : 'Collapse legend'}
                     >
                       <ChevronDown className="w-3.5 h-3.5" />
                     </button>
@@ -1560,7 +1590,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   {circleRefValues3a.map((val, idx) => {
                     const r = calculateInactiveCircleRadius(val);
                     const maxR = calculateInactiveCircleRadius(circleRefValues3a[0]);
-                    const refLabel = idx === 0 ? 'Max observé' : idx === 1 ? '50 %' : '10 %';
+                    const refLabel = language === 'fr'
+                      ? (idx === 0 ? 'Max observé' : idx === 1 ? '50 %' : '10 %')
+                      : (idx === 0 ? 'Max observed' : idx === 1 ? '50%' : '10%');
+                    const locale3a = language === 'fr' ? 'fr-FR' : 'en-US';
                     return (
                       <div key={idx} className="flex items-center gap-2.5">
                         <div
@@ -1579,10 +1612,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                         </div>
                         <div className="flex items-baseline gap-1.5 font-mono">
                           <span className="text-xs font-semibold text-[#9a3412]">
-                            {val.toLocaleString('fr-FR')}
+                            {val.toLocaleString(locale3a)}
                           </span>
                           <span className="text-[10px] text-[#c2410c]">
-                            inactifs ({refLabel})
+                            {language === 'fr' ? `inactifs (${refLabel})` : `inactive (${refLabel})`}
                           </span>
                         </div>
                       </div>
@@ -1590,7 +1623,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   })}
                 </div>
                 <div className="text-[10px] font-mono text-[#64748b] text-center">
-                  Une zone avec 0 inactif n'a pas de cercle
+                  {language === 'fr' ? 'Une zone avec 0 inactif n\'a pas de cercle' : 'A zone with 0 inactive has no circle'}
                 </div>
               </div>
             )}
@@ -1599,7 +1632,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
             {activeMap === 'map-3b' && (
               <div className="space-y-2">
                 <div className="border-b border-[#e2e8f0] pb-1 font-bold text-xs text-[#0f172a] flex items-center justify-between gap-2">
-                  <span>Part d'ASC inactifs (%)</span>
+                  <span>{language === 'fr' ? "Part d'ASC inactifs (%)" : 'Inactive CHW share (%)'}</span>
                   <button
                     type="button"
                     onClick={() => setIsLegendOpen(false)}
@@ -1618,7 +1651,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                         style={{ backgroundColor: cls.color }}
                       ></span>
                       <span className="text-[#334155] leading-tight text-[10px]">
-                        {cls.label}
+                        {language === 'fr' ? cls.label : cls.labelEn}
                       </span>
                     </div>
                   ))}
@@ -1632,7 +1665,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       }}
                     ></span>
                     <span className="text-[#64748b] text-[10px] leading-tight">
-                      {COVERAGE_CONFIG.LOW_ASC_STYLE.label}
+                      {language === 'fr' ? COVERAGE_CONFIG.LOW_ASC_STYLE.label : COVERAGE_CONFIG.LOW_ASC_STYLE.labelEn}
                     </span>
                   </div>
 
@@ -1645,7 +1678,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       }}
                     ></span>
                     <span className="text-[#64748b] text-[10px]">
-                      {COVERAGE_CONFIG.NO_DATA_STYLE.label}
+                      {language === 'fr' ? COVERAGE_CONFIG.NO_DATA_STYLE.label : COVERAGE_CONFIG.NO_DATA_STYLE.labelEn}
                     </span>
                   </div>
                 </div>
@@ -1654,7 +1687,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
 
             {/* Source cartographique obligatoire sur chaque carte */}
             <div className="text-[9px] text-[#94a3b8] font-mono border-t border-[#e2e8f0] pt-1 leading-tight">
-              Source : {COVERAGE_CONFIG.SOURCES.MAP_SOURCE}
+              {language === 'fr' ? 'Source :' : 'Source:'} {language === 'fr' ? COVERAGE_CONFIG.SOURCES.MAP_SOURCE : COVERAGE_CONFIG.SOURCES.MAP_SOURCE_EN}
             </div>
           </div>
         )}
@@ -1663,6 +1696,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
         <FloatingBasemapSwitcher
           basemap={basemap}
           onBasemapChange={onBasemapChange}
+          language={language}
           className={isPanelOpen ? 'bottom-5 right-92 sm:right-100' : 'bottom-5 right-4'}
         />
 
@@ -1716,10 +1750,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   </div>
                   <div>
                     <h3 className="font-bold text-sm text-[#0f172a]">
-                      Exporter la carte actuelle
+                      {language === 'fr' ? 'Exporter la carte actuelle' : 'Export current map'}
                     </h3>
                     <span className="text-[10px] font-mono text-[#64748b]">
-                      Format haute résolution pour rapport officiel (300 DPI)
+                      {language === 'fr' ? 'Format haute résolution pour rapport officiel (300 DPI)' : 'High-resolution format for official report (300 DPI)'}
                     </span>
                   </div>
                 </div>
@@ -1735,29 +1769,29 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               {/* Détails du document à exporter */}
               <div className="bg-[#f8fafc] p-3 rounded-2xl border border-[#e2e8f0] space-y-2 text-xs font-mono">
                 <div className="flex justify-between">
-                  <span className="text-[#64748b]">Carte active :</span>
+                  <span className="text-[#64748b]">{language === 'fr' ? 'Carte active :' : 'Active map:'}</span>
                   <strong className="text-[#0f172a]">
-                    {activeMap === 'map-1' && `1. Effectifs (${activeCategory.shortLabel})`}
-                    {activeMap === 'map-2a' && '2a. Couverture normative ASCp'}
-                    {activeMap === 'map-2b' && '2b. Ratios toutes catégories'}
-                    {activeMap === 'map-3a' && '3a. ASC inactifs à remplacer'}
-                    {activeMap === 'map-3b' && "3b. Part d'inactifs (%)"}
+                    {activeMap === 'map-1' && `${language === 'fr' ? '1. Effectifs' : '1. CHW Count'} (${language === 'fr' ? activeCategory.shortLabel : activeCategory.shortLabelEn})`}
+                    {activeMap === 'map-2a' && (language === 'fr' ? '2a. Couverture normative ASCp' : '2a. Normative CHWp coverage')}
+                    {activeMap === 'map-2b' && (language === 'fr' ? '2b. Ratios toutes catégories' : '2b. All-category ratios')}
+                    {activeMap === 'map-3a' && (language === 'fr' ? '3a. ASC inactifs à remplacer' : '3a. Inactive CHWs to replace')}
+                    {activeMap === 'map-3b' && (language === 'fr' ? "3b. Part d'inactifs (%)" : '3b. Inactive share (%)')}
                   </strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#64748b]">Découpage :</span>
+                  <span className="text-[#64748b]">{language === 'fr' ? 'Découpage :' : 'Subdivision:'}</span>
                   <strong className="text-[#006948]">{level}</strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#64748b]">Territoire :</span>
+                  <span className="text-[#64748b]">{language === 'fr' ? 'Territoire :' : 'Territory:'}</span>
                   <strong className="text-[#0f172a]">
-                    {selectedSubdivision 
-                      ? `${selectedSubdivision.type === 'district' ? 'District' : 'Dép.'} : ${selectedSubdivision.name}`
-                      : (selectedRegion ? `Région : ${selectedRegion}` : 'National (Cameroun)')}
+                    {selectedSubdivision
+                      ? `${selectedSubdivision.type === 'district' ? (language === 'fr' ? 'District' : 'District') : (language === 'fr' ? 'Dép.' : 'Dept.')} : ${selectedSubdivision.name}`
+                      : (selectedRegion ? `${language === 'fr' ? 'Région' : 'Region'} : ${selectedRegion}` : (language === 'fr' ? 'National (Cameroun)' : 'National (Cameroon)'))}
                   </strong>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#64748b]">Résolution :</span>
+                  <span className="text-[#64748b]">{language === 'fr' ? 'Résolution :' : 'Resolution:'}</span>
                   <strong className="text-[#0284c7]">A4 — 300 DPI ({exportType === 'small-multiples' || exportOrientation === 'portrait' ? '2480 x 3508 px' : '3508 x 2480 px'})</strong>
                 </div>
               </div>
@@ -1766,7 +1800,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               {activeMap === 'map-1' && (
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-mono font-bold text-[#475569]">
-                    Type de document à exporter :
+                    {language === 'fr' ? 'Type de document à exporter :' : 'Document type to export:'}
                   </label>
                   <div className="grid grid-cols-2 gap-2 font-mono text-xs">
                     <button
@@ -1778,8 +1812,8 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                           : 'border-[#cbd5e1] bg-white text-[#475569] hover:bg-[#f8fafc]'
                       }`}
                     >
-                      <span>Carte actuelle</span>
-                      <span className="text-[10px] text-[#64748b] font-normal">{activeCategory.shortLabel}</span>
+                      <span>{language === 'fr' ? 'Carte actuelle' : 'Current map'}</span>
+                      <span className="text-[10px] text-[#64748b] font-normal">{language === 'fr' ? activeCategory.shortLabel : activeCategory.shortLabelEn}</span>
                     </button>
                     <button
                       type="button"
@@ -1791,7 +1825,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                       }`}
                     >
                       <span>Small Multiples</span>
-                      <span className="text-[10px] text-[#64748b] font-normal">Planche 2x3 (6 catégories)</span>
+                      <span className="text-[10px] text-[#64748b] font-normal">{language === 'fr' ? 'Planche 2x3 (6 catégories)' : '2×3 sheet (6 categories)'}</span>
                     </button>
                   </div>
                 </div>
@@ -1801,7 +1835,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               {exportType === 'single' && (
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-mono font-bold text-[#475569]">
-                    Orientation de la page :
+                    {language === 'fr' ? 'Orientation de la page :' : 'Page orientation:'}
                   </label>
                   <div className="grid grid-cols-2 gap-2 font-mono text-xs">
                     <button
@@ -1813,8 +1847,8 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                           : 'border-[#cbd5e1] bg-white text-[#475569] hover:bg-[#f8fafc]'
                       }`}
                     >
-                      <span>Portrait (Recommandé)</span>
-                      <span className="text-[10px] text-[#64748b] font-normal">Idéal pour le Cameroun</span>
+                      <span>{language === 'fr' ? 'Portrait (Recommandé)' : 'Portrait (Recommended)'}</span>
+                      <span className="text-[10px] text-[#64748b] font-normal">{language === 'fr' ? 'Idéal pour le Cameroun' : 'Ideal for Cameroon'}</span>
                     </button>
                     <button
                       type="button"
@@ -1825,8 +1859,8 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                           : 'border-[#cbd5e1] bg-white text-[#475569] hover:bg-[#f8fafc]'
                       }`}
                     >
-                      <span>Paysage</span>
-                      <span className="text-[10px] text-[#64748b] font-normal">Orientation horizontale</span>
+                      <span>{language === 'fr' ? 'Paysage' : 'Landscape'}</span>
+                      <span className="text-[10px] text-[#64748b] font-normal">{language === 'fr' ? 'Orientation horizontale' : 'Horizontal orientation'}</span>
                     </button>
                   </div>
                 </div>
@@ -1849,8 +1883,8 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   <Download className="w-4 h-4" />
                   <span>
                     {exportType === 'small-multiples'
-                      ? 'Générer la planche Small Multiples A4'
-                      : 'Générer et télécharger le PNG A4'}
+                      ? (language === 'fr' ? 'Générer la planche Small Multiples A4' : 'Generate Small Multiples A4 sheet')
+                      : (language === 'fr' ? 'Générer et télécharger le PNG A4' : 'Generate and download A4 PNG')}
                   </span>
                 </button>
                 <button
@@ -1858,7 +1892,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                   onClick={() => setShowExportModal(false)}
                   className="py-2.5 px-3 bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#475569] font-mono font-semibold text-xs rounded-xl transition-all cursor-pointer"
                 >
-                  Annuler
+                  {language === 'fr' ? 'Annuler' : 'Cancel'}
                 </button>
               </div>
             </div>
@@ -1873,10 +1907,10 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
                 <Sparkles className="w-5 h-5 animate-pulse" />
               </div>
               <h3 className="font-bold text-sm text-[#0f172a]">
-                Génération de l'export cartographique
+                {language === 'fr' ? "Génération de l'export cartographique" : 'Generating map export'}
               </h3>
               <p className="text-xs font-mono text-[#64748b]">
-                {exportStatus || 'Traitement en cours...'}
+                {exportStatus || (language === 'fr' ? 'Traitement en cours...' : 'Processing...')}
               </p>
 
               {/* Barre de progression */}
@@ -1888,7 +1922,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               </div>
 
               <div className="text-[10px] font-mono text-[#94a3b8]">
-                {exportProgress}% • Rendu 300 DPI haute résolution
+                {exportProgress}% • {language === 'fr' ? 'Rendu 300 DPI haute résolution' : '300 DPI high-resolution rendering'}
               </div>
             </div>
           </div>

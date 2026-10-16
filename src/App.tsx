@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
-import { Livrable3RealNeed } from './components/Livrable3RealNeed';
+import { CiblageAscMap } from './components/Livrable3RealNeed';
 import { CouvertureAscMap } from './components/CouvertureAscMap';
+import { GuidedTour } from './components/GuidedTour';
 import { ActiveModule, Language, SubdivisionLevel, BasemapType, CoverageMapType } from './types';
 import { COVERAGE_CONFIG } from './config/coverageConfig';
 
@@ -16,10 +17,10 @@ export default function App() {
   const [activeBasemap, setActiveBasemap] = useState<BasemapType>('hot');
 
   // Paramètres d'affichage spécifiques Livrable 3
-  const [l3ThematicOpacity, setL3ThematicOpacity] = useState<number>(0.85);
-  const [l3IsThematicVisible, setL3IsThematicVisible] = useState<boolean>(true);
-  const [l3RasterOpacity, setL3RasterOpacity] = useState<number>(0.85);
-  const [l3IsRasterVisible, setL3IsRasterVisible] = useState<boolean>(true);
+  const [ciblageThematicOpacity, setCiblageThematicOpacity] = useState<number>(0.85);
+  const [ciblageIsThematicVisible, setCiblageIsThematicVisible] = useState<boolean>(true);
+  const [ciblageRasterOpacity, setCiblageRasterOpacity] = useState<number>(0.85);
+  const [ciblageIsRasterVisible, setCiblageIsRasterVisible] = useState<boolean>(true);
 
   // Paramètres spécifiques Couverture en ASC (5 cartes thématiques et sous-catégories)
   const [coverageActiveMap, setCoverageActiveMap] = useState<CoverageMapType>('map-1');
@@ -27,17 +28,31 @@ export default function App() {
     COVERAGE_CONFIG.FIELDS.EFF_TOT_A
   );
 
-  // Déclencheur d'export depuis le bouton officiel de l'en-tête
+  // Déclencheurs d'export depuis le bouton officiel de l'en-tête
   const [coverageExportTrigger, setCoverageExportTrigger] = useState<number>(0);
+  const [ciblageExportTrigger, setCiblageExportTrigger] = useState<number>(0);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] text-[#0f172a] font-sans antialiased flex flex-col">
+      {/* Guided Platform Tour (shown on first visit) */}
+      <GuidedTour
+        language={language}
+        onNavigate={(module) => setActiveModule(module as ActiveModule)}
+        onLanguageChange={setLanguage}
+      />
+
       {/* Barre Supérieure Épurée */}
       <Header
         language={language}
         setLanguage={setLanguage}
         activeModule={activeModule}
-        onExportMap={() => setCoverageExportTrigger((prev) => prev + 1)}
+        onExportMap={() => {
+          if (activeModule === 'ciblage-asc') {
+            setCiblageExportTrigger((prev) => prev + 1);
+          } else {
+            setCoverageExportTrigger((prev) => prev + 1);
+          }
+        }}
       />
 
       {/* Disposition Principale */}
@@ -49,16 +64,16 @@ export default function App() {
           language={language}
           collapsed={sidebarCollapsed}
           setCollapsed={setSidebarCollapsed}
-          l3Level={spatialLevel}
-          setL3Level={setSpatialLevel}
-          l3ThematicOpacity={l3ThematicOpacity}
-          setL3ThematicOpacity={setL3ThematicOpacity}
-          l3IsThematicVisible={l3IsThematicVisible}
-          setL3IsThematicVisible={setL3IsThematicVisible}
-          l3RasterOpacity={l3RasterOpacity}
-          setL3RasterOpacity={setL3RasterOpacity}
-          l3IsRasterVisible={l3IsRasterVisible}
-          setL3IsRasterVisible={setL3IsRasterVisible}
+          ciblageLevel={spatialLevel}
+          setCiblageLevel={setSpatialLevel}
+          ciblageThematicOpacity={ciblageThematicOpacity}
+          setCiblageThematicOpacity={setCiblageThematicOpacity}
+          ciblageIsThematicVisible={ciblageIsThematicVisible}
+          setCiblageIsThematicVisible={setCiblageIsThematicVisible}
+          ciblageRasterOpacity={ciblageRasterOpacity}
+          setCiblageRasterOpacity={setCiblageRasterOpacity}
+          ciblageIsRasterVisible={ciblageIsRasterVisible}
+          setCiblageIsRasterVisible={setCiblageIsRasterVisible}
           coverageActiveMap={coverageActiveMap}
           onCoverageActiveMapChange={setCoverageActiveMap}
           coverageCategoryField={coverageCategoryField}
@@ -71,22 +86,23 @@ export default function App() {
             sidebarCollapsed ? 'ml-16' : 'ml-72 sm:ml-80'
           } min-h-[calc(100vh-4rem)] overflow-hidden relative`}
         >
-          {/* Livrable 3: Analyse du Besoin Réel (> 5 km FOSA / AccessMod) */}
-          {activeModule === 'livrable-3' && (
-            <Livrable3RealNeed 
+          {/* Ciblage du besoin en ASC (population couverte FOSA < 5 km) */}
+          {activeModule === 'ciblage-asc' && (
+            <CiblageAscMap
               language={language}
               level={spatialLevel}
               onLevelChange={setSpatialLevel}
               basemap={activeBasemap}
               onBasemapChange={setActiveBasemap}
-              thematicOpacity={l3ThematicOpacity}
-              onThematicOpacityChange={setL3ThematicOpacity}
-              isThematicVisible={l3IsThematicVisible}
-              onIsThematicVisibleChange={setL3IsThematicVisible}
-              rasterOpacity={l3RasterOpacity}
-              onRasterOpacityChange={setL3RasterOpacity}
-              isRasterVisible={l3IsRasterVisible}
-              onIsRasterVisibleChange={setL3IsRasterVisible}
+              thematicOpacity={ciblageThematicOpacity}
+              onThematicOpacityChange={setCiblageThematicOpacity}
+              isThematicVisible={ciblageIsThematicVisible}
+              onIsThematicVisibleChange={setCiblageIsThematicVisible}
+              rasterOpacity={ciblageRasterOpacity}
+              onRasterOpacityChange={setCiblageRasterOpacity}
+              isRasterVisible={ciblageIsRasterVisible}
+              onIsRasterVisibleChange={setCiblageIsRasterVisible}
+              exportTrigger={ciblageExportTrigger}
             />
           )}
 
@@ -105,6 +121,7 @@ export default function App() {
               onSelectedCategoryFieldChange={setCoverageCategoryField}
             />
           )}
+
         </main>
       </div>
     </div>

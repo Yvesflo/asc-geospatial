@@ -7,7 +7,6 @@ import {
   Download, 
   Activity, 
   ArrowRight, 
-  Info, 
   MapPin, 
   Building2, 
   Users, 
@@ -19,7 +18,6 @@ import {
   ChevronUp,
   ChevronDown,
   ChevronRight,
-  TrendingUp,
   ShieldCheck,
   Building,
   Target,
@@ -38,8 +36,10 @@ import {
   getCanonicalRegionName
 } from '../config/coverageConfig';
 import { FloatingBasemapSwitcher } from './FloatingBasemapSwitcher';
+import { CiblageAscSidePanel } from './Livrable3SidePanel';
+import { exportCiblageAscMapPng, triggerBrowserDownload, sanitizeFilename } from '../utils/coverageExportUtils';
 
-interface Livrable3RealNeedProps {
+interface CiblageAscMapProps {
   language: Language;
   level?: SubdivisionLevel;
   onLevelChange?: (level: SubdivisionLevel) => void;
@@ -53,6 +53,7 @@ interface Livrable3RealNeedProps {
   onRasterOpacityChange?: (val: number) => void;
   isRasterVisible?: boolean;
   onIsRasterVisibleChange?: (val: boolean) => void;
+  exportTrigger?: number;
 }
 
 interface NationalData {
@@ -80,7 +81,7 @@ function normalizeName(str: string | undefined | null): string {
     .replace(/[^a-z0-9]/g, '');
 }
 
-export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
+export const CiblageAscMap: React.FC<CiblageAscMapProps> = ({
   language,
   level: externalLevel = 'regions',
   onLevelChange,
@@ -94,6 +95,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
   onRasterOpacityChange,
   isRasterVisible = true,
   onIsRasterVisibleChange,
+  exportTrigger,
 }) => {
   // State controlled by props
   const level = externalLevel;
@@ -128,9 +130,8 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [allFeatures, setAllFeatures] = useState<any[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [showNationalCard, setShowNationalCard] = useState<boolean>(true);
-  const [isNationalCardMinimized, setIsNationalCardMinimized] = useState<boolean>(true);
   const [isLegendOpen, setIsLegendOpen] = useState<boolean>(false);
+  const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
 
   // Filtres territoriaux (Région, Département ou District de Santé)
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -181,6 +182,54 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Export states
+  const [isExporting, setIsExporting] = useState<boolean>(false);
+  const [exportProgress, setExportProgress] = useState<number>(0);
+  const [exportStatus, setExportStatus] = useState<string>('');
+  const [showExportModal, setShowExportModal] = useState<boolean>(false);
+  const [exportOrientation, setExportOrientation] = useState<'portrait' | 'landscape'>('portrait');
+
+  useEffect(() => {
+    if (exportTrigger && exportTrigger > 0) {
+      setShowExportModal(true);
+    }
+  }, [exportTrigger]);
+
+  const handleExportMap = async (orientation: 'portrait' | 'landscape' = exportOrientation) => {
+    if (!geoData) return;
+    setIsExporting(true);
+    setExportProgress(5);
+    setExportStatus(language === 'fr' ? 'Initialisation...' : 'Initializing...');
+    try {
+      const blob = await exportCiblageAscMapPng({
+        level,
+        selectedRegion,
+        selectedSubdivision,
+        geoData,
+        basemap,
+        orientation,
+        language,
+        onProgress: (pct, msg) => {
+          setExportProgress(pct);
+          setExportStatus(msg);
+        },
+      });
+      const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, '');
+      const levelStr = level.replace('_', '-');
+      const filterStr = selectedRegion ? sanitizeFilename(selectedRegion) : 'national';
+      const orientStr = orientation === 'landscape' ? '_paysage' : '_portrait';
+      triggerBrowserDownload(blob, `besoin_reel_asc_5km_${levelStr}_${filterStr}${orientStr}_${dateStr}.png`);
+      triggerToast(language === 'fr' ? 'Export PNG généré avec succès !' : 'PNG export successful!');
+    } catch (err) {
+      console.error('Export error:', err);
+      triggerToast(language === 'fr' ? 'Erreur lors de l\'export.' : 'Export failed.');
+    } finally {
+      setIsExporting(false);
+      setExportProgress(0);
+      setExportStatus('');
+    }
   };
 
   // Color ramp based on popCoveredPercent (< 5 km of any FOSA)
@@ -401,7 +450,11 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
       });
 
       rasterLayer.on('load', () => {
-        console.log('Population raster overlay loaded successfully.');
+        const el = rasterLayer.getElement();
+        if (el) {
+          el.style.filter = 'saturate(260%) contrast(190%) brightness(0.92)';
+        }
+        console.log('Population raster overlay loaded and color-boosted successfully.');
       });
       rasterLayer.on('error', (e) => {
         console.error('Failed to load population raster overlay:', e);
@@ -409,6 +462,10 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
 
       if (isRasterVisible) {
         rasterLayer.addTo(map);
+        const el = rasterLayer.getElement();
+        if (el) {
+          el.style.filter = 'saturate(260%) contrast(190%) brightness(0.92)';
+        }
       }
       rasterLayerRef.current = rasterLayer;
 
@@ -486,6 +543,11 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
     }
   }, [rasterOpacity, isRasterVisible]);
 
+  // Keep isThematicVisibleRef in sync with state
+  useEffect(() => {
+    isThematicVisibleRef.current = isThematicVisible && thematicOpacity > 0;
+  }, [isThematicVisible, thematicOpacity]);
+
   // Update Thematic GeoJSON layer style when opacity or visibility changes
   useEffect(() => {
     if (geojsonLayerRef.current) {
@@ -551,8 +613,8 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
         l.bindTooltip(
           `<div class="font-mono text-xs p-1">
             <strong>${name}</strong><br/>
-            <span style="color: ${getColor(pct)}">Couverture: <strong>${pct}%</strong></span><br/>
-            <span>Pop. totale: ${pop} hab.</span>
+            <span style="color: ${getColor(pct)}">${language === 'fr' ? 'Couverture' : 'Coverage'}: <strong>${pct}%</strong></span><br/>
+            <span>${language === 'fr' ? 'Pop. totale' : 'Total pop'}: ${pop} ${language === 'fr' ? 'hab.' : 'pop.'}</span>
           </div>`,
           { sticky: true, className: 'leaflet-custom-tooltip' }
         );
@@ -649,8 +711,8 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
     if (!selectedRegion && !selectedSubdivision) {
       return {
         isTerritory: false,
-        title: 'Statistiques Nationales',
-        subtitle: 'Cameroun • Synthèse FOSA',
+        title: language === 'fr' ? 'Statistiques Nationales' : 'National Statistics',
+        subtitle: language === 'fr' ? 'Cameroun • Synthèse FOSA' : 'Cameroon • HF Summary',
         popTotal: nationalData?.popTotal || 0,
         popCovered: nationalData?.popTravelTime_60 || 0,
         popCoveredPercent: nationalData?.popCoveredPercent_60 || 0,
@@ -676,15 +738,15 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
 
     let subTitle = '';
     if (selectedSubdivision) {
-      subTitle = `${selectedSubdivision.type === 'district' ? 'District' : 'Département'} : ${selectedSubdivision.name}`;
+      subTitle = `${selectedSubdivision.type === 'district' ? (language === 'fr' ? 'District' : 'District') : (language === 'fr' ? 'Département' : 'Department')} : ${selectedSubdivision.name}`;
       if (selectedSubdivision.region) subTitle += ` (${selectedSubdivision.region})`;
     } else if (selectedRegion) {
-      subTitle = `Région : ${selectedRegion}`;
+      subTitle = `${language === 'fr' ? 'Région' : 'Region'} : ${selectedRegion}`;
     }
 
     return {
       isTerritory: true,
-      title: 'Statistiques Territoriales',
+      title: language === 'fr' ? 'Statistiques Territoriales' : 'Territorial Statistics',
       subtitle: subTitle,
       popTotal: totalPop,
       popCovered: coveredPop,
@@ -775,10 +837,10 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `Livrable3_Couverture_5km_FOSA_${level}_${filterStr}_${dateStr}.csv`;
+    link.download = `CiblageASC_Couverture_5km_FOSA_${level}_${filterStr}_${dateStr}.csv`;
     link.click();
     URL.revokeObjectURL(url);
-    triggerToast(`Export CSV généré (${territorialFeatures.length} zones)`);
+    triggerToast(language === 'fr' ? `Export CSV généré (${territorialFeatures.length} zones)` : `CSV export generated (${territorialFeatures.length} zones)`);
   };
 
   // Filter features based on search within territorial selection
@@ -795,7 +857,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
     // 1. National tier is always present at the very top
     if (nationalData) {
       items.push({
-        levelLabel: 'National (Cameroun)',
+        levelLabel: language === 'fr' ? 'National (Cameroun)' : 'National (Cameroon)',
         name: 'National',
         popTotal: nationalData.popTotal,
         popCoveredPercent: nationalData.popCoveredPercent_60,
@@ -812,14 +874,14 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
       const regData = regionsLookup.get(normalizeName(regName));
       if (regData) {
         items.push({
-          levelLabel: 'Région',
+          levelLabel: language === 'fr' ? 'Région' : 'Region',
           name: regData.name,
           popTotal: regData.popTotal,
           popCoveredPercent: regData.popCoveredPercent,
         });
       } else {
         items.push({
-          levelLabel: 'Région',
+          levelLabel: language === 'fr' ? 'Région' : 'Region',
           name: regName,
           popTotal: 0,
           popCoveredPercent: 0,
@@ -832,7 +894,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
       const deptData = deptsLookup.get(normalizeName(deptName));
       if (deptData) {
         items.push({
-          levelLabel: 'Département',
+          levelLabel: language === 'fr' ? 'Département' : 'Department',
           name: deptData.name,
           popTotal: deptData.popTotal,
           popCoveredPercent: deptData.popCoveredPercent,
@@ -845,7 +907,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
       const arrData = arrsLookup.get(normalizeName(arrName));
       if (arrData) {
         items.push({
-          levelLabel: 'Arrondissement',
+          levelLabel: language === 'fr' ? 'Arrondissement' : 'Sub-district',
           name: arrData.name,
           popTotal: arrData.popTotal,
           popCoveredPercent: arrData.popCoveredPercent,
@@ -858,7 +920,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
       const distData = distsLookup.get(normalizeName(distName));
       if (distData) {
         items.push({
-          levelLabel: 'District de Santé',
+          levelLabel: language === 'fr' ? 'District de Santé' : 'Health District',
           name: distData.name,
           popTotal: distData.popTotal,
           popCoveredPercent: distData.popCoveredPercent,
@@ -898,26 +960,30 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[9px] font-bold uppercase bg-[#006948]/10 text-[#006948] px-2 py-0.5 rounded-full">
-                    Livrable 3 • Modélisation AccessMod
+                  <span className="font-mono text-[9px] font-bold uppercase bg-[#be123c]/10 text-[#be123c] px-2 py-0.5 rounded-full border border-[#fecdd3]">
+                    {language === 'fr' ? 'Ciblage ASC • Zones de Déficit FOSA' : 'CHW Targeting • HF Deficit Zones'}
                   </span>
                   <span className="text-xs font-mono text-[#64748b] hidden md:inline">
-                    Accessibilité aux FOSA &lt; 5 km &bull; Besoin Réel ASC
+                    {language === 'fr'
+                      ? 'Les zones rouges/orange indiquent un faible accès FOSA et un besoin prioritaire en ASC'
+                      : 'Red/orange zones indicate low HF access and priority CHW need'}
                   </span>
                 </div>
                 <h1 className="font-display font-bold text-sm text-[#0f172a] leading-tight">
-                  Accessibilité Géographique aux FOSA & Modélisation du Besoin Réel en ASC
+                  {language === 'fr'
+                    ? 'Ciblage Prioritaire des ASC dans les Zones à Faible Accès aux FOSA'
+                    : 'Priority CHW Targeting in Low Health Facility Access Zones'}
                 </h1>
               </div>
             </div>
 
               {/* Action Buttons & Territorial Filters */}
-              <div className="flex items-center gap-2 flex-wrap">
+              <div data-tour="horizontal-filter-bar" className="flex items-center gap-2 flex-wrap">
                 {/* 1. Filtre Régional */}
                 <div className="flex items-center gap-1.5 bg-[#f8fafc] px-2.5 py-1 rounded-xl border border-[#cbd5e1]/70">
                   <span className="text-[11px] font-mono font-bold text-[#475569] flex items-center gap-1">
                     <MapPin className="w-3 h-3 text-[#006948]" />
-                    <span className="hidden md:inline">Région :</span>
+                    <span className="hidden md:inline">{language === 'fr' ? 'Région :' : 'Region:'}</span>
                   </span>
                   <select
                     value={selectedRegion || ''}
@@ -933,7 +999,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                     }}
                     className="bg-white border border-[#cbd5e1] text-[#0f172a] text-xs font-mono font-semibold rounded-lg px-2 py-1 focus:ring-1 focus:ring-[#006948] focus:outline-none"
                   >
-                    <option value="">Toutes (National)</option>
+                    <option value="">{language === 'fr' ? 'Toutes (National)' : 'All (National)'}</option>
                     {COVERAGE_CONFIG.REGIONS_LIST.map((reg) => (
                       <option key={reg} value={reg}>
                         {reg}
@@ -948,7 +1014,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                     <Search className="w-3 h-3 text-[#006948] shrink-0" />
                     <input
                       type="text"
-                      placeholder="Dép. ou District (texte libre)..."
+                      placeholder={language === 'fr' ? 'Dép. ou District (texte libre)...' : 'Dept. or District (free text)...'}
                       value={searchSubdivText}
                       onChange={(e) => {
                         const val = e.target.value;
@@ -969,7 +1035,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                       <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-md font-bold uppercase ${
                         selectedSubdivision.type === 'district' ? 'bg-[#e0f2fe] text-[#0284c7]' : 'bg-[#fef3c7] text-[#d97706]'
                       }`}>
-                        {selectedSubdivision.type === 'district' ? 'Dist' : 'Dép'}
+                        {selectedSubdivision.type === 'district' ? 'Dist' : (language === 'fr' ? 'Dép' : 'Dept')}
                       </span>
                     )}
                     {(searchSubdivText || selectedSubdivision) && (
@@ -981,7 +1047,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                           setIsSubdivDropdownOpen(false);
                         }}
                         className="text-[#94a3b8] hover:text-[#0f172a] p-0.5 rounded transition-colors cursor-pointer"
-                        title="Effacer le filtre"
+                        title={language === 'fr' ? 'Effacer le filtre' : 'Clear filter'}
                       >
                         <X className="w-3 h-3" />
                       </button>
@@ -994,7 +1060,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                       className="absolute left-0 top-full mt-1.5 w-72 bg-white rounded-2xl shadow-xl border border-[#cbd5e1] py-1.5 z-50 max-h-64 overflow-y-auto font-mono text-xs animate-in fade-in zoom-in-95 duration-100"
                     >
                       <div className="px-3 py-1 text-[10px] font-bold text-[#64748b] uppercase tracking-wider border-b border-[#f1f5f9] flex items-center justify-between">
-                        <span>Suggestions correspondantes</span>
+                        <span>{language === 'fr' ? 'Suggestions correspondantes' : 'Matching suggestions'}</span>
                         <span>{filteredSubdivSuggestions.length}</span>
                       </div>
                       {filteredSubdivSuggestions.map((item, idx) => (
@@ -1024,14 +1090,16 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                             <div className="truncate">
                               <div className="font-bold text-[#0f172a] truncate">{item.name}</div>
                               <div className="text-[10px] text-[#64748b] truncate">
-                                {item.type === 'district' ? `District • Dép. ${item.dept || '-'} • ${item.region}` : `Département • Région ${item.region}`}
+                                {item.type === 'district'
+                                  ? `${language === 'fr' ? 'District' : 'District'} • ${language === 'fr' ? 'Dép.' : 'Dept.'} ${item.dept || '-'} • ${item.region}`
+                                  : `${language === 'fr' ? 'Département' : 'Department'} • ${language === 'fr' ? 'Région' : 'Region'} ${item.region}`}
                               </div>
                             </div>
                           </div>
                           <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded shrink-0 ml-1.5 ${
                             item.type === 'district' ? 'bg-[#e0f2fe] text-[#0284c7]' : 'bg-[#fef3c7] text-[#d97706]'
                           }`}>
-                            {item.type === 'district' ? 'District' : 'Dép.'}
+                            {item.type === 'district' ? 'District' : (language === 'fr' ? 'Dép.' : 'Dept.')}
                           </span>
                         </button>
                       ))}
@@ -1039,29 +1107,17 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                   )}
                 </div>
 
-                {/* 3. Bouton Stats */}
-                <button
-                  onClick={() => setShowNationalCard(!showNationalCard)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 border rounded-xl text-xs font-semibold transition-all shadow-2xs ${
-                    showNationalCard 
-                      ? 'bg-[#f0fdf4] text-[#006948] border-[#86efac]' 
-                      : 'bg-white text-[#475569] border-[#cbd5e1] hover:bg-[#f1f5f9]'
-                  }`}
-                  title={showNationalCard ? "Masquer la carte statistique" : "Afficher la carte statistique"}
-                >
-                  <TrendingUp className="w-3.5 h-3.5 text-[#006948]" />
-                  <span>{territoryStats.isTerritory ? 'Stats Territoire' : 'Stats Nationales'}</span>
-                </button>
-
-                {/* 4. Bouton Export CSV */}
+                {/* Export CSV */}
+                <div data-tour="ciblage-stats-csv" className="flex items-center gap-2">
                 <button
                   onClick={handleExportCsv}
                   className="inline-flex items-center gap-1.5 px-3 py-1 bg-white hover:bg-[#f1f5f9] text-[#0f172a] border border-[#cbd5e1] rounded-xl text-xs font-semibold transition-all shadow-2xs"
-                  title="Exporter les indicateurs en CSV"
+                  title={language === 'fr' ? 'Exporter les indicateurs en CSV' : 'Export indicators as CSV'}
                 >
                   <FileSpreadsheet className="w-3.5 h-3.5 text-[#006948]" />
                   <span className="hidden sm:inline">Export CSV</span>
                 </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1076,7 +1132,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
           <div className="absolute inset-0 z-30 bg-white/60 backdrop-blur-xs flex items-center justify-center">
             <div className="bg-white p-4 rounded-2xl shadow-xl border border-[#cbd5e1] flex items-center gap-3 font-mono text-xs">
               <div className="w-5 h-5 border-2 border-[#006948] border-t-transparent rounded-full animate-spin"></div>
-              <span>Chargement de la couche vectorielle ({level})...</span>
+              <span>{language === 'fr' ? `Chargement de la couche vectorielle (${level})...` : `Loading vector layer (${level})...`}</span>
             </div>
           </div>
         )}
@@ -1094,21 +1150,21 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
             type="button"
             onClick={() => setIsLegendOpen(true)}
             className="absolute bottom-6 left-4 z-30 bg-white/95 hover:bg-white text-[#0f172a] border border-[#cbd5e1] rounded-2xl px-3.5 py-2.5 shadow-xl font-sans text-xs font-bold flex items-center gap-2.5 transition-all hover:scale-105 backdrop-blur-md group cursor-pointer"
-            title="Afficher la légende"
+            title={language === 'fr' ? 'Afficher la légende' : 'Show legend'}
           >
             <div className="w-6 h-6 rounded-lg bg-[#006948]/10 text-[#006948] flex items-center justify-center font-bold">
               <Layers className="w-3.5 h-3.5" />
             </div>
             <div className="flex items-center gap-1.5 font-sans font-semibold text-xs text-[#0f172a]">
-              <span>Légende</span>
-              <span className="w-2.5 h-2.5 rounded-full bg-[#006948]" title="Couverture FOSA" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#e11d48]" title="Raster Pop. Isolée" />
+              <span>{language === 'fr' ? 'Légende' : 'Legend'}</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#006948]" title={language === 'fr' ? 'Couverture FOSA' : 'HF Coverage'} />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#e11d48]" title={language === 'fr' ? 'Raster Pop. Isolée' : 'Isolated Pop. Raster'} />
             </div>
             <ChevronUp className="w-4 h-4 text-[#64748b] group-hover:text-[#006948] transition-colors" />
           </button>
         ) : (
           <div className="absolute bottom-6 left-4 z-30 pointer-events-auto flex flex-col gap-2.5 w-72 sm:w-80 bg-white/85 backdrop-blur-xl rounded-2xl shadow-2xl border border-[#cbd5e1]/80 p-3.5 text-xs font-mono animate-in fade-in zoom-in-95 duration-150">
-            {/* Header Légende avec titre explicite et bouton réduire */}
+            {/* Header Légende avec titre épuré et bouton réduire */}
             <div className="flex items-center justify-between pb-2 border-b border-[#e2e8f0]">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-lg bg-[#006948]/10 text-[#006948] flex items-center justify-center font-bold">
@@ -1116,10 +1172,10 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                 </div>
                 <div>
                   <h3 className="font-display font-bold text-xs text-[#0f172a] leading-tight">
-                    Légende Cartographique
+                    {language === 'fr' ? 'Légende' : 'Legend'}
                   </h3>
                   <span className="text-[9.5px] font-mono text-[#64748b] block">
-                    AccessMod • FOSA &lt; 5 km
+                    {language === 'fr' ? 'Rayon d’accès FOSA : ≤ 5 km' : 'HF Access radius: ≤ 5 km'}
                   </span>
                 </div>
               </div>
@@ -1127,13 +1183,13 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                 type="button"
                 onClick={() => setIsLegendOpen(false)}
                 className="p-1 rounded-lg hover:bg-[#e2e8f0] text-[#64748b] hover:text-[#0f172a] transition-colors cursor-pointer"
-                title="Réduire la légende"
+                title={language === 'fr' ? 'Réduire la légende' : 'Collapse legend'}
               >
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Légende 1: Carte Thématique (% Pop < 5 km) */}
+            {/* Légende 1: Carte Thématique (% Pop <= 5 km) */}
             <div className="bg-white/75 backdrop-blur-sm rounded-xl p-2.5 border border-[#e2e8f0] space-y-1.5 shadow-2xs">
               <div className="flex items-center justify-between pb-1.5 border-b border-[#e2e8f0]/80">
                 <div className="flex items-center gap-1.5">
@@ -1143,13 +1199,22 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                     className={`p-1 rounded-md transition-colors cursor-pointer ${
                       isThematicVisible ? 'text-[#006948] hover:bg-[#e0f2fe]' : 'text-[#94a3b8] hover:bg-[#f1f5f9]'
                     }`}
-                    title={isThematicVisible ? "Masquer la couche thématique" : "Afficher la couche thématique"}
+                    title={isThematicVisible ? (language === 'fr' ? "Masquer la couche thématique" : 'Hide thematic layer') : (language === 'fr' ? "Afficher la couche thématique" : 'Show thematic layer')}
                   >
                     {isThematicVisible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
                   </button>
-                  <span className="font-bold text-[11px] text-[#0f172a]">
-                    Couverture FOSA &lt; 5 km
-                  </span>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-[11px] text-[#0f172a] leading-tight">
+                      {language === 'fr' 
+                        ? 'Pourcentage de population à ≤ 5 km d’une FOSA' 
+                        : 'Population percentage within ≤ 5 km of a health facility'}
+                    </span>
+                    <span className="text-[9px] text-[#64748b]">
+                      {language === 'fr' 
+                        ? 'Accès direct aux soins • Déduction du besoin en ASC' 
+                        : 'Direct healthcare access • Derivation of CHW need'}
+                    </span>
+                  </div>
                 </div>
                 <span className="text-[9px] bg-[#f1f5f9] px-1.5 py-0.5 rounded font-bold text-[#006948]">
                   {Math.round(thematicOpacity * 100)}%
@@ -1161,29 +1226,49 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                 <div className="pt-1 space-y-1 text-[10px]">
                   <div className="flex items-center gap-2">
                     <span className="w-3.5 h-2.5 rounded shrink-0 shadow-2xs" style={{ backgroundColor: '#006948' }}></span>
-                    <span className="text-[#334155]">&ge; 90% (Excellente)</span>
+                    <span className="text-[#334155]">
+                      {language === 'fr'
+                        ? '≥ 90% (Accès optimal → Besoin ASC très résiduel)'
+                        : '≥ 90% (Optimal access → Minimal CHW need)'}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3.5 h-2.5 rounded shrink-0 shadow-2xs" style={{ backgroundColor: '#22c55e' }}></span>
-                    <span className="text-[#334155]">80% - 89.9% (Cible 80%)</span>
+                    <span className="text-[#334155]">
+                      {language === 'fr'
+                        ? '80% - 89.9% (Accès satisfaisant → Faible besoin en ASC)'
+                        : '80% - 89.9% (Adequate access → Low CHW need)'}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3.5 h-2.5 rounded shrink-0 shadow-2xs" style={{ backgroundColor: '#eab308' }}></span>
-                    <span className="text-[#334155]">65% - 79.9% (Déficit modéré)</span>
+                    <span className="text-[#334155]">
+                      {language === 'fr'
+                        ? '65% - 79.9% (Déficit modéré → Besoin ASC modéré)'
+                        : '65% - 79.9% (Moderate deficit → Moderate CHW need)'}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3.5 h-2.5 rounded shrink-0 shadow-2xs" style={{ backgroundColor: '#f97316' }}></span>
-                    <span className="text-[#334155]">50% - 64.9% (Déficit élevé)</span>
+                    <span className="text-[#334155]">
+                      {language === 'fr'
+                        ? '50% - 64.9% (Déficit élevé → Fort besoin en ASC)'
+                        : '50% - 64.9% (High deficit → High CHW need)'}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3.5 h-2.5 rounded shrink-0 shadow-2xs" style={{ backgroundColor: '#dc2626' }}></span>
-                    <span className="text-[#dc2626] font-bold">&lt; 50% (Déficit critique)</span>
+                    <span className="text-[#dc2626] font-bold">
+                      {language === 'fr'
+                        ? '< 50% (Déficit critique → Besoin ASC prioritaire)'
+                        : '< 50% (Critical deficit → Priority CHW need)'}
+                    </span>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Légende 2: Raster de la Population Non Couverte (> 5 km FOSA) */}
+            {/* Légende 2: Distribution de la population non couverte (> 5 km de toute FOSA) */}
             <div className="bg-white/75 backdrop-blur-sm rounded-xl p-2.5 border border-[#fecdd3]/70 space-y-1.5 shadow-2xs">
               <div className="flex items-center justify-between pb-1.5 border-b border-[#e2e8f0]/80">
                 <div className="flex items-center gap-1.5">
@@ -1193,13 +1278,21 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                     className={`p-1 rounded-md transition-colors cursor-pointer ${
                       isRasterVisible ? 'text-[#e11d48] hover:bg-[#ffe4e6]' : 'text-[#94a3b8] hover:bg-[#f1f5f9]'
                     }`}
-                    title={isRasterVisible ? "Masquer le raster de la population non couverte" : "Afficher le raster"}
+                    title={isRasterVisible ? (language === 'fr' ? "Masquer la distribution de la population non couverte" : 'Hide uncovered population distribution') : (language === 'fr' ? "Afficher la distribution" : 'Show distribution')}
                   >
                     {isRasterVisible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
                   </button>
-                  <span className="font-bold text-[11px] text-[#0f172a]">
-                    Pop. Non Couverte (&gt; 5 km)
-                  </span>
+                  <div className="flex flex-col">
+                    <span 
+                      className="font-bold text-[11px] text-[#0f172a] leading-tight" 
+                      title="Distribution de la population non couverte / Grid distribution of uncovered population > 5 km de toute FOSA"
+                    >
+                      {language === 'fr' 
+                        ? 'Distribution pop. non couverte (> 5 km FOSA)' 
+                        : 'Grid distribution of uncovered pop. (> 5 km from FOSA)'}
+                    </span>
+                    <span className="text-[9px] text-[#94a3b8] font-mono">{language === 'fr' ? 'Grille spatiale continue' : 'Continuous spatial grid'}</span>
+                  </div>
                 </div>
                 <span className="text-[9px] bg-[#fef2f2] text-[#e11d48] px-1.5 py-0.5 rounded font-bold border border-[#fecdd3]">
                   {Math.round(rasterOpacity * 100)}%
@@ -1209,7 +1302,7 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
               {/* Échelle du Raster de Population (hab / pixel) */}
               {isRasterVisible && (
                 <div className="pt-1 space-y-1.5 text-[10px]">
-                  <div className="text-[9px] text-[#64748b]">Densité continue (hab / pixel) :</div>
+                  <div className="text-[9px] text-[#64748b]">{language === 'fr' ? 'Densité continue (hab / pixel) :' : 'Continuous density (pop / pixel):'}</div>
                   <div
                     className="w-full h-2.5 rounded-full shadow-inner"
                     style={{
@@ -1237,117 +1330,6 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
         {/* 
           DEDICATED FLOATING STATISTICS CARD (Top-Right or Floating Side Card)
         */}
-        {showNationalCard && (
-          <div className="absolute top-4 right-4 z-20 w-80 bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-[#cbd5e1] p-4 font-mono pointer-events-auto animate-in fade-in slide-in-from-right-2 duration-150 text-xs">
-            {/* Header with Title and Minimize/Close Buttons */}
-            <div className="flex items-center justify-between pb-2 border-b border-[#e2e8f0]">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-[#006948]/10 text-[#006948] flex items-center justify-center font-bold">
-                  <TrendingUp className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#006948] block">
-                    {territoryStats.title}
-                  </span>
-                  <span className="font-display font-bold text-xs text-[#0f172a] truncate block max-w-[180px]">
-                    {territoryStats.subtitle}
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center gap-1">
-                <button
-                  type="button"
-                  onClick={() => setIsNationalCardMinimized(!isNationalCardMinimized)}
-                  className="p-1 rounded-lg hover:bg-[#f1f5f9] text-[#64748b] transition-colors"
-                  title={isNationalCardMinimized ? "Développer la carte statistique" : "Réduire la carte statistique"}
-                >
-                  {isNationalCardMinimized ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowNationalCard(false)}
-                  className="p-1 rounded-lg hover:bg-[#fee2e2] hover:text-[#b91c1c] text-[#94a3b8] transition-colors"
-                  title="Fermer la carte statistique"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            {/* Collapsed State Summary */}
-            {isNationalCardMinimized ? (
-              <div className="pt-2 flex items-center justify-between">
-                <span className="text-[11px] text-[#64748b]">Couverture &lt; 5 km :</span>
-                <span className="text-sm font-bold text-[#006948]">
-                  {territoryStats.popCoveredPercent.toFixed(2)}%
-                </span>
-              </div>
-            ) : (
-              /* Expanded Full Metric Cards */
-              <div className="pt-3 space-y-2.5">
-                {/* 1. Population Couverte (< 5 km) */}
-                <div className="bg-[#f0fdf4] border border-[#86efac]/80 rounded-2xl p-2.5">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="text-[#166534] font-semibold">Population Couverte (&lt; 5 km)</span>
-                    <span className="font-bold text-sm text-[#006948]">
-                      {territoryStats.popCoveredPercent.toFixed(2)}%
-                    </span>
-                  </div>
-                  <div className="h-2 w-full bg-[#dcfce7] rounded-full mt-1.5 overflow-hidden">
-                    <div
-                      className="h-full bg-[#006948] rounded-full transition-all duration-300"
-                      style={{ width: `${Math.min(territoryStats.popCoveredPercent, 100)}%` }}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] text-[#166534] mt-1 font-semibold">
-                    <span>{Math.round(territoryStats.popCovered).toLocaleString('fr-FR')} hab.</span>
-                    <span>Cible OMS: &ge; 80%</span>
-                  </div>
-                </div>
-
-                {/* 2. Besoin Réel (> 5 km FOSA) */}
-                <div className="bg-[#fff1f2] border border-[#fecdd3] rounded-2xl p-2.5">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="text-[#be123c] font-semibold">Besoin Réel ASC (&gt; 5 km)</span>
-                    <span className="font-bold text-sm text-[#e11d48]">
-                      {territoryStats.popIsolatedPercent.toFixed(2)}%
-                    </span>
-                  </div>
-                  <div className="h-2 w-full bg-[#ffe4e6] rounded-full mt-1.5 overflow-hidden">
-                    <div
-                      className="h-full bg-[#e11d48] rounded-full transition-all duration-300"
-                      style={{ width: `${Math.min(territoryStats.popIsolatedPercent, 100)}%` }}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] text-[#be123c] mt-1 font-semibold">
-                    <span>{Math.round(territoryStats.popIsolated).toLocaleString('fr-FR')} hab.</span>
-                    <span>À couvrir par ASC</span>
-                  </div>
-                </div>
-
-                {/* 3. Métriques Démographiques Complémentaires */}
-                <div className="grid grid-cols-2 gap-2 text-[10px] pt-0.5">
-                  <div className="bg-[#f8fafc] border border-[#e2e8f0] p-2 rounded-xl">
-                    <span className="text-[#64748b] block">Pop. Totale ({territoryStats.isTerritory ? 'Zone' : 'WorldPop'})</span>
-                    <span className="font-bold text-[#0f172a] text-[11px]">
-                      {Math.round(territoryStats.popTotal).toLocaleString('fr-FR')} hab.
-                    </span>
-                  </div>
-                  <div className="bg-[#f8fafc] border border-[#e2e8f0] p-2 rounded-xl">
-                    <span className="text-[#64748b] block">{territoryStats.isTerritory ? 'Entités incluses' : 'Plafond Déplacement'}</span>
-                    <span className="font-bold text-[#006948] text-[11px]">
-                      {territoryStats.isTerritory ? `${territoryStats.zonesCount} (${level})` : '≤ 60 min (5 km)'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-2 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] text-[9.5px] text-[#64748b] leading-tight">
-                  Source: Modélisation AccessMod v5.8 &bull; Base FOSA Minsanté 2023 &bull; Raster 100m WorldPop
-                </div>
-              </div>
-            )}
-          </div>
-        )}
 
         {/* 
           SEARCH & QUICK JUMP FLOATING BOX (Top-Left)
@@ -1358,7 +1340,9 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
           {(selectedSubdivision || selectedRegion) && (
             <div className="flex items-center gap-1.5 bg-[#0f172a] text-white px-2.5 py-1 rounded-xl shadow-lg border border-white/20 font-mono text-[11px] w-fit animate-in fade-in slide-in-from-top-1">
               <span className="text-[#86efac]">
-                {selectedSubdivision ? (selectedSubdivision.type === 'district' ? '🏥 District :' : '🏢 Dép. :') : '📍 Région :'}
+                {selectedSubdivision
+                  ? (selectedSubdivision.type === 'district' ? '🏥 District :' : (language === 'fr' ? '🏢 Dép. :' : '🏢 Dept.:'))
+                  : (language === 'fr' ? '📍 Région :' : '📍 Region:')}
               </span>
               <span className="font-bold">
                 {selectedSubdivision ? selectedSubdivision.name : selectedRegion}
@@ -1371,18 +1355,18 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
                   setSearchSubdivText('');
                 }}
                 className="ml-1 hover:text-[#f87171] p-0.5 rounded cursor-pointer transition-colors"
-                title="Effacer le filtre territorial"
+                title={language === 'fr' ? 'Effacer le filtre territorial' : 'Clear territorial filter'}
               >
                 <X className="w-3 h-3" />
               </button>
             </div>
           )}
 
-          <div className="bg-white/95 backdrop-blur-md p-1.5 rounded-2xl shadow-xl border border-[#cbd5e1] flex items-center gap-2 w-76">
+          <div data-tour="ciblage-map-search" className="bg-white/95 backdrop-blur-md p-1.5 rounded-2xl shadow-xl border border-[#cbd5e1] flex items-center gap-2 w-76">
             <Search className="w-4 h-4 text-[#006948] ml-1.5 shrink-0" />
             <input
               type="text"
-              placeholder={`Rechercher et zoomer (${territorialFeatures.length} zones)...`}
+              placeholder={language === 'fr' ? `Rechercher et zoomer (${territorialFeatures.length} zones)...` : `Search and zoom (${territorialFeatures.length} zones)...`}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-transparent text-xs text-[#0f172a] focus:outline-none font-mono placeholder:text-[#94a3b8]"
@@ -1429,169 +1413,109 @@ export const Livrable3RealNeed: React.FC<Livrable3RealNeedProps> = ({
           )}
         </div>
 
-        {/* 
-          DETAILED INSPECTOR POPUP CARD ON FEATURE CLICK
-          User Requirement 3: Multi-tier upper hierarchy breakdown on click
-        */}
-        {selectedFeature && (
-          <div className={`absolute top-4 ${showNationalCard ? 'right-88 sm:right-92' : 'right-4'} z-20 w-88 sm:w-96 max-h-[calc(100vh-8rem)] overflow-y-auto bg-white/98 backdrop-blur-md rounded-3xl shadow-2xl border border-[#cbd5e1] p-4 font-mono animate-in fade-in zoom-in-95 duration-150 text-xs`}>
-            {/* Header: Name and Type */}
-            <div className="flex items-start justify-between pb-3 border-b border-[#e2e8f0]">
-              <div>
-                <span className="text-[10px] font-bold uppercase text-[#006948] block">
-                  {level === 'regions' ? 'Région' : level === 'departements' ? 'Département' : level === 'arrondissements' ? 'Arrondissement' : level === 'districts_sante' ? 'District de Santé' : 'Aire de Santé'}
-                </span>
-                <h3 className="font-display font-bold text-base text-[#0f172a] mt-0.5">
-                  {getFeatureNameForLevel(level, selectedFeature)}
-                </h3>
-                {(selectedFeature.region || selectedFeature.Nom_Region || selectedFeature.district || selectedFeature.District_S) && (
-                  <span className="text-[10px] text-[#64748b]">
-                    {selectedFeature.region || selectedFeature.Nom_Region} {selectedFeature.district ? `• ${selectedFeature.district}` : ''}
-                  </span>
-                )}
-              </div>
-              <button
-                onClick={() => {
-                  setSelectedFeature(null);
-                  if (mapInstanceRef.current && selectedHighlightLayerRef.current) {
-                    mapInstanceRef.current.removeLayer(selectedHighlightLayerRef.current);
-                    selectedHighlightLayerRef.current = null;
-                  }
-                }}
-                className="p-1.5 rounded-xl hover:bg-[#f1f5f9] text-[#64748b] transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Coverage KPI Gauge for the selected zone */}
-            <div className="my-3 p-3 rounded-2xl bg-[#f8fafc] border border-[#e2e8f0] space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] text-[#64748b]">Couverture FOSA (&lt; 5 km) :</span>
-                <span
-                  className="font-bold text-base"
-                  style={{ color: getColor(selectedFeature.popCoveredPercent || 0) }}
-                >
-                  {selectedFeature.popCoveredPercent || 0}%
-                </span>
-              </div>
-
-              {/* Progress bar */}
-              <div className="h-2.5 w-full bg-[#e2e8f0] rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-300"
-                  style={{
-                    width: `${Math.min(selectedFeature.popCoveredPercent || 0, 100)}%`,
-                    backgroundColor: getColor(selectedFeature.popCoveredPercent || 0),
-                  }}
-                />
-              </div>
-
-              <div className="flex items-center justify-between text-[10px]">
-                <span className="text-[#64748b]">Pop. à &lt; 5 km :</span>
-                <span className="font-bold text-[#0f172a]">
-                  {Math.round(
-                    ((selectedFeature.popTotal || 0) * (selectedFeature.popCoveredPercent || 0)) / 100
-                  ).toLocaleString('fr-FR')} hab.
-                </span>
-              </div>
-            </div>
-
-            {/* Demographic & Gap Indicators */}
-            <div className="grid grid-cols-2 gap-2 text-[11px]">
-              <div className="bg-[#f8fafc] p-2.5 rounded-xl border border-[#e2e8f0]">
-                <span className="text-[10px] text-[#64748b] block">Population Totale</span>
-                <span className="font-bold text-[#0f172a]">
-                  {Math.round(selectedFeature.popTotal || 0).toLocaleString('fr-FR')} hab.
-                </span>
-              </div>
-
-              <div className="bg-[#fff1f2] p-2.5 rounded-xl border border-[#fecdd3]">
-                <span className="text-[10px] text-[#be123c] block">Pop. Isolée (&gt; 5 km)</span>
-                <span className="font-bold text-[#e11d48]">
-                  {Math.round(
-                    (selectedFeature.popTotal || 0) * (1 - (selectedFeature.popCoveredPercent || 0) / 100)
-                  ).toLocaleString('fr-FR')} hab.
-                </span>
-              </div>
-            </div>
-
-            {/* 
-              USER REQUIREMENT 3: HIERARCHICAL UPPER-TIER BREAKDOWN
-              Show national, regional, departmental, and district levels above the clicked entity!
-            */}
-            {upperTiersHierarchy.length > 0 && (
-              <div className="mt-3 p-3 rounded-2xl bg-gradient-to-br from-[#f8fafc] to-[#f0fdf4] border border-[#86efac]/50 space-y-2">
-                <div className="flex items-center justify-between border-b border-[#cbd5e1]/50 pb-1.5">
-                  <span className="text-[10px] font-bold uppercase text-[#166534] flex items-center gap-1">
-                    <TrendingUp className="w-3.5 h-3.5 text-[#16a34a]" />
-                    Désagrégation Paliers Supérieurs
-                  </span>
-                  <span className="text-[9px] text-[#64748b] font-mono">Hiérarchie</span>
-                </div>
-
-                <div className="space-y-1.5 pt-1">
-                  {upperTiersHierarchy.map((tier, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-white/90 p-2 rounded-xl border border-[#e2e8f0] flex items-center justify-between gap-2 shadow-2xs"
-                    >
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-[9px] font-bold uppercase text-[#64748b] px-1.5 py-0.2 bg-[#f1f5f9] rounded">
-                            {tier.levelLabel}
-                          </span>
-                          <span className="text-xs font-bold text-[#0f172a] truncate">
-                            {tier.name}
-                          </span>
-                        </div>
-                        {tier.popTotal > 0 && (
-                          <span className="text-[9px] text-[#64748b] block mt-0.5">
-                            Pop: {Math.round(tier.popTotal).toLocaleString('fr-FR')} hab.
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="text-right shrink-0">
-                        <span
-                          className="font-bold text-xs block"
-                          style={{ color: getColor(tier.popCoveredPercent) }}
-                        >
-                          {tier.popCoveredPercent.toFixed(1)}%
-                        </span>
-                        <span className="text-[9px] text-[#64748b]">couvert</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Status interpretation according to national guidelines */}
-            <div className="mt-3 p-2.5 rounded-xl text-[10px] leading-relaxed flex items-start gap-2 bg-[#f8fafc] border border-[#e2e8f0]">
-              <Info className="w-4 h-4 text-[#006948] shrink-0 mt-0.5" />
-              <div>
-                {(selectedFeature.popCoveredPercent || 0) < 80 ? (
-                  <p className="text-[#b91c1c]">
-                    <strong>Cible prioritaire Scaling-Up (Livrable 4) :</strong> Moins de 80% de la population réside à proximité d'une FOSA. Un déploiement d'ASC communautaires est requis.
-                  </p>
-                ) : (
-                  <p className="text-[#15803d]">
-                    <strong>Couverture Conforme :</strong> Plus de 80% de la population réside à moins de 5 km d'une formation sanitaire fonctionnelle.
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Panneau d'analyse latéral (idem onglet 1) */}
+        <CiblageAscSidePanel
+          isOpen={isPanelOpen}
+          onToggleOpen={() => setIsPanelOpen(!isPanelOpen)}
+          level={level}
+          language={language}
+          selectedFeature={selectedFeature}
+          onClearSelectedFeature={() => {
+            setSelectedFeature(null);
+            if (mapInstanceRef.current && selectedHighlightLayerRef.current) {
+              mapInstanceRef.current.removeLayer(selectedHighlightLayerRef.current);
+              selectedHighlightLayerRef.current = null;
+            }
+          }}
+          territorialFeatures={territorialFeatures}
+          upperTiersHierarchy={upperTiersHierarchy}
+          territoryStats={territoryStats}
+        />
 
         {/* Sélecteur Flottant de Fond de Carte (en bas à droite) */}
         <FloatingBasemapSwitcher
           basemap={basemap}
           onBasemapChange={onBasemapChange}
+          language={language}
           className="bottom-5 right-4"
         />
       </div>
+
+      {/* Modal configuration export */}
+      {showExportModal && !isExporting && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#cbd5e1] max-w-md w-full p-5 space-y-4 font-sans animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between pb-2 border-b border-[#e2e8f0]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-[#006948]/10 text-[#006948] flex items-center justify-center">
+                  <Download className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-sm text-[#0f172a]">
+                  {language === 'fr' ? 'Exporter la carte actuelle' : 'Export current map'}
+                </h3>
+              </div>
+              <button type="button" onClick={() => setShowExportModal(false)} className="p-1 rounded-lg hover:bg-[#f1f5f9] text-[#64748b] cursor-pointer">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="bg-[#f8fafc] rounded-2xl p-3 space-y-1.5 text-xs font-mono text-[#334155] border border-[#e2e8f0]">
+              <div className="flex justify-between">
+                <span className="text-[#64748b]">{language === 'fr' ? 'Carte active :' : 'Active map:'}</span>
+                <strong>{language === 'fr' ? 'Besoin Réel ASC (< 5 km FOSA)' : 'Real CHW Need (< 5 km HF)'}</strong>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#64748b]">{language === 'fr' ? 'Résolution :' : 'Resolution:'}</span>
+                <strong className="text-[#0284c7]">A4 — 300 DPI ({exportOrientation === 'portrait' ? '2480 x 3508 px' : '3508 x 2480 px'})</strong>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs font-mono text-[#475569]">{language === 'fr' ? 'Orientation :' : 'Orientation:'}</p>
+              <div className="grid grid-cols-2 gap-2">
+                <button type="button" onClick={() => setExportOrientation('portrait')}
+                  className={`py-2 px-3 rounded-xl border flex flex-col items-center gap-1 transition-all cursor-pointer ${exportOrientation === 'portrait' ? 'border-[#006948] bg-[#f0fdf4] text-[#006948] font-bold shadow-xs' : 'border-[#cbd5e1] bg-white text-[#475569] hover:bg-[#f8fafc]'}`}>
+                  <div className="w-5 h-7 border-2 rounded-sm border-current" />
+                  <span className="text-[10px] font-mono">{language === 'fr' ? 'Portrait' : 'Portrait'}</span>
+                </button>
+                <button type="button" onClick={() => setExportOrientation('landscape')}
+                  className={`py-2 px-3 rounded-xl border flex flex-col items-center gap-1 transition-all cursor-pointer ${exportOrientation === 'landscape' ? 'border-[#006948] bg-[#f0fdf4] text-[#006948] font-bold shadow-xs' : 'border-[#cbd5e1] bg-white text-[#475569] hover:bg-[#f8fafc]'}`}>
+                  <div className="w-7 h-5 border-2 rounded-sm border-current" />
+                  <span className="text-[10px] font-mono">{language === 'fr' ? 'Paysage' : 'Landscape'}</span>
+                </button>
+              </div>
+            </div>
+            <div className="flex gap-2 pt-1">
+              <button type="button" onClick={() => setShowExportModal(false)}
+                className="flex-1 py-2.5 px-4 bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#475569] font-mono font-bold text-xs rounded-xl transition-all cursor-pointer">
+                {language === 'fr' ? 'Annuler' : 'Cancel'}
+              </button>
+              <button type="button" onClick={() => { setShowExportModal(false); handleExportMap(exportOrientation); }}
+                className="flex-1 py-2.5 px-4 bg-[#006948] hover:bg-[#005238] text-white font-mono font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer">
+                <Download className="w-3.5 h-3.5" />
+                {language === 'fr' ? 'Générer PNG A4' : 'Generate A4 PNG'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Indicateur de progression export */}
+      {isExporting && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl border border-[#cbd5e1] max-w-sm w-full p-5 space-y-3 font-sans text-center animate-in fade-in zoom-in-95 duration-150">
+            <div className="w-10 h-10 mx-auto rounded-2xl bg-[#006948]/10 text-[#006948] flex items-center justify-center">
+              <Download className="w-5 h-5 animate-pulse" />
+            </div>
+            <h3 className="font-bold text-sm text-[#0f172a]">
+              {language === 'fr' ? "Génération de l'export cartographique" : 'Generating map export'}
+            </h3>
+            <div className="w-full bg-[#f1f5f9] rounded-full h-2.5 overflow-hidden">
+              <div className="bg-[#006948] h-2.5 rounded-full transition-all duration-300" style={{ width: `${exportProgress}%` }} />
+            </div>
+            <p className="text-[11px] font-mono text-[#64748b]">{exportStatus}</p>
+            <p className="text-[10px] font-mono text-[#94a3b8]">{exportProgress}% — A4 300 DPI</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

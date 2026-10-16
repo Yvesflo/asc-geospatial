@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { 
-  Activity, 
+import {
+  Activity,
   ChevronLeft,
   ChevronRight,
   Building2,
@@ -13,8 +13,7 @@ import {
   Layers,
   ShieldCheck,
   BarChart3,
-  UserMinus,
-  Percent
+  BookOpen
 } from 'lucide-react';
 import { ActiveModule, Language, SubdivisionLevel, BasemapType, CoverageMapType } from '../types';
 import { TRANSLATIONS } from '../data/mockGisData';
@@ -26,18 +25,18 @@ interface SidebarProps {
   language: Language;
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
-  l3Level?: SubdivisionLevel;
-  setL3Level?: (level: SubdivisionLevel) => void;
-  l3Basemap?: BasemapType;
-  setL3Basemap?: (bm: BasemapType) => void;
-  l3ThematicOpacity?: number;
-  setL3ThematicOpacity?: (val: number) => void;
-  l3IsThematicVisible?: boolean;
-  setL3IsThematicVisible?: (vis: boolean) => void;
-  l3RasterOpacity?: number;
-  setL3RasterOpacity?: (val: number) => void;
-  l3IsRasterVisible?: boolean;
-  setL3IsRasterVisible?: (vis: boolean) => void;
+  ciblageLevel?: SubdivisionLevel;
+  setCiblageLevel?: (level: SubdivisionLevel) => void;
+  ciblageBasemap?: BasemapType;
+  setCiblageBasemap?: (bm: BasemapType) => void;
+  ciblageThematicOpacity?: number;
+  setCiblageThematicOpacity?: (val: number) => void;
+  ciblageIsThematicVisible?: boolean;
+  setCiblageIsThematicVisible?: (vis: boolean) => void;
+  ciblageRasterOpacity?: number;
+  setCiblageRasterOpacity?: (val: number) => void;
+  ciblageIsRasterVisible?: boolean;
+  setCiblageIsRasterVisible?: (vis: boolean) => void;
   coverageActiveMap?: CoverageMapType;
   onCoverageActiveMapChange?: (map: CoverageMapType) => void;
   coverageCategoryField?: string;
@@ -50,39 +49,37 @@ export const Sidebar: React.FC<SidebarProps> = ({
   language,
   collapsed,
   setCollapsed,
-  l3Level = 'regions',
-  setL3Level,
-  l3ThematicOpacity = 0.85,
-  setL3ThematicOpacity,
-  l3IsThematicVisible = true,
-  setL3IsThematicVisible,
-  l3RasterOpacity = 0.85,
-  setL3RasterOpacity,
-  l3IsRasterVisible = true,
-  setL3IsRasterVisible,
+  ciblageLevel = 'regions',
+  setCiblageLevel,
+  ciblageThematicOpacity = 0.85,
+  setCiblageThematicOpacity,
+  ciblageIsThematicVisible = true,
+  setCiblageIsThematicVisible,
+  ciblageRasterOpacity = 0.85,
+  setCiblageRasterOpacity,
+  ciblageIsRasterVisible = true,
+  setCiblageIsRasterVisible,
   coverageActiveMap = 'map-1',
   onCoverageActiveMapChange,
   coverageCategoryField = COVERAGE_CONFIG.FIELDS.EFF_TOT_A,
   onCoverageCategoryFieldChange,
 }) => {
   const t = TRANSLATIONS[language];
-  const [l3Category, setL3Category] = useState<'sanitary' | 'administrative' | 'all'>('sanitary');
+  const isFr = language === 'fr';
+  const [ciblageCategory, setCiblageCategory] = useState<'sanitary' | 'administrative' | 'all'>('sanitary');
 
-  // Les 2 modules cartographiques actifs (Couverture en premier, puis L3)
   const navItems = [
     {
       id: 'couverture-asc' as ActiveModule,
       label: t.navCouvertureAsc,
       description: t.navCouvertureAscDesc,
       icon: Users,
-      badge: '5 Cartes & Ratios',
     },
     {
-      id: 'livrable-3' as ActiveModule,
-      label: t.navLivrable3,
-      description: t.navLivrable3Desc,
+      id: 'ciblage-asc' as ActiveModule,
+      label: t.navCiblageAsc,
+      description: t.navCiblageAscDesc,
       icon: Activity,
-      badge: 'AccessMod 5 km',
     },
   ];
 
@@ -104,22 +101,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="text-[#6d7a72] hover:text-[#0f172a] p-1.5 rounded-lg hover:bg-white transition-colors ml-auto shadow-xs border border-transparent hover:border-[#cbd5e1] cursor-pointer"
-            title={collapsed ? 'Développer le menu' : 'Réduire le menu'}
+            title={isFr ? (collapsed ? 'Développer le menu' : 'Réduire le menu') : (collapsed ? 'Expand menu' : 'Collapse menu')}
             type="button"
           >
             {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
           </button>
         </div>
 
-        {/* Deliverable Module Navigation Pills */}
-        <nav className="p-2 space-y-1.5 border-b border-[#bccac0]/20">
+        {/* Module Navigation */}
+        <nav data-tour="sidebar-nav" className="p-2 space-y-1.5 border-b border-[#bccac0]/20">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeModule === item.id;
-
             return (
               <button
                 key={item.id}
+                data-tour={item.id === 'ciblage-asc' ? 'ciblage-tab' : item.id === 'couverture-asc' ? 'couverture-tab' : undefined}
                 onClick={() => setActiveModule(item.id)}
                 className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all cursor-pointer ${
                   isActive
@@ -129,33 +126,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 title={collapsed ? `${item.label} • ${item.description}` : undefined}
                 type="button"
               >
-                <Icon
-                  className={`w-4 h-4 shrink-0 ${
-                    isActive ? 'text-white' : 'text-[#006948]'
-                  }`}
-                />
+                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-[#006948]'}`} />
                 {!collapsed && (
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-1">
-                      <span className="text-xs truncate font-bold">{item.label}</span>
-                      {item.badge && (
-                        <span
-                          className={`text-[9px] font-mono px-1.5 py-0.5 rounded-md font-semibold shrink-0 ${
-                            isActive
-                              ? 'bg-white/20 text-white'
-                              : 'bg-[#f1f5f9] text-[#475569] border border-[#cbd5e1]'
-                          }`}
-                        >
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
+                    <span className="text-xs font-bold block truncate leading-snug">{item.label}</span>
                     {item.description && (
-                      <span
-                        className={`text-[10px] block truncate font-mono mt-0.5 ${
-                          isActive ? 'text-white/80' : 'text-[#64748b]'
-                        }`}
-                      >
+                      <span className={`text-[10px] block truncate font-mono mt-0.5 ${isActive ? 'text-white/80' : 'text-[#64748b]'}`}>
                         {item.description}
                       </span>
                     )}
@@ -166,165 +142,165 @@ export const Sidebar: React.FC<SidebarProps> = ({
           })}
         </nav>
 
-        {/* Dynamic Controls & Filters (Visible when not collapsed) */}
+        {/* Dynamic Controls */}
         {!collapsed && (
           <div className="p-3 space-y-4">
-            {/* 1. Niveau de Désagrégation Territoriale */}
-            <div className="bg-[#f8fafc] border border-[#cbd5e1]/70 rounded-2xl p-3 space-y-3">
+            {/* 1. Territorial Disaggregation */}
+            <div data-tour="level-selector" className="bg-[#f8fafc] border border-[#cbd5e1]/70 rounded-2xl p-3 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] uppercase font-bold text-[#475569] flex items-center gap-1.5">
                   <Filter className="w-3.5 h-3.5 text-[#006948]" />
-                  <span>Désagrégation Territoriale</span>
+                  <span>{t.territorialDisagg}</span>
                 </span>
               </div>
 
-              {/* Niveau Pivot / Socle Commun : Régions (10) */}
+              {/* Regions pivot */}
               <div>
                 <button
-                  onClick={() => setL3Level && setL3Level('regions')}
+                  onClick={() => setCiblageLevel && setCiblageLevel('regions')}
                   className={`w-full py-2 px-2.5 rounded-xl text-left font-semibold transition-all flex items-center justify-between cursor-pointer ${
-                    l3Level === 'regions'
+                    ciblageLevel === 'regions'
                       ? 'bg-[#006948] text-white shadow-xs'
                       : 'bg-white hover:bg-[#f1f5f9] text-[#1e293b] border border-[#cbd5e1]'
                   }`}
                   type="button"
                 >
                   <div className="flex items-center gap-2">
-                    <Globe2 className={`w-4 h-4 shrink-0 ${l3Level === 'regions' ? 'text-white' : 'text-[#006948]'}`} />
+                    <Globe2 className={`w-4 h-4 shrink-0 ${ciblageLevel === 'regions' ? 'text-white' : 'text-[#006948]'}`} />
                     <div>
-                      <span className="text-xs font-bold block">Régions (10)</span>
-                      <span className={`text-[10px] font-mono block ${l3Level === 'regions' ? 'text-white/80' : 'text-[#64748b]'}`}>
-                        Socle national commun
+                      <span className="text-xs font-bold block">{t.regions10}</span>
+                      <span className={`text-[10px] font-mono block ${ciblageLevel === 'regions' ? 'text-white/80' : 'text-[#64748b]'}`}>
+                        {t.nationalBase}
                       </span>
                     </div>
                   </div>
-                  {l3Level === 'regions' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
+                  {ciblageLevel === 'regions' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
                 </button>
               </div>
 
-              {/* Catégories de Découpage : Administratif & Sanitaire */}
+              {/* Category toggle */}
               <div className="space-y-2 pt-1 border-t border-[#e2e8f0]">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-mono uppercase font-bold text-[#64748b]">
-                    Catégories de découpage
+                    {t.subdivCategories}
                   </span>
                   <div className="flex gap-1 text-[10px] font-mono">
                     <button
                       type="button"
-                      onClick={() => setL3Category('all')}
+                      onClick={() => setCiblageCategory('all')}
                       className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
-                        l3Category === 'all'
+                        ciblageCategory === 'all'
                           ? 'bg-[#0f172a] text-white font-bold'
                           : 'text-[#64748b] hover:text-[#0f172a] hover:bg-[#e2e8f0]'
                       }`}
-                      title="Afficher toutes les catégories"
+                      title={isFr ? 'Afficher toutes les catégories' : 'Show all categories'}
                     >
-                      Tous
+                      {t.all}
                     </button>
                   </div>
                 </div>
 
-                {/* Toggle Pills Administratif vs Sanitaire */}
+                {/* Admin / Health pills */}
                 <div className="grid grid-cols-2 gap-1 bg-[#f1f5f9] p-1 rounded-xl text-xs font-mono border border-[#cbd5e1]/60">
                   <button
                     type="button"
                     onClick={() => {
-                      setL3Category('administrative');
-                      if (l3Level === 'districts_sante' || l3Level === 'aires_sante') {
-                        setL3Level && setL3Level('departements');
+                      setCiblageCategory('administrative');
+                      if (ciblageLevel === 'districts_sante' || ciblageLevel === 'aires_sante') {
+                        setCiblageLevel && setCiblageLevel('departements');
                       }
                     }}
                     className={`py-1.5 px-2 rounded-lg font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                      l3Category === 'administrative' || (l3Category !== 'all' && (l3Level === 'departements' || l3Level === 'arrondissements'))
+                      ciblageCategory === 'administrative' || (ciblageCategory !== 'all' && (ciblageLevel === 'departements' || ciblageLevel === 'arrondissements'))
                         ? 'bg-[#006948] text-white shadow-xs'
                         : 'text-[#475569] hover:text-[#0f172a]'
                     }`}
                   >
                     <Building2 className="w-3.5 h-3.5" />
-                    <span>Administratif</span>
+                    <span>{t.administrative}</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => {
-                      setL3Category('sanitary');
-                      if (l3Level === 'departements' || l3Level === 'arrondissements') {
-                        setL3Level && setL3Level('districts_sante');
+                      setCiblageCategory('sanitary');
+                      if (ciblageLevel === 'departements' || ciblageLevel === 'arrondissements') {
+                        setCiblageLevel && setCiblageLevel('districts_sante');
                       }
                     }}
                     className={`py-1.5 px-2 rounded-lg font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                      l3Category === 'sanitary' || (l3Category !== 'all' && (l3Level === 'districts_sante' || l3Level === 'aires_sante'))
+                      ciblageCategory === 'sanitary' || (ciblageCategory !== 'all' && (ciblageLevel === 'districts_sante' || ciblageLevel === 'aires_sante'))
                         ? 'bg-[#006948] text-white shadow-xs'
                         : 'text-[#475569] hover:text-[#0f172a]'
                     }`}
                   >
                     <Activity className="w-3.5 h-3.5" />
-                    <span>Sanitaire</span>
+                    <span>{t.sanitary}</span>
                   </button>
                 </div>
 
-                {/* Liste des Niveaux selon Catégorie */}
+                {/* Level list */}
                 <div className="space-y-2 pt-1 font-mono text-xs">
-                  {/* Branche Découpage Administratif */}
-                  {(l3Category === 'administrative' || l3Category === 'all' || l3Level === 'departements' || l3Level === 'arrondissements') && (
+                  {/* Administrative branch */}
+                  {(ciblageCategory === 'administrative' || ciblageCategory === 'all' || ciblageLevel === 'departements' || ciblageLevel === 'arrondissements') && (
                     <div className="space-y-1">
-                      {l3Category === 'all' && (
+                      {ciblageCategory === 'all' && (
                         <span className="text-[10px] font-bold text-[#475569] flex items-center gap-1 px-1">
                           <Building2 className="w-3 h-3 text-[#64748b]" />
-                          <span>Découpage Administratif</span>
+                          <span>{t.adminSubdiv}</span>
                         </span>
                       )}
                       <div className="grid grid-cols-1 gap-1">
                         {[
-                          { id: 'departements' as SubdivisionLevel, label: 'Départements (58)' },
+                          { id: 'departements' as SubdivisionLevel, label: t.departments58 },
                           ...((activeModule !== 'couverture-asc' || COVERAGE_CONFIG.ENABLE_ARRONDISSEMENTS)
-                            ? [{ id: 'arrondissements' as SubdivisionLevel, label: 'Arrondissements (360)' }]
+                            ? [{ id: 'arrondissements' as SubdivisionLevel, label: t.arrondissements360 }]
                             : []),
                         ].map((lvl) => (
                           <button
                             key={lvl.id}
-                            onClick={() => setL3Level && setL3Level(lvl.id)}
+                            onClick={() => setCiblageLevel && setCiblageLevel(lvl.id)}
                             className={`w-full py-1.5 px-2.5 rounded-xl text-left font-semibold transition-all flex items-center justify-between cursor-pointer ${
-                              l3Level === lvl.id
+                              ciblageLevel === lvl.id
                                 ? 'bg-[#006948] text-white shadow-xs'
                                 : 'bg-white hover:bg-[#f1f5f9] text-[#334155] border border-[#e2e8f0]'
                             }`}
                             type="button"
                           >
                             <span className="text-xs">{lvl.label}</span>
-                            {l3Level === lvl.id && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>}
+                            {ciblageLevel === lvl.id && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>}
                           </button>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* Branche Découpage Sanitaire */}
-                  {(l3Category === 'sanitary' || l3Category === 'all' || l3Level === 'districts_sante' || l3Level === 'aires_sante') && (
+                  {/* Health branch */}
+                  {(ciblageCategory === 'sanitary' || ciblageCategory === 'all' || ciblageLevel === 'districts_sante' || ciblageLevel === 'aires_sante') && (
                     <div className="space-y-1">
-                      {l3Category === 'all' && (
+                      {ciblageCategory === 'all' && (
                         <span className="text-[10px] font-bold text-[#006948] flex items-center gap-1 px-1 pt-1 border-t border-[#e2e8f0]">
                           <Activity className="w-3 h-3 text-[#006948]" />
-                          <span>Découpage Sanitaire</span>
+                          <span>{t.sanitarySubdiv}</span>
                         </span>
                       )}
                       <div className="grid grid-cols-1 gap-1">
                         {[
-                          { id: 'districts_sante' as SubdivisionLevel, label: 'Districts de Santé (211)' },
-                          { id: 'aires_sante' as SubdivisionLevel, label: 'Aires de Santé (1 922)' },
+                          { id: 'districts_sante' as SubdivisionLevel, label: t.districtsSante211 },
+                          { id: 'aires_sante' as SubdivisionLevel, label: t.airesSante1922 },
                         ].map((lvl) => (
                           <button
                             key={lvl.id}
-                            onClick={() => setL3Level && setL3Level(lvl.id)}
+                            onClick={() => setCiblageLevel && setCiblageLevel(lvl.id)}
                             className={`w-full py-1.5 px-2.5 rounded-xl text-left font-semibold transition-all flex items-center justify-between cursor-pointer ${
-                              l3Level === lvl.id
+                              ciblageLevel === lvl.id
                                 ? 'bg-[#006948] text-white shadow-xs'
                                 : 'bg-white hover:bg-[#f1f5f9] text-[#334155] border border-[#e2e8f0]'
                             }`}
                             type="button"
                           >
                             <span className="text-xs">{lvl.label}</span>
-                            {l3Level === lvl.id && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>}
+                            {ciblageLevel === lvl.id && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>}
                           </button>
                         ))}
                       </div>
@@ -334,86 +310,81 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             </div>
 
-            {/* 2. Réglages des Couches & Opacités (Spécifique Livrable 3) */}
-            {activeModule === 'livrable-3' && (
-              <div className="bg-[#f8fafc] border border-[#cbd5e1]/70 rounded-2xl p-3 space-y-3">
+            {/* 2. Layer settings (Livrable 3 only) */}
+            {activeModule === 'ciblage-asc' && (
+              <div data-tour="ciblage-layer-controls" className="bg-[#f8fafc] border border-[#cbd5e1]/70 rounded-2xl p-3 space-y-3">
                 <div className="flex items-center justify-between pb-1.5 border-b border-[#e2e8f0]">
                   <span className="font-mono text-[10px] uppercase font-bold text-[#0f172a] flex items-center gap-1.5">
                     <Sliders className="w-3.5 h-3.5 text-[#006948]" />
-                    <span>Réglage des Couches</span>
+                    <span>{t.layerSettings}</span>
                   </span>
                   <span className="text-[9px] font-mono font-bold bg-[#e0f2fe] text-[#0369a1] px-1.5 py-0.5 rounded">
-                    Transparence
+                    {t.transparency}
                   </span>
                 </div>
 
-                {/* Contrôle Carte Thématique */}
+                {/* Thematic layer */}
                 <div className="bg-white p-2.5 rounded-xl border border-[#e2e8f0] space-y-2 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-[#0f172a]">
-                      1. Carte Thématique (% Pop)
-                    </span>
+                    <span className="font-bold text-xs text-[#0f172a]">{t.thematicMapLayer}</span>
                     <button
                       type="button"
-                      onClick={() => setL3IsThematicVisible && setL3IsThematicVisible(!l3IsThematicVisible)}
+                      onClick={() => setCiblageIsThematicVisible && setCiblageIsThematicVisible(!ciblageIsThematicVisible)}
                       className={`p-1 rounded-lg transition-colors cursor-pointer ${
-                        l3IsThematicVisible ? 'text-[#006948] bg-[#f0fdf4]' : 'text-[#94a3b8] bg-[#f1f5f9]'
+                        ciblageIsThematicVisible ? 'text-[#006948] bg-[#f0fdf4]' : 'text-[#94a3b8] bg-[#f1f5f9]'
                       }`}
-                      title={l3IsThematicVisible ? "Masquer la couche" : "Afficher la couche"}
+                      title={ciblageIsThematicVisible ? t.hideLayer : t.showLayer}
                     >
-                      {l3IsThematicVisible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                      {ciblageIsThematicVisible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                     </button>
                   </div>
-
                   <div className="space-y-1">
                     <div className="flex items-center justify-between text-[10px] font-mono text-[#64748b]">
-                      <span>Opacité :</span>
-                      <span className="font-bold text-[#0f172a]">{Math.round(l3ThematicOpacity * 100)}%</span>
+                      <span>{t.opacity}</span>
+                      <span className="font-bold text-[#0f172a]">{Math.round(ciblageThematicOpacity * 100)}%</span>
                     </div>
                     <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.05"
-                      value={l3ThematicOpacity}
-                      disabled={!l3IsThematicVisible}
-                      onChange={(e) => setL3ThematicOpacity && setL3ThematicOpacity(parseFloat(e.target.value))}
+                      type="range" min="0" max="1" step="0.05"
+                      value={ciblageThematicOpacity}
+                      disabled={!ciblageIsThematicVisible}
+                      onChange={(e) => setCiblageThematicOpacity && setCiblageThematicOpacity(parseFloat(e.target.value))}
                       className="w-full h-1.5 bg-[#e2e8f0] rounded-lg appearance-none cursor-pointer accent-[#006948]"
                     />
                   </div>
                 </div>
 
-                {/* Contrôle Raster Population Non Couverte */}
+                {/* Raster layer */}
                 <div className="bg-white p-2.5 rounded-xl border border-[#fecdd3]/80 space-y-2 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-[#be123c]">
-                      2. Raster Pop. Non Couverte
+                    <span
+                      className="font-bold text-xs text-[#be123c] leading-tight"
+                      title={isFr
+                        ? 'Distribution de la population non couverte / Grid distribution of uncovered population > 5 km de toute FOSA'
+                        : 'Grid distribution of uncovered population > 5 km from any health facility'}
+                    >
+                      {isFr ? '2. Distribution Pop. Non Couverte' : '2. Uncovered Pop. Grid'}
                     </span>
                     <button
                       type="button"
-                      onClick={() => setL3IsRasterVisible && setL3IsRasterVisible(!l3IsRasterVisible)}
+                      onClick={() => setCiblageIsRasterVisible && setCiblageIsRasterVisible(!ciblageIsRasterVisible)}
                       className={`p-1 rounded-lg transition-colors cursor-pointer ${
-                        l3IsRasterVisible ? 'text-[#e11d48] bg-[#fff1f2]' : 'text-[#94a3b8] bg-[#f1f5f9]'
+                        ciblageIsRasterVisible ? 'text-[#e11d48] bg-[#fff1f2]' : 'text-[#94a3b8] bg-[#f1f5f9]'
                       }`}
-                      title={l3IsRasterVisible ? "Masquer le raster" : "Afficher le raster"}
+                      title={ciblageIsRasterVisible ? t.hideRaster : t.showRaster}
                     >
-                      {l3IsRasterVisible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                      {ciblageIsRasterVisible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                     </button>
                   </div>
-
                   <div className="space-y-1">
                     <div className="flex items-center justify-between text-[10px] font-mono text-[#64748b]">
-                      <span>Opacité :</span>
-                      <span className="font-bold text-[#be123c]">{Math.round(l3RasterOpacity * 100)}%</span>
+                      <span>{t.opacity}</span>
+                      <span className="font-bold text-[#be123c]">{Math.round(ciblageRasterOpacity * 100)}%</span>
                     </div>
                     <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.05"
-                      value={l3RasterOpacity}
-                      disabled={!l3IsRasterVisible}
-                      onChange={(e) => setL3RasterOpacity && setL3RasterOpacity(parseFloat(e.target.value))}
+                      type="range" min="0" max="1" step="0.05"
+                      value={ciblageRasterOpacity}
+                      disabled={!ciblageIsRasterVisible}
+                      onChange={(e) => setCiblageRasterOpacity && setCiblageRasterOpacity(parseFloat(e.target.value))}
                       className="w-full h-1.5 bg-[#e2e8f0] rounded-lg appearance-none cursor-pointer accent-[#e11d48]"
                     />
                   </div>
@@ -421,27 +392,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             )}
 
-            {/* 2. Indicateurs & Cartes (Spécifique Couverture en ASC : Catégorisés en Symboles Proportionnels et Choroplèthes) */}
+            {/* 3. Indicators & Maps (Coverage module only) */}
             {activeModule === 'couverture-asc' && (
-              <div className="bg-[#f8fafc] border border-[#cbd5e1]/70 rounded-2xl p-3 space-y-3">
+              <div data-tour="map-selector" className="bg-[#f8fafc] border border-[#cbd5e1]/70 rounded-2xl p-3 space-y-3">
                 <div className="flex items-center justify-between pb-1.5 border-b border-[#e2e8f0]">
                   <span className="font-mono text-[10px] uppercase font-bold text-[#0f172a] flex items-center gap-1.5">
                     <Layers className="w-3.5 h-3.5 text-[#006948]" />
-                    <span>Indicateurs & Cartes</span>
+                    <span>{t.indicatorsMaps}</span>
                   </span>
                   <span className="text-[9px] font-mono font-bold bg-[#ecfdf5] text-[#006948] px-1.5 py-0.5 rounded border border-[#a7f3d0]">
-                    5 Cartes
+                    {t.maps5}
                   </span>
                 </div>
 
-                {/* Catégorie 1 : Symboles Proportionnels (Effectifs bruts & Volumes) */}
-                <div className="space-y-1.5">
+                {/* Proportional symbols category */}
+                <div data-tour="coverage-proportional" className="space-y-1.5">
                   <div className="text-[10px] font-mono uppercase font-bold text-[#0284c7] flex items-center gap-1.5 px-1">
                     <span className="w-2 h-2 rounded-full bg-[#0284c7]"></span>
-                    <span>Symboles Proportionnels</span>
+                    <span>{t.propSymbols}</span>
                   </div>
 
-                  {/* Carte 1 : Effectifs d'ASC Actifs */}
+                  {/* Map 1 */}
                   <div className="space-y-1">
                     <button
                       type="button"
@@ -455,20 +426,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       <div className="flex items-center gap-2 min-w-0">
                         <Users className={`w-3.5 h-3.5 shrink-0 ${coverageActiveMap === 'map-1' ? 'text-white' : 'text-[#0284c7]'}`} />
                         <div className="truncate">
-                          <span className="text-xs font-bold block truncate">1. Effectifs d'ASC Actifs</span>
+                          <span className="text-xs font-bold block truncate">{t.map1Label}</span>
                           <span className={`text-[10px] font-mono block truncate ${coverageActiveMap === 'map-1' ? 'text-white/80' : 'text-[#64748b]'}`}>
-                            {COVERAGE_CONFIG.ASC_CATEGORIES.find(c => c.field === coverageCategoryField)?.shortLabel || 'Total actifs'}
+                            {isFr
+                              ? (COVERAGE_CONFIG.ASC_CATEGORIES.find(c => c.field === coverageCategoryField)?.shortLabel || 'Total actifs')
+                              : (COVERAGE_CONFIG.ASC_CATEGORIES.find(c => c.field === coverageCategoryField)?.shortLabelEn || 'Total active')}
                           </span>
                         </div>
                       </div>
                       {coverageActiveMap === 'map-1' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
                     </button>
 
-                    {/* Déroulé des sous-catégories lorsque Carte 1 est active */}
                     {coverageActiveMap === 'map-1' && (
                       <div className="pt-1 pb-1 space-y-1 bg-white rounded-xl p-1.5 border border-[#cbd5e1]">
                         <span className="text-[9px] font-mono font-bold text-[#64748b] block px-1">
-                          Catégorie d'effectif :
+                          {t.effCategory}
                         </span>
                         <div className="grid grid-cols-1 gap-0.5">
                           {COVERAGE_CONFIG.ASC_CATEGORIES.map((cat) => {
@@ -485,11 +457,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                                 }`}
                               >
                                 <div className="flex items-center gap-1.5 truncate">
-                                  <span
-                                    className="w-2 h-2 rounded-full shrink-0"
-                                    style={{ backgroundColor: cat.color }}
-                                  />
-                                  <span className="truncate">{cat.shortLabel}</span>
+                                  <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: cat.color }} />
+                                  <span className="truncate">{isFr ? cat.shortLabel : cat.shortLabelEn}</span>
                                 </div>
                                 {isCatActive && <span className="text-[10px] font-bold text-[#006948]">✓</span>}
                               </button>
@@ -500,37 +469,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     )}
                   </div>
 
-                  {/* Carte 3a : ASC inactifs à remplacer */}
-                  <button
-                    type="button"
-                    onClick={() => onCoverageActiveMapChange && onCoverageActiveMapChange('map-3a')}
-                    className={`w-full py-2 px-2.5 rounded-xl text-left font-semibold transition-all flex items-center justify-between cursor-pointer ${
-                      coverageActiveMap === 'map-3a'
-                        ? 'bg-[#006948] text-white shadow-xs'
-                        : 'bg-white hover:bg-[#f1f5f9] text-[#1e293b] border border-[#cbd5e1]'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <UserMinus className={`w-3.5 h-3.5 shrink-0 ${coverageActiveMap === 'map-3a' ? 'text-white' : 'text-[#ea580c]'}`} />
-                      <div className="truncate">
-                        <span className="text-xs font-bold block truncate">3a. Inactifs à Remplacer</span>
-                        <span className={`text-[10px] font-mono block truncate ${coverageActiveMap === 'map-3a' ? 'text-white/80' : 'text-[#64748b]'}`}>
-                          Volume d'inactifs (besoin)
-                        </span>
-                      </div>
-                    </div>
-                    {coverageActiveMap === 'map-3a' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
-                  </button>
                 </div>
 
-                {/* Catégorie 2 : Cartes Choroplèthes (Taux, Couverture & Ratios) */}
-                <div className="space-y-1.5 pt-2 border-t border-[#e2e8f0]">
+                {/* Choropleth category */}
+                <div data-tour="coverage-choropleth" className="space-y-1.5 pt-2 border-t border-[#e2e8f0]">
                   <div className="text-[10px] font-mono uppercase font-bold text-[#059669] flex items-center gap-1.5 px-1">
                     <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
-                    <span>Cartes Choroplèthes</span>
+                    <span>{t.choroMaps}</span>
                   </div>
 
-                  {/* Carte 2a : Couverture normative ASCp */}
+                  {/* Map 2a */}
                   <button
                     type="button"
                     onClick={() => onCoverageActiveMapChange && onCoverageActiveMapChange('map-2a')}
@@ -543,16 +491,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     <div className="flex items-center gap-2 min-w-0">
                       <ShieldCheck className={`w-3.5 h-3.5 shrink-0 ${coverageActiveMap === 'map-2a' ? 'text-white' : 'text-[#16a34a]'}`} />
                       <div className="truncate">
-                        <span className="text-xs font-bold block truncate">2a. Couverture ASCp</span>
+                        <span className="text-xs font-bold block truncate">{t.map2aLabel}</span>
                         <span className={`text-[10px] font-mono block truncate ${coverageActiveMap === 'map-2a' ? 'text-white/80' : 'text-[#64748b]'}`}>
-                          Norme 1 ASCp / 1 000 hab.
+                          {t.map2aDesc}
                         </span>
                       </div>
                     </div>
                     {coverageActiveMap === 'map-2a' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
                   </button>
 
-                  {/* Carte 2b : Ratios toutes catégories */}
+                  {/* Map 2b */}
                   <button
                     type="button"
                     onClick={() => onCoverageActiveMapChange && onCoverageActiveMapChange('map-2b')}
@@ -565,36 +513,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     <div className="flex items-center gap-2 min-w-0">
                       <BarChart3 className={`w-3.5 h-3.5 shrink-0 ${coverageActiveMap === 'map-2b' ? 'text-white' : 'text-[#8b5cf6]'}`} />
                       <div className="truncate">
-                        <span className="text-xs font-bold block truncate">2b. Ratios Toutes Cat.</span>
+                        <span className="text-xs font-bold block truncate">{t.map2bLabel}</span>
                         <span className={`text-[10px] font-mono block truncate ${coverageActiveMap === 'map-2b' ? 'text-white/80' : 'text-[#64748b]'}`}>
-                          1 ASC pour X habitants
+                          {t.map2bDesc}
                         </span>
                       </div>
                     </div>
                     {coverageActiveMap === 'map-2b' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
                   </button>
 
-                  {/* Carte 3b : Part d'ASC inactifs (%) */}
-                  <button
-                    type="button"
-                    onClick={() => onCoverageActiveMapChange && onCoverageActiveMapChange('map-3b')}
-                    className={`w-full py-2 px-2.5 rounded-xl text-left font-semibold transition-all flex items-center justify-between cursor-pointer ${
-                      coverageActiveMap === 'map-3b'
-                        ? 'bg-[#006948] text-white shadow-xs'
-                        : 'bg-white hover:bg-[#f1f5f9] text-[#1e293b] border border-[#cbd5e1]'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <Percent className={`w-3.5 h-3.5 shrink-0 ${coverageActiveMap === 'map-3b' ? 'text-white' : 'text-[#dc2626]'}`} />
-                      <div className="truncate">
-                        <span className="text-xs font-bold block truncate">3b. Part d'Inactifs (%)</span>
-                        <span className={`text-[10px] font-mono block truncate ${coverageActiveMap === 'map-3b' ? 'text-white/80' : 'text-[#64748b]'}`}>
-                          Taux de déperdition
-                        </span>
-                      </div>
-                    </div>
-                    {coverageActiveMap === 'map-3b' && <span className="w-2 h-2 rounded-full bg-white shrink-0"></span>}
-                  </button>
                 </div>
               </div>
             )}
@@ -602,11 +529,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* Footer Info / Versioning */}
+      {/* Footer */}
       {!collapsed && (
-        <div className="p-3 border-t border-[#bccac0]/20 bg-[#f8fafc] text-[10px] font-mono text-[#64748b] flex items-center justify-between">
-          <span>MINSANTE • DOSTS</span>
-          <span className="text-[#006948] font-bold">WGS 84 / UTM 32N</span>
+        <div className="p-3 border-t border-[#bccac0]/20 bg-[#f8fafc] text-[10px] font-mono text-[#64748b] space-y-2">
+          <div className="flex items-center justify-between">
+            <span>MINSANTE • DOSTS</span>
+            <span className="text-[#006948] font-bold">WGS 84 / UTM 32N</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.removeItem('sig_asc_tour_v1_completed');
+              window.location.reload();
+            }}
+            className="w-full flex items-center justify-center gap-1.5 text-[10px] font-mono text-[#64748b] hover:text-[#006948] py-1 rounded-lg hover:bg-white transition-colors border border-transparent hover:border-[#bccac0]/40 cursor-pointer"
+            title={isFr ? 'Relancer le tour guidé de la plateforme' : 'Restart the platform guided tour'}
+          >
+            <BookOpen className="w-3 h-3" />
+            {isFr ? 'Revoir le tour de la plateforme' : 'Replay the platform tour'}
+          </button>
         </div>
       )}
     </aside>

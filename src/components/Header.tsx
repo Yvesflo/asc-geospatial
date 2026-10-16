@@ -67,6 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Bouton Unique Officiel d'Exportation Cartographique (A4 300 DPI) */}
         <button
+          data-tour="export-btn"
           onClick={() => {
             if (onExportMap) {
               onExportMap();
@@ -78,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
               : 'border-[#cbd5e1] bg-white hover:bg-[#f8fafc] text-[#0f172a]'
           }`}
           type="button"
-          title="Exporter la carte affichée en haute résolution A4 (300 DPI)"
+          title={language === 'fr' ? 'Exporter la carte affichée en haute résolution A4 (300 DPI)' : 'Export displayed map in high resolution A4 (300 DPI)'}
         >
           <Printer className={`w-4 h-4 ${activeModule === 'couverture-asc' ? 'text-white' : 'text-[#006948]'}`} />
           <span>{t.exportPrint}</span>

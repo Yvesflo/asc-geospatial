@@ -1598,7 +1598,320 @@ export async function exportSmallMultiplesPng(options: {
 }
 
 /**
- * 3. EXPORT DES DONNÉES (CSV UTF-8 AVEC BOM ET SÉPARATEUR POINT-VIRGULE)
+ * 3. EXPORTATION CARTE LIVRABLE 3 — Besoin Réel ASC (accès FOSA < 5 km)
+ * Choroplèthe par % population couverte. Format A4 300 DPI.
+ */
+export async function exportCiblageAscMapPng(options: {
+  level: SubdivisionLevel;
+  selectedRegion: string | null;
+  selectedSubdivision?: TerritorialFilter | null;
+  geoData: any;
+  basemap?: BasemapType;
+  orientation?: 'portrait' | 'landscape';
+  language?: 'fr' | 'en';
+  onProgress?: ExportProgressCallback;
+}): Promise<Blob> {
+  const {
+    level,
+    selectedRegion,
+    selectedSubdivision = null,
+    geoData,
+    basemap = 'hot',
+    orientation = 'portrait',
+    language = 'fr',
+    onProgress,
+  } = options;
+
+  onProgress?.(5, 'Initialisation du document A4 (300 DPI)...');
+  await new Promise((r) => setTimeout(r, 20));
+
+  const isPortrait = orientation === 'portrait';
+  const canvasWidth = isPortrait ? 2480 : 3508;
+  const canvasHeight = isPortrait ? 3508 : 2480;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+  const ctx = canvas.getContext('2d', { alpha: false });
+  if (!ctx) throw new Error('Impossible de créer le contexte 2D');
+
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+  onProgress?.(15, 'Calcul des coordonnées et du cadrage...');
+  await new Promise((r) => setTimeout(r, 20));
+
+  const allFeatures: any[] = geoData?.features || [];
+  const filteredFeatures = allFeatures.filter((f) =>
+    isFeatureInTerritorialFilter(f, selectedRegion, selectedSubdivision, level)
+  );
+
+  if (filteredFeatures.length === 0) {
+    throw new Error('Aucune entité trouvée pour le filtre sélectionné.');
+  }
+
+  const marginX = 90;
+  const headerH = 310;
+  const footerH = 140;
+  const mapFrameX = marginX;
+  const mapFrameY = headerH;
+  const mapFrameW = canvasWidth - marginX * 2;
+  const mapFrameH = canvasHeight - headerH - footerH;
+
+  const bounds = computeFeaturesProjectedBounds(filteredFeatures);
+  const bboxW = bounds.maxX - bounds.minX;
+  const bboxH = bounds.maxY - bounds.minY;
+
+  const innerPad = 60;
+  const availW = mapFrameW - innerPad * 2;
+  const availH = mapFrameH - innerPad * 2;
+  const scale = Math.min(availW / bboxW, availH / bboxH);
+  const renderedW = bboxW * scale;
+  const renderedH = bboxH * scale;
+
+  const offsetX = mapFrameX + innerPad + (availW - renderedW) / 2;
+  const offsetY = mapFrameY + innerPad + (availH - renderedH) / 2;
+
+  const toCanvasX = (px: number) => offsetX + (px - bounds.minX) * scale;
+  const toCanvasY = (py: number) => offsetY + (bounds.maxY - py) * scale;
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.fillRect(mapFrameX, mapFrameY, mapFrameW, mapFrameH);
+
+  onProgress?.(30, `Chargement du fond de carte (${basemap.toUpperCase()})...`);
+  await new Promise((r) => setTimeout(r, 20));
+
+  try {
+    await fetchAndRenderBasemapTiles(
+      ctx, basemap,
+      bounds.minLng, bounds.maxLng, bounds.minLat, bounds.maxLat,
+      mapFrameX, mapFrameY, mapFrameW, mapFrameH,
+      toCanvasX, toCanvasY
+    );
+  } catch (err) {
+    console.warn('Fond de carte indisponible, export sans fond:', err);
+  }
+
+  ctx.strokeStyle = '#64748b';
+  ctx.lineWidth = 2.5;
+  ctx.strokeRect(mapFrameX, mapFrameY, mapFrameW, mapFrameH);
+
+  const getColorForPct = (pct: number): string => {
+    if (pct >= 90) return '#006948';
+    if (pct >= 80) return '#22c55e';
+    if (pct >= 65) return '#eab308';
+    if (pct >= 50) return '#f97316';
+    return '#dc2626';
+  };
+
+  onProgress?.(55, 'Rendu des polygones thématiques...');
+  await new Promise((r) => setTimeout(r, 20));
+
+  filteredFeatures.forEach((feature) => {
+    const p = feature.properties || {};
+    const pct = typeof p.popCoveredPercent === 'number' ? p.popCoveredPercent : -1;
+    const fillColor = pct >= 0 ? getColorForPct(pct) : '#94a3b8';
+
+    ctx.save();
+    ctx.fillStyle = fillColor;
+    ctx.globalAlpha = 0.82;
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1.8;
+
+    const geom = feature.geometry;
+    if (geom?.type === 'Polygon') {
+      ctx.beginPath();
+      drawPolygonPath(ctx, geom.coordinates, toCanvasX, toCanvasY);
+      ctx.fill();
+      ctx.globalAlpha = 1.0;
+      ctx.stroke();
+    } else if (geom?.type === 'MultiPolygon') {
+      ctx.beginPath();
+      geom.coordinates.forEach((poly: any[]) => drawPolygonPath(ctx, poly, toCanvasX, toCanvasY));
+      ctx.fill();
+      ctx.globalAlpha = 1.0;
+      ctx.stroke();
+    }
+    ctx.restore();
+  });
+
+  onProgress?.(80, 'Flèche du nord et barre d\'échelle...');
+  await new Promise((r) => setTimeout(r, 20));
+
+  drawNorthArrow(ctx, mapFrameX + mapFrameW - 80, mapFrameY + 80, 80);
+
+  const kmPerLng = 111.32 * Math.cos((bounds.centerLat * Math.PI) / 180);
+  const pxPerLng = Math.abs(
+    toCanvasX(projectWebMercator(bounds.centerLng + 1, bounds.centerLat)[0]) -
+    toCanvasX(projectWebMercator(bounds.centerLng, bounds.centerLat)[0])
+  );
+  const pxPerKm = pxPerLng / kmPerLng;
+  let targetKm = 100;
+  if (selectedRegion) targetKm = 50;
+  if (level === 'aires_sante') targetKm = 20;
+  const scalePx = targetKm * pxPerKm;
+  drawScaleBar(ctx, mapFrameX + mapFrameW - scalePx - 40, mapFrameY + mapFrameH - 40, scalePx, targetKm);
+
+  onProgress?.(88, 'Mise en page de la légende...');
+  await new Promise((r) => setTimeout(r, 20));
+
+  const legendClasses = [
+    { color: '#006948', label: language === 'fr' ? '≥ 90 % — Excellente couverture' : '≥ 90% — Excellent coverage' },
+    { color: '#22c55e', label: language === 'fr' ? '80–89 % — Cible OMS atteinte' : '80–89% — WHO target met' },
+    { color: '#eab308', label: language === 'fr' ? '65–79 % — Déficit modéré' : '65–79% — Moderate gap' },
+    { color: '#f97316', label: language === 'fr' ? '50–64 % — Déficit élevé' : '50–64% — High deficit' },
+    { color: '#dc2626', label: language === 'fr' ? '< 50 % — Déficit critique' : '< 50% — Critical deficit' },
+    { color: '#94a3b8', label: language === 'fr' ? 'Données non disponibles' : 'Data not available' },
+  ];
+
+  const swatchW = 34;
+  const swatchH = 22;
+  ctx.save();
+  ctx.font = 'bold 15px sans-serif';
+  let maxLegW = ctx.measureText('LÉGENDE OFFICIELLE').width + 48;
+  legendClasses.forEach((c) => {
+    const w = ctx.measureText(c.label).width;
+    maxLegW = Math.max(maxLegW, 22 + swatchW + 16 + w + 24);
+  });
+  ctx.restore();
+
+  const legendW = Math.max(280, Math.ceil(maxLegW));
+  const legendH = 76 + legendClasses.length * 34 + 16;
+  const legX = mapFrameX + 35;
+  const legY = mapFrameY + mapFrameH - legendH - 35;
+
+  ctx.save();
+  ctx.fillStyle = 'rgba(255,255,255,0.94)';
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.roundRect(legX, legY, legendW, legendH, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#006948';
+  ctx.font = 'bold 20px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(language === 'fr' ? 'LÉGENDE OFFICIELLE' : 'OFFICIAL LEGEND', legX + 22, legY + 36);
+  ctx.strokeStyle = '#006948';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(legX + 22, legY + 46);
+  ctx.lineTo(legX + legendW - 22, legY + 46);
+  ctx.stroke();
+
+  let itemY = legY + 76;
+  legendClasses.forEach((c) => {
+    ctx.fillStyle = c.color;
+    ctx.fillRect(legX + 22, itemY - 16, swatchW, swatchH);
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 1.2;
+    ctx.strokeRect(legX + 22, itemY - 16, swatchW, swatchH);
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 15px sans-serif';
+    ctx.fillText(c.label, legX + 22 + swatchW + 16, itemY);
+    itemY += 34;
+  });
+  ctx.restore();
+
+  // Header institutionnel
+  const levelName: Record<SubdivisionLevel, string> = {
+    regions: language === 'fr' ? 'Régions' : 'Regions',
+    departements: language === 'fr' ? 'Départements' : 'Departments',
+    arrondissements: language === 'fr' ? 'Arrondissements' : 'Arrondissements',
+    districts_sante: language === 'fr' ? 'Districts de Santé' : 'Health Districts',
+    aires_sante: language === 'fr' ? 'Aires de Santé' : 'Health Areas',
+  };
+  const territoryStr = selectedSubdivision
+    ? (selectedSubdivision.type === 'district' ? `District : ${selectedSubdivision.name}` : `Département : ${selectedSubdivision.name}`)
+    : (selectedRegion ? `${language === 'fr' ? 'Région' : 'Region'} : ${selectedRegion}` : (language === 'fr' ? 'National (Cameroun)' : 'National (Cameroon)'));
+
+  ctx.save();
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillStyle = '#006948';
+  ctx.fillText(
+    language === 'fr'
+      ? 'RÉPUBLIQUE DU CAMEROUN • MINISTÈRE DE LA SANTÉ PUBLIQUE'
+      : 'REPUBLIC OF CAMEROON • MINISTRY OF PUBLIC HEALTH',
+    canvasWidth / 2, 75
+  );
+  ctx.font = 'bold 17px monospace';
+  ctx.fillStyle = '#475569';
+  ctx.fillText(
+    language === 'fr'
+      ? "DIRECTION DE L'ORGANISATION DES SOINS ET DE LA TECHNOLOGIE SANITAIRE (DOSTS)"
+      : 'DEPARTMENT OF HEALTH CARE ORGANIZATION & HEALTH TECHNOLOGY (DOSTS)',
+    canvasWidth / 2, 105
+  );
+  ctx.font = 'bold 36px sans-serif';
+  ctx.fillStyle = '#0f172a';
+  ctx.fillText(
+    language === 'fr'
+      ? 'Besoin Réel en ASC — Accès aux FOSA (< 5 km)'
+      : 'Real CHW Need — HF Access (< 5 km)',
+    canvasWidth / 2, 175
+  );
+  ctx.font = '21px sans-serif';
+  ctx.fillStyle = '#334155';
+  ctx.fillText(
+    `${language === 'fr' ? 'Découpage' : 'Level'} : ${levelName[level]} • ${language === 'fr' ? 'Territoire' : 'Territory'} : ${territoryStr} • ${language === 'fr' ? 'Fond' : 'Basemap'} : ${basemap.toUpperCase()}`,
+    canvasWidth / 2, 220
+  );
+  ctx.strokeStyle = '#006948';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(marginX, 255);
+  ctx.lineTo(canvasWidth - marginX, 255);
+  ctx.stroke();
+  ctx.restore();
+
+  // Pied de page
+  const footerY = canvasHeight - 80;
+  ctx.save();
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(marginX, footerY - 30);
+  ctx.lineTo(canvasWidth - marginX, footerY - 30);
+  ctx.stroke();
+  ctx.fillStyle = '#475569';
+  ctx.font = '16px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(
+    language === 'fr'
+      ? 'Source : Population WorldPop ; Distances FOSA — AccessMod/DOSTS • Fond : © OpenStreetMap contributors'
+      : 'Source: WorldPop population; HF distances — AccessMod/DOSTS • Basemap: © OpenStreetMap contributors',
+    marginX, footerY
+  );
+  const nowStr = new Date().toISOString().split('T')[0];
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#64748b';
+  ctx.font = '16px monospace';
+  ctx.fillText(`Atlas A4 (300 DPI) — DOSTS/MINSANTE — ${language === 'fr' ? 'Exporté le' : 'Exported'} ${nowStr}`, canvasWidth - marginX, footerY);
+  ctx.restore();
+
+  if (COVERAGE_CONFIG.SHOW_MOCK_BANNER) {
+    drawMockWatermark(ctx, canvasWidth, canvasHeight);
+  }
+
+  onProgress?.(95, 'Finalisation du fichier image PNG...');
+  await new Promise((r) => setTimeout(r, 20));
+
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        onProgress?.(100, language === 'fr' ? 'Exportation terminée !' : 'Export complete!');
+        resolve(blob);
+      } else {
+        reject(new Error("Échec de génération du blob d'image"));
+      }
+    }, 'image/png');
+  });
+}
+
+/**
+ * 4. EXPORT DES DONNÉES (CSV UTF-8 AVEC BOM ET SÉPARATEUR POINT-VIRGULE)
  */
 export function exportCoverageCsv(options: {
   level: SubdivisionLevel;

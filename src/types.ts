@@ -1,8 +1,8 @@
 export type Language = 'fr' | 'en';
 
-export type ActiveModule = 
-  | 'livrable-3'         // Livrable 3 : Analyse du Besoin Réel (> 5 km FOSA)
-  | 'couverture-asc';    // Couverture en ASC (Cartes thématiques, effectifs & ratios)
+export type ActiveModule =
+  | 'ciblage-asc'     // Ciblage du besoin en ASC (population couverte FOSA < 5 km)
+  | 'couverture-asc'; // Couverture en ASC (Cartes thématiques, effectifs & ratios)
 
 export type CoverageMapType = 
   | 'map-1'   // Effectifs d'ASC actifs (symboles proportionnels)
