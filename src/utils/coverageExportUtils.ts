@@ -849,7 +849,7 @@ export async function exportSingleMapPng(options: {
     const circleColor = isMap1 ? activeCat.color : COVERAGE_CONFIG.INACTIVE_CIRCLES_COLOR;
 
     let maxVal = 0;
-    allFeatures.forEach((f) => {
+    filteredFeatures.forEach((f) => {
       const v = f.properties?.[checkField];
       if (typeof v === 'number' && v > maxVal) maxVal = v;
     });
@@ -924,7 +924,7 @@ export async function exportSingleMapPng(options: {
 
   let maxVal = 0;
   if (isMap1 || isMap3a) {
-    allFeatures.forEach((f) => {
+    filteredFeatures.forEach((f) => {
       const v = f.properties?.[checkField];
       if (typeof v === 'number' && v > maxVal) maxVal = v;
     });
@@ -1290,6 +1290,8 @@ export async function exportSmallMultiplesPng(options: {
   const filteredFeatures = allFeatures.filter((f) =>
     isFeatureInTerritorialFilter(f, selectedRegion, selectedSubdivision, level)
   );
+
+  if (filteredFeatures.length === 0) throw new Error('Aucune entité trouvée pour les filtres sélectionnés.');
 
   const categories = COVERAGE_CONFIG.ASC_CATEGORIES;
 

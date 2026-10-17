@@ -69,6 +69,16 @@ export interface QuantileClass {
   isLast: boolean;
 }
 
+// Échappement HTML minimal pour les données GeoJSON insérées dans innerHTML
+function escHtml(v: unknown): string {
+  if (v === null || v === undefined) return '';
+  return String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // Fonction de calcul des 5 classes par quantiles (quintiles) avec fusion des bornes identiques
 function computeQuintileBreaks(values: number[], lang: 'fr' | 'en' = 'fr'): QuantileClass[] {
   if (!values || values.length === 0) return [];
@@ -194,25 +204,25 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
   useEffect(() => {
     // Régions pour le benchmark de ratio
     fetch(COVERAGE_CONFIG.GEOJSON_FILES.regions)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(`HTTP error ${r.status}`); return r.json(); })
       .then((d) => setRegionsFeatures(d.features || []))
       .catch((e) => console.error('Erreur chargement regions:', e));
 
     // Départements pour la recherche libre et le filtrage
     fetch(COVERAGE_CONFIG.GEOJSON_FILES.departements)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(`HTTP error ${r.status}`); return r.json(); })
       .then((d) => setDepartementsFeatures(d.features || []))
       .catch((e) => console.error('Erreur chargement departements:', e));
 
     // Districts pour le benchmark de ratio et le filtrage
     fetch(COVERAGE_CONFIG.GEOJSON_FILES.districts_sante)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(`HTTP error ${r.status}`); return r.json(); })
       .then((d) => setDistrictsFeatures(d.features || []))
       .catch((e) => console.error('Erreur chargement districts:', e));
 
     // Aires de santé pour les totaux d'effectifs et de population stricts
     fetch(COVERAGE_CONFIG.GEOJSON_FILES.aires_sante)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(`HTTP error ${r.status}`); return r.json(); })
       .then((d) => setAllAiresFeatures(d.features || []))
       .catch((e) => console.error('Erreur chargement aires:', e));
   }, []);
@@ -296,7 +306,8 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
 
   // Déclencheur d'export depuis la barre d'en-tête horizontale
   useEffect(() => {
-    if (exportTrigger && exportTrigger > 0) {
+    if (exportTrigger > 0 && exportTrigger !== prevExportTriggerRef.current) {
+      prevExportTriggerRef.current = exportTrigger;
       setExportType('single');
       setShowExportModal(true);
     }
@@ -442,6 +453,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
   const polygonsLayerRef = useRef<L.GeoJSON | null>(null);
   const circlesLayerRef = useRef<L.LayerGroup | null>(null);
   const subdivDropdownRef = useRef<HTMLDivElement>(null);
+  const prevExportTriggerRef = useRef<number>(0);
 
   // Tour: simulate click on first polygon to show demo popup
   useEffect(() => {
@@ -544,7 +556,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       }
     });
     return computeQuintileBreaks(vals, language);
-  }, [geoData]);
+  }, [geoData, language]);
 
   // 1. Initialisation de la carte Leaflet
   useEffect(() => {
@@ -768,7 +780,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
           <span>${language === 'fr' ? 'Total ASC actifs :' : 'Total active CHWs:'}</span>
           <strong class="text-[#8b5cf6]">${typeof totalCount === 'number' ? totalCount.toLocaleString(locale) : '0'} ${language === 'fr' ? 'ASC' : 'CHW'}</strong>
         </div>
-        ${ratioTot ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? 'Ratio démographique :' : 'Demographic ratio:'}</span><strong class="text-[#0f172a]">${language === 'fr' ? `1 ASC pour ${Math.round(ratioTot).toLocaleString(locale)} hab.` : `1 CHW per ${Math.round(ratioTot).toLocaleString(locale)} pop.`}</strong></div>` : ''}
+        ${ratioTot != null && !isNaN(ratioTot) ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? 'Ratio démographique :' : 'Demographic ratio:'}</span><strong class="text-[#0f172a]">${language === 'fr' ? `1 ASC pour ${Math.round(ratioTot).toLocaleString(locale)} hab.` : `1 CHW per ${Math.round(ratioTot).toLocaleString(locale)} pop.`}</strong></div>` : ''}
       `;
       card.appendChild(totRow);
     } else if (activeMap === 'map-3a') {
@@ -782,7 +794,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
           <span class="text-[#ea580c]">${language === 'fr' ? 'Inactifs à remplacer :' : 'Inactive to replace:'}</span>
           <strong class="text-[#ea580c]">${typeof inactCount === 'number' ? inactCount.toLocaleString(locale) : '0'} ${language === 'fr' ? 'ASC' : 'CHW'}</strong>
         </div>
-        ${inactPct !== undefined && inactPct !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? "Part d'inactifs :" : 'Inactive share:'}</span><strong>${inactPct} %</strong></div>` : ''}
+        ${inactPct !== undefined && inactPct !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? "Part d'inactifs :" : 'Inactive share:'}</span><strong>${escHtml(inactPct)} %</strong></div>` : ''}
       `;
       card.appendChild(inactRow);
     } else if (activeMap === 'map-3b') {
@@ -794,7 +806,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
       pctRow.innerHTML = `
         <div class="flex justify-between items-center text-[11px]">
           <span class="text-[#dc2626]">${language === 'fr' ? "Part d'inactifs :" : 'Inactive share:'}</span>
-          <strong class="text-[#dc2626]">${inactPct !== undefined && inactPct !== null ? `${inactPct} %` : 'N/A'}</strong>
+          <strong class="text-[#dc2626]">${inactPct !== undefined && inactPct !== null ? `${escHtml(inactPct)} %` : 'N/A'}</strong>
         </div>
         ${inactCount !== undefined && inactCount !== null ? `<div class="flex justify-between items-center text-[10px] text-[#64748b]"><span>${language === 'fr' ? 'Volume à remplacer :' : 'Volume to replace:'}</span><strong>${inactCount.toLocaleString(locale)} ${language === 'fr' ? 'ASC' : 'CHW'}</strong></div>` : ''}
       `;
@@ -1027,8 +1039,8 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               const safeName = getFeatureNameForLevel(level, p) + (level === 'aires_sante' && p.District_S ? ` (${p.District_S})` : '');
               circleMarker.bindTooltip(
                 `<div class="font-mono text-xs">
-                  <strong>${safeName}</strong><br/>
-                  <span>${activeCategory.shortLabel} : <strong>${val.toLocaleString('fr-FR')}</strong></span>
+                  <strong>${escHtml(safeName)}</strong><br/>
+                  <span>${escHtml(activeCategory.shortLabel)} : <strong>${val.toLocaleString('fr-FR')}</strong></span>
                 </div>`,
                 { sticky: true }
               );
@@ -1068,7 +1080,7 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
               const safeName = getFeatureNameForLevel(level, p) + (level === 'aires_sante' && p.District_S ? ` (${p.District_S})` : '');
               circleMarker.bindTooltip(
                 `<div class="font-mono text-xs">
-                  <strong>${safeName}</strong><br/>
+                  <strong>${escHtml(safeName)}</strong><br/>
                   <span>ASC inactifs à remplacer : <strong>${val.toLocaleString('fr-FR')}</strong></span>
                 </div>`,
                 { sticky: true }
@@ -1090,13 +1102,14 @@ export const CouvertureAscMap: React.FC<CouvertureAscMapProps> = ({
 
     polyLayer.addTo(map);
     polygonsLayerRef.current = polyLayer;
-  }, [geoData, activeMap, selectedCategoryField, activeCategory, globalMaxTotalActifs, globalMaxInactive, quantileBreaks, selectedRegion, selectedSubdivision]);
+  }, [geoData, activeMap, selectedCategoryField, activeCategory, globalMaxTotalActifs, globalMaxInactive, quantileBreaks, selectedRegion, selectedSubdivision, language]);
 
   // Recentrage lors du changement de filtre territorial (région ou département/district)
   useEffect(() => {
-    if (!mapInstanceRef.current || !polygonsLayerRef.current) return;
+    if (!mapInstanceRef.current) return;
     const map = mapInstanceRef.current;
     if (selectedSubdivision || selectedRegion) {
+      if (!polygonsLayerRef.current) return;
       const bounds = polygonsLayerRef.current.getBounds();
       if (bounds.isValid()) {
         map.fitBounds(bounds, { padding: [50, 50], maxZoom: level === 'aires_sante' ? 12 : 10 });
